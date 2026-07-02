@@ -77,12 +77,10 @@ function Home() {
               resilient engineering.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I'm <span className="font-medium text-foreground">Bhavin Shah</span> —
-              a Technical Product Leader and Staff Software Engineer with{" "}
-              <span className="font-medium text-foreground">15 years</span>{" "}
-              across HPE, Nimble Storage, Intuit, IBM, and Accenture. I bridge
-              business objectives and technical execution to ship products that
-              scale.
+              I am <span className="font-medium text-foreground">Bhavin Shah</span> — a
+              full-stack engineer with 15 years of experience bridging product and engineering.
+              I deliver cloud-native, high-quality software across distributed teams, translate
+              customer needs into roadmaps, and drive product strategy as an Agile Scrum Master.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
