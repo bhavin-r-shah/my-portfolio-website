@@ -125,10 +125,6 @@ function Home() {
           <div className="relative">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-card">
               <img src={photo.url} alt="Portrait of Bhavin Shah" className="h-full w-full object-cover" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/80 to-transparent p-4">
-                <p className="font-mono text-xs text-foreground/90">bhavin.shah</p>
-                <p className="font-mono text-[11px] text-muted-foreground">Durham, NC · open to remote</p>
-              </div>
             </div>
             <div className="absolute -top-3 -right-3 hidden rotate-3 rounded-xl border border-border bg-card px-3 py-2 text-xs shadow-sm sm:block">
               <p className="eyebrow">Stack</p>
