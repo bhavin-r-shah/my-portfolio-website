@@ -91,6 +91,9 @@ function Home() {
               <CtaLink href={resume.url} target="_blank" rel="noreferrer" variant="secondary">
                 <Download className="h-4 w-4" /> Download Résumé
               </CtaLink>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-3">
               <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="ghost">
                 <Github className="h-4 w-4" /> GitHub
               </CtaLink>
