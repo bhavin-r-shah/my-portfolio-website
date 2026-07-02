@@ -99,27 +99,34 @@ function Home() {
               </CtaLink>
             </div>
 
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid grid-cols-1 overflow-hidden rounded-2xl border border-border bg-border/60 shadow-sm lg:grid-cols-10 lg:gap-px">
               {[
-                { icon: Briefcase, label: "Experience", value: "15+ Years • Staff Engineer" },
-                { icon: Code2, label: "Core tech", value: "Go, React, REST API, PostgreSQL, Design Systems" },
-                { icon: Target, label: "Focus", value: "Product Strategy & Delivery" },
-                { icon: Heart, label: "Passion", value: "User-Friendly Applications, Accessibility & Sustainability" },
-              ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="card-surface card-surface-hover relative overflow-hidden p-5">
-                  <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-primary to-accent" />
-                  <div className="flex items-start gap-3">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary/10 text-primary">
+                { icon: Briefcase, label: "Experience", value: "15+ Years", sub: "Staff Engineer", span: "lg:col-span-2" },
+                { icon: Code2, label: "Core Tech", value: "Go, React, REST API, PostgreSQL,", emphasis: "Design Systems", span: "lg:col-span-3" },
+                { icon: Target, label: "Focus", value: "Product Strategy &", emphasis: "Delivery", span: "lg:col-span-2" },
+                { icon: Heart, label: "Passion", value: "User-Friendly Applications, Accessibility & Sustainability", italic: true, glow: true, span: "lg:col-span-3" },
+              ].map(({ icon: Icon, label, value, sub, emphasis, italic, glow, span }) => (
+                <div key={label} className={`group relative flex flex-col justify-between overflow-hidden bg-card p-6 transition-colors hover:bg-surface ${span}`}>
+                  {glow && (
+                    <div aria-hidden className="pointer-events-none absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
+                  )}
+                  <div className="mb-8 flex items-center gap-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                       <Icon className="h-4 w-4" />
                     </span>
-                    <div>
-                      <p className="eyebrow">{label}</p>
-                      <p className="mt-1 text-sm font-medium leading-snug text-foreground">{value}</p>
-                    </div>
+                    <span className="eyebrow">{label}</span>
+                  </div>
+                  <div>
+                    <p className={`display-serif leading-snug text-foreground ${italic ? "text-lg italic" : sub ? "text-2xl italic" : "text-xl"}`}>
+                      {value}
+                      {emphasis && <> <span className="text-primary not-italic">{emphasis}</span></>}
+                    </p>
+                    {sub && <p className="mt-1 text-sm font-medium text-muted-foreground">{sub}</p>}
                   </div>
                 </div>
               ))}
             </div>
+
           </div>
 
           <div className="relative">
