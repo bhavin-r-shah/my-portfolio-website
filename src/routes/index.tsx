@@ -74,13 +74,14 @@ function Home() {
             <h1 className="display-serif mt-6 text-4xl sm:text-5xl md:text-6xl">
               Leading the intersection of ambitious{" "}
               <span className="italic text-primary">product strategy</span> and{" "}
-              <span className="italic text-accent-foreground">resilient engineering.</span>
+              <span className="italic text-accent">resilient engineering.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I am <span className="font-medium text-foreground">Bhavin Shah</span> — a
-              full-stack engineer with 15 years of experience bridging product and engineering.
-              I deliver cloud-native, high-quality software across distributed teams, translate
-              customer needs into roadmaps, and drive product strategy as an Agile Scrum Master.
+              I&apos;m <span className="font-medium text-foreground">Bhavin Shah</span> — a
+              full-stack engineer with 15 years bridging product and engineering. I build with{" "}
+              React, Go, Java, PostgreSQL, and cloud-native systems, and deliver high-quality software
+              across distributed teams while translating customer needs into roadmaps and driving
+              product strategy as an Agile Scrum Master.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
