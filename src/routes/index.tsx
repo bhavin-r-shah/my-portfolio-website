@@ -249,7 +249,7 @@ function Home() {
               <p className="font-mono text-sm">github.com/bhavinshah</p>
               <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[11px] text-primary">live</span>
             </div>
-            <div className="mt-6 grid grid-cols-53 gap-[3px]">
+            <div className="mt-6 grid gap-[3px]" style={{ gridTemplateColumns: "repeat(53, minmax(0, 1fr))" }}>
               {Array.from({ length: 371 }).map((_, i) => {
                 const level = [0, 0, 1, 1, 2, 2, 3, 3, 4][Math.floor(Math.abs(Math.sin(i * 12.9898) * 43758.5453) % 9)];
                 const alpha = [0.06, 0.14, 0.28, 0.5, 0.78][level];
