@@ -123,10 +123,6 @@ function Home() {
                 <p className="font-mono text-[11px] text-muted-foreground">Durham, NC · open to remote</p>
               </div>
             </div>
-            <div className="absolute -bottom-4 -left-4 hidden rounded-xl border border-border bg-card px-3 py-2 text-xs shadow-sm sm:block">
-              <p className="font-mono text-muted-foreground">$ whoami</p>
-              <p className="mt-0.5 font-medium">staff engineer · product mind</p>
-            </div>
             <div className="absolute -top-3 -right-3 hidden rotate-3 rounded-xl border border-border bg-card px-3 py-2 text-xs shadow-sm sm:block">
               <p className="eyebrow">Stack</p>
               <p className="mt-0.5 font-mono">React · Go · PostgreSQL</p>
