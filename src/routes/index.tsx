@@ -64,22 +64,25 @@ function Home() {
         />
         <div className="container-page grid gap-12 py-20 md:grid-cols-[1.35fr_1fr] md:py-28">
           <div>
-            <p className="eyebrow inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <p className="eyebrow inline-flex items-center gap-3">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
+              </span>
               Open to Staff / Principal & Tech Lead roles
             </p>
-            <h1 className="display-serif mt-5 text-5xl sm:text-6xl md:text-7xl">
-              Building software that ships,
-              <span className="italic text-primary"> scales,</span> and stays kind
-              to the people using it.
+            <h1 className="display-serif mt-6 text-5xl sm:text-6xl md:text-7xl">
+              Leading the intersection of ambitious{" "}
+              <span className="italic text-primary">product strategy</span> and
+              resilient engineering.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               I'm <span className="font-medium text-foreground">Bhavin Shah</span> —
-              a Technical Product Leader and Full-Stack Engineer with{" "}
+              a Technical Product Leader and Staff Software Engineer with{" "}
               <span className="font-medium text-foreground">15 years</span>{" "}
-              bridging product and engineering. I design cloud-native systems in
-              Go & PostgreSQL, ship React interfaces with a design-system
-              backbone, and drive strategy as an Agile Scrum Master.
+              across HPE, Nimble Storage, Intuit, IBM, and Accenture. I bridge
+              business objectives and technical execution to ship products that
+              scale.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -97,22 +100,20 @@ function Home() {
               </CtaLink>
             </div>
 
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
-              <div>
-                <dt className="eyebrow">Experience</dt>
-                <dd className="mt-1 display-serif text-3xl">15 yrs</dd>
+            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-8">
+              <div className="flex flex-col gap-1">
+                <span className="eyebrow">Experience</span>
+                <span className="text-sm text-foreground">15+ Years • Staff Engineer</span>
               </div>
-              <div>
-                <dt className="eyebrow">UI Library</dt>
-                <dd className="mt-1 display-serif text-3xl">~60</dd>
-                <p className="text-xs text-muted-foreground">a11y components</p>
+              <div className="flex flex-col gap-1">
+                <span className="eyebrow">Core tech</span>
+                <span className="text-sm text-foreground">Go, React, Design Systems</span>
               </div>
-              <div>
-                <dt className="eyebrow">Dev time</dt>
-                <dd className="mt-1 display-serif text-3xl">−30%</dd>
-                <p className="text-xs text-muted-foreground">across 8+ products</p>
+              <div className="flex flex-col gap-1">
+                <span className="eyebrow">Focus</span>
+                <span className="text-sm text-foreground">Product Strategy & Delivery</span>
               </div>
-            </dl>
+            </div>
           </div>
 
           <div className="relative">
