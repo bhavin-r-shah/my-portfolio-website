@@ -239,7 +239,7 @@ function Home() {
                 <Github className="h-4 w-4" /> Visit GitHub
               </CtaLink>
               <CtaLink href="/notes" variant="secondary">
-                Read Learning Notes <ArrowRight className="h-4 w-4" />
+                Read Learnings <ArrowRight className="h-4 w-4" />
               </CtaLink>
             </div>
           </div>

@@ -8,10 +8,10 @@ export const Route = createFileRoute("/notes")({
   component: NotesPage,
   head: () => ({
     meta: [
-      { title: "Learning Notes — Bhavin Shah" },
-      { name: "description", content: "Working notes on AI engineering, React & frontend, DSA patterns, sustainable web, and system design basics." },
-      { property: "og:title", content: "Learning Notes — Bhavin Shah" },
-      { property: "og:description", content: "A knowledge-base of practical engineering notes." },
+      { title: "Learnings — Bhavin Shah" },
+      { name: "description", content: "Curated learnings on AI engineering, React & frontend, DSA patterns, sustainable web, and system design basics." },
+      { property: "og:title", content: "Learnings — Bhavin Shah" },
+      { property: "og:description", content: "A knowledge-base of practical engineering learnings." },
       { property: "og:url", content: "/notes" },
     ],
     links: [{ rel: "canonical", href: "/notes" }],
@@ -24,7 +24,7 @@ function NotesPage() {
 
   return (
     <div className="container-page py-20">
-      <p className="eyebrow">Learning notes</p>
+      <p className="eyebrow">Learnings</p>
       <h1 className="display-serif mt-3 max-w-3xl text-5xl sm:text-6xl">
         A working knowledge base — not a blog.
       </h1>
