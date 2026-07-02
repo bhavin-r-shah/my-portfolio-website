@@ -71,10 +71,10 @@ function Home() {
               </span>
               Open to Staff / Principal & Tech Lead roles
             </p>
-            <h1 className="display-serif mt-6 text-5xl sm:text-6xl md:text-7xl">
+            <h1 className="display-serif mt-6 text-4xl sm:text-5xl md:text-6xl">
               Leading the intersection of ambitious{" "}
-              <span className="italic text-primary">product strategy</span> and
-              resilient engineering.
+              <span className="italic text-primary">product strategy</span> and{" "}
+              <span className="italic text-accent-foreground">resilient engineering.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               I am <span className="font-medium text-foreground">Bhavin Shah</span> — a
