@@ -26,7 +26,7 @@ function ResumePage() {
           <h1 className="display-serif mt-3 text-5xl sm:text-6xl">The one-page version.</h1>
           <p className="mt-4 max-w-xl text-muted-foreground">
             The full document is here to preview or download. For deeper
-            context on any role, see <span className="text-foreground">/projects</span>.
+            context on any role, see <span className="text-foreground">/experience</span>.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
