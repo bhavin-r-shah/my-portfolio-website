@@ -72,7 +72,7 @@ function ProjectsPage() {
           </div>
         </div>
         <p className="mt-5 max-w-2xl text-sm text-muted-foreground">
-          Follow along on GitHub or via Learning Notes for early write-ups,
+          Follow along on GitHub or via Learnings for early write-ups,
           code snippets, and lessons from what I'm exploring right now.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -80,7 +80,7 @@ function ProjectsPage() {
             <Github className="h-4 w-4" /> Follow on GitHub
           </CtaLink>
           <CtaLink href="/notes" variant="secondary">
-            Read Learning Notes <ArrowRight className="h-4 w-4" />
+            Read Learnings <ArrowRight className="h-4 w-4" />
           </CtaLink>
         </div>
       </div>
