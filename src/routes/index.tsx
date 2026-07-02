@@ -133,10 +133,6 @@ function Home() {
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-card">
               <img src={photo.url} alt="Portrait of Bhavin Shah" className="h-full w-full object-cover" />
             </div>
-            <div className="absolute -top-3 -right-3 hidden rotate-3 rounded-xl border border-border bg-card px-3 py-2 text-xs shadow-sm sm:block">
-              <p className="eyebrow">Stack</p>
-              <p className="mt-0.5 font-mono">React · Go · PostgreSQL</p>
-            </div>
           </div>
         </div>
       </section>
