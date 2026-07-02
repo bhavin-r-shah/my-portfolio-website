@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Download, Github, Linkedin, Mail, Sparkles, Cpu, Layers, Leaf, Gauge, Code2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Briefcase, Download, Github, Heart, Linkedin, Mail, Sparkles, Cpu, Layers, Leaf, Gauge, Code2, Target } from "lucide-react";
 import photo from "@/assets/bhavin-photo.asset.json";
 import resume from "@/assets/resume.asset.json";
 import { CtaLink } from "@/components/cta-button";
