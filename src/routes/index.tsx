@@ -99,19 +99,26 @@ function Home() {
               </CtaLink>
             </div>
 
-            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-8">
-              <div className="flex flex-col gap-1">
-                <span className="eyebrow">Experience</span>
-                <span className="text-sm text-foreground">15+ Years • Staff Engineer</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="eyebrow">Core tech</span>
-                <span className="text-sm text-foreground">Go, React, Design Systems</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="eyebrow">Focus</span>
-                <span className="text-sm text-foreground">Product Strategy & Delivery</span>
-              </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: Briefcase, label: "Experience", value: "15+ Years • Staff Engineer" },
+                { icon: Code2, label: "Core tech", value: "Go, React, REST API, PostgreSQL, Design Systems" },
+                { icon: Target, label: "Focus", value: "Product Strategy & Delivery" },
+                { icon: Heart, label: "Passion", value: "User-Friendly Applications, Accessibility & Sustainability" },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label} className="card-surface card-surface-hover relative overflow-hidden p-5">
+                  <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-primary to-accent" />
+                  <div className="flex items-start gap-3">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary/10 text-primary">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="eyebrow">{label}</p>
+                      <p className="mt-1 text-sm font-medium leading-snug text-foreground">{value}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
