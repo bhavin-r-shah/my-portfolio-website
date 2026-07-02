@@ -77,11 +77,8 @@ function Home() {
               <span className="italic text-accent">resilient engineering.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I&apos;m <span className="font-medium text-foreground">Bhavin Shah</span> — a
-              full-stack engineer with 15 years bridging product and engineering. I build with{" "}
-              React, Go, Java, PostgreSQL, and cloud-native systems, and deliver high-quality software
-              across distributed teams while translating customer needs into roadmaps and driving
-              product strategy as an Agile Scrum Master.
+              I’m <span className="font-medium text-foreground">Bhavin Shah</span> — a
+              full-stack engineer with 15 years of experience bridging product and engineering. I have delivered cloud-native microservices & web applications across distributed teams. I have translated customer needs into roadmaps & driven product strategy as Agile Scrum Master.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
