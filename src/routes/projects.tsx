@@ -1,15 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Github } from "lucide-react";
-import { projects } from "@/lib/portfolio-data";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Github, Sparkles } from "lucide-react";
+import { SOCIAL } from "@/components/site-footer";
+import { CtaLink } from "@/components/cta-button";
 
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
   head: () => ({
     meta: [
-      { title: "Projects — Bhavin Shah" },
-      { name: "description", content: "Selected case studies: enterprise UI component libraries, cloud-native microservices in Go, sustainable web POCs, and accessibility tooling." },
-      { property: "og:title", content: "Projects — Bhavin Shah" },
-      { property: "og:description", content: "Case studies from a Staff Software Engineer & Technical Product Leader." },
+      { title: "Side Projects — Bhavin Shah" },
+      { name: "description", content: "Personal side projects, experiments, and open-source contributions — coming soon." },
+      { property: "og:title", content: "Side Projects — Bhavin Shah" },
+      { property: "og:description", content: "A space for side projects, experiments, and open-source work — coming soon." },
       { property: "og:url", content: "/projects" },
     ],
     links: [{ rel: "canonical", href: "/projects" }],
@@ -17,82 +18,94 @@ export const Route = createFileRoute("/projects")({
 });
 
 function ProjectsPage() {
+  const upcoming = [
+    {
+      title: "AI-Assisted Résumé Reviewer",
+      blurb: "LLM-powered feedback on résumés with rubric-driven scoring and inline rewrites.",
+      tags: ["React", "TypeScript", "LLM"],
+    },
+    {
+      title: "Sustainable Web Audit Tool",
+      blurb: "Chrome extension that scores pages on data-transfer, CPU idle, and green-web heuristics.",
+      tags: ["Chrome API", "Web Vitals", "Sustainability"],
+    },
+    {
+      title: "A11y Component Playground",
+      blurb: "Open-source library of accessible React primitives with keyboard-first demos.",
+      tags: ["React", "WCAG 2.2", "Storybook"],
+    },
+  ];
+
   return (
     <div className="container-page py-20">
-      <p className="eyebrow">Projects</p>
+      <p className="eyebrow inline-flex items-center gap-2">
+        <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Coming soon
+      </p>
       <h1 className="display-serif mt-3 max-w-3xl text-5xl sm:text-6xl">
-        Case studies from 15 years of shipping.
+        Side projects, experiments &amp; open source.
       </h1>
       <p className="mt-5 max-w-2xl text-muted-foreground">
-        Each entry captures the problem, the role I played, the stack, and the
-        outcome. Screenshots and repo links land here as I open-source more.
+        This space is reserved for things I'm building on the side — small
+        tools, weekend experiments, AI-assisted projects, and open-source
+        contributions. New entries land here as I ship them. For delivered
+        production work, see{" "}
+        <Link to="/experience" className="text-primary underline-offset-4 hover:underline">
+          Work Experience
+        </Link>
+        .
       </p>
 
-      <div className="mt-14 space-y-6">
-        {projects.map((p) => (
-          <article
-            key={p.slug}
-            id={p.slug}
-            className="card-surface card-surface-hover scroll-mt-24 overflow-hidden"
-          >
-            <div className="grid gap-0 md:grid-cols-[1fr_1.6fr]">
-              <div
-                className="relative flex min-h-56 items-center justify-center border-b border-border md:border-b-0 md:border-r"
-                style={{
-                  background:
-                    "linear-gradient(135deg, color-mix(in oklab, var(--primary) 20%, var(--card)), color-mix(in oklab, var(--accent) 15%, var(--card)))",
-                }}
-              >
-                <span className="display-serif text-7xl italic text-foreground/70">
-                  {p.title.split(" ").map((w) => w[0]).slice(0, 3).join("")}
-                </span>
-                <span className="absolute bottom-3 left-3 rounded-full bg-background/80 px-2 py-0.5 font-mono text-[11px] text-muted-foreground backdrop-blur">
-                  {p.year}
-                </span>
+      <div
+        className="mt-12 card-surface relative overflow-hidden p-8 sm:p-12"
+        style={{
+          background:
+            "linear-gradient(135deg, color-mix(in oklab, var(--primary) 12%, var(--card)), var(--card))",
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-md bg-primary/15 text-primary">
+            <Sparkles className="h-5 w-5" />
+          </span>
+          <div>
+            <p className="font-mono text-xs text-muted-foreground">status</p>
+            <p className="text-lg font-semibold">Building in public — check back soon.</p>
+          </div>
+        </div>
+        <p className="mt-5 max-w-2xl text-sm text-muted-foreground">
+          Follow along on GitHub or via Learning Notes for early write-ups,
+          code snippets, and lessons from what I'm exploring right now.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="primary">
+            <Github className="h-4 w-4" /> Follow on GitHub
+          </CtaLink>
+          <CtaLink href="/notes" variant="secondary">
+            Read Learning Notes <ArrowRight className="h-4 w-4" />
+          </CtaLink>
+        </div>
+      </div>
+
+      <div className="mt-16">
+        <p className="eyebrow">On the workbench</p>
+        <h2 className="display-serif mt-2 text-3xl sm:text-4xl">Ideas in progress.</h2>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {upcoming.map((u) => (
+            <article key={u.title} className="card-surface flex flex-col p-6">
+              <span className="w-fit rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[11px] text-primary">
+                planned
+              </span>
+              <h3 className="mt-4 text-lg font-semibold text-foreground">{u.title}</h3>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">{u.blurb}</p>
+              <div className="mt-5 flex flex-wrap gap-1.5 border-t border-border pt-4">
+                {u.tags.map((t) => (
+                  <span key={t} className="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
+                    {t}
+                  </span>
+                ))}
               </div>
-
-              <div className="flex flex-col p-6 md:p-8">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h2 className="text-2xl font-semibold text-foreground">{p.title}</h2>
-                  <p className="font-mono text-xs text-muted-foreground">{p.role}</p>
-                </div>
-                <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
-                <p className="mt-4 text-sm leading-relaxed">{p.description}</p>
-
-                <ul className="mt-5 space-y-1.5 text-sm">
-                  {p.impact.map((i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                      <span className="text-foreground/85">{i}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.tags.map((t) => (
-                      <span key={t} className="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-3 text-sm">
-                    {p.repo && (
-                      <a href={p.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
-                        <Github className="h-4 w-4" /> Repo
-                      </a>
-                    )}
-                    {p.live && (
-                      <a href={p.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary">
-                        Live <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   );
