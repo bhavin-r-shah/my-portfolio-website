@@ -72,7 +72,7 @@ function Home() {
               Open to Staff / Principal & Tech Lead roles
             </p>
             <h1 className="display-serif mt-6 text-4xl sm:text-5xl md:text-6xl">
-              Leading the intersection of ambitious{" "}
+              Leading the intersection of user-centric{" "}
               <span className="italic text-primary">product strategy</span> and{" "}
               <span className="italic text-accent">resilient engineering.</span>
             </h1>
