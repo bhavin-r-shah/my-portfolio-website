@@ -83,8 +83,8 @@ function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <CtaLink href="/projects" variant="primary">
-                View Projects <ArrowRight className="h-4 w-4" />
+              <CtaLink href="/experience" variant="primary">
+                View Work Experience <ArrowRight className="h-4 w-4" />
               </CtaLink>
               <CtaLink href={resume.url} target="_blank" rel="noreferrer" variant="secondary">
                 <Download className="h-4 w-4" /> Download Résumé
@@ -140,10 +140,10 @@ function Home() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow">Selected work</p>
-            <h2 className="display-serif mt-2 text-4xl sm:text-5xl">Projects that hire me back.</h2>
+            <h2 className="display-serif mt-2 text-4xl sm:text-5xl">Work that hires me back.</h2>
           </div>
-          <Link to="/projects" className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline-flex items-center gap-1">
-            All projects <ArrowRight className="h-4 w-4" />
+          <Link to="/experience" className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline-flex items-center gap-1">
+            All experience <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -151,7 +151,7 @@ function Home() {
           {featured.map((p) => (
             <Link
               key={p.slug}
-              to="/projects"
+              to="/experience"
               hash={p.slug}
               className="card-surface card-surface-hover group flex flex-col overflow-hidden"
             >
