@@ -257,7 +257,7 @@ function Home() {
 
           <div className="card-surface p-6">
             <div className="flex items-center justify-between">
-              <p className="font-mono text-sm">github.com/bhavinshah</p>
+              <p className="font-mono text-sm">github.com/bhavin-r-shah</p>
               <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[11px] text-primary">live</span>
             </div>
             <div className="mt-6 grid gap-[3px]" style={{ gridTemplateColumns: "repeat(53, minmax(0, 1fr))" }}>
