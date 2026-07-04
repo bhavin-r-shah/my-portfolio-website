@@ -57,7 +57,7 @@ function ContactPage() {
               </span>
               <div className="min-w-0">
                 <p className="text-sm font-medium">GitHub</p>
-                <p className="truncate font-mono text-xs text-muted-foreground">github.com/bhavinshah</p>
+                <p className="truncate font-mono text-xs text-muted-foreground">github.com/bhavin-r-shah</p>
               </div>
             </a>
             <a href={resume.url} target="_blank" rel="noreferrer" className="card-surface card-surface-hover flex items-center gap-3 p-5">
