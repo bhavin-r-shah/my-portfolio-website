@@ -134,7 +134,7 @@ function Home() {
 
           {/* Portrait and actions */}
           <div className="relative">
-            <div className="relative mx-auto flex w-full max-w-sm flex-col gap-5 rounded-3xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur">
+            <div className="relative mx-auto flex w-full max-w-sm flex-col gap-5 rounded-3xl p-4">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border bg-card">
                 <img
                   src={photo.url}
