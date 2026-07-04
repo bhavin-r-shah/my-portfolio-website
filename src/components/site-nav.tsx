@@ -55,7 +55,7 @@ export function SiteNav() {
       <div className="container-page flex h-16 items-center justify-between">
         <Link to="/" className="group flex items-center gap-2">
           <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground font-mono text-sm">
-            bs
+            BS
           </span>
           <span className="hidden text-sm font-medium tracking-tight sm:inline">
             Bhavin Shah
