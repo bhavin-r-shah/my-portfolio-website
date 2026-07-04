@@ -64,13 +64,13 @@ function Home() {
         />
         <div className="container-page grid gap-12 py-20 md:grid-cols-[1.35fr_1fr] md:py-28">
           <div>
-            <p className="eyebrow inline-flex items-center gap-3">
+            {/* <p className="eyebrow inline-flex items-center gap-3">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
               </span>
               Open to Staff / Principal & Tech Lead roles
-            </p>
+            </p> */}
             <h1 className="display-serif mt-6 text-4xl sm:text-5xl md:text-6xl">
               Leading the intersection of user-centric{" "}
               <span className="italic text-primary">product strategy</span> and{" "}
@@ -78,7 +78,9 @@ function Home() {
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               I’m <span className="font-medium text-foreground">Bhavin Shah</span> — a
-              full-stack engineer with 15 years of experience bridging product and engineering. I have delivered cloud-native microservices & web applications across distributed teams. I have translated customer needs into roadmaps & driven product strategy as Agile Scrum Master.
+              full-stack engineer with{" "}
+              <span className="italic text-accent">15 years</span>
+              {" "}of experience bridging product and engineering. I have delivered cloud-native microservices & web applications across distributed teams. I have translated customer needs into roadmaps & driven product strategy as Agile Scrum Master.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">

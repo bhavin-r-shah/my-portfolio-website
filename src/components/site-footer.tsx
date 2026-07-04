@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import resumeAsset from "@/assets/resume.asset.json";
 
 const SOCIAL = {
-  github: "https://github.com/",
+  github: "https://github.com/bhavin-r-shah",
   linkedin: "https://www.linkedin.com/in/shah-bhavin-r/",
   email: "mailto:bhavinshah120986@gmail.com",
 };
