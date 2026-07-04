@@ -142,7 +142,7 @@ function Home() {
             </div>
 
             {/* Hero Social Links */}
-            <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-border pt-4">
+            <div className="mt-3 flex flex-wrap items-center gap-3">
               <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="ghost">
                 <Github className="h-4 w-4" /> GitHub
               </CtaLink>
@@ -168,8 +168,8 @@ function Home() {
       </section>
 
       {/* SKILLS SNAPSHOT */}
-      <section className="border-y border-border bg-surface/60">
-        <div className="container-page py-20">
+      <section>
+        <div className="container-page py-5">
           <div className="flex items-end justify-between gap-6">
             <div>
               <h2 className="display-serif text-4xl sm:text-5xl">Skills Snapshot</h2>
