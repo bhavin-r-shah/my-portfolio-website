@@ -9,7 +9,6 @@ const links = [
   { to: "/projects", label: "Projects" },
   { to: "/notes", label: "Learnings" },
   { to: "/about", label: "About" },
-  { to: "/resume", label: "Resume" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -28,7 +27,8 @@ export function SiteNav() {
 
   useEffect(() => {
     const stored = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    const prefers = typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefers =
+      typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = stored ? stored === "dark" : prefers;
     setDark(isDark);
     document.documentElement.classList.toggle("dark", isDark);
@@ -57,9 +57,7 @@ export function SiteNav() {
           <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground font-mono text-sm">
             BS
           </span>
-          <span className="hidden text-sm font-medium tracking-tight sm:inline">
-            Bhavin Shah
-          </span>
+          <span className="hidden text-sm font-medium tracking-tight sm:inline">Bhavin Shah</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
