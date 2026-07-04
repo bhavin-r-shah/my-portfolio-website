@@ -55,12 +55,20 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-6 flex justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             Try again
           </button>
-          <a href="/" className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:border-primary">Go home</a>
+          <a
+            href="/"
+            className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:border-primary"
+          >
+            Go home
+          </a>
         </div>
       </div>
     </div>
@@ -80,16 +88,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Bhavin Shah" },
       { property: "og:site_name", content: "Bhavin Shah" },
-      { property: "og:title", content: "Bhavin Shah — Technical Product Leader & Staff Software Engineer" },
-      { property: "og:description", content: "Portfolio, projects, and learning notes from a full-stack engineer & product-minded leader." },
+      {
+        property: "og:title",
+        content: "Bhavin Shah — Technical Product Leader & Staff Software Engineer",
+      },
+      {
+        property: "og:description",
+        content:
+          "Portfolio, projects, and learning notes from a full-stack engineer & product-minded leader.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Bhavin Shah — Technical Product Leader & Staff Software Engineer" },
+      {
+        name: "twitter:title",
+        content: "Bhavin Shah — Technical Product Leader & Staff Software Engineer",
+      },
       { name: "twitter:description", content: "Portfolio, projects, and learning notes." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

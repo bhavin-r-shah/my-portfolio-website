@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="BS monogram">
+  <rect width="32" height="32" rx="6" fill="#78c4ea"/>
+  <text
+    x="16"
+    y="20.5"
+    text-anchor="middle"
+    font-family="'JetBrains Mono', 'SFMono-Regular', Consolas, monospace"
+    font-size="13"
+    font-weight="500"
+    letter-spacing="-0.5"
+    fill="#090909"
+  >BS</text>
+</svg>
