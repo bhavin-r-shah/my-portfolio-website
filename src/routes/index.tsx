@@ -107,7 +107,7 @@ function Home() {
           }}
         />
         <div className="container-page grid gap-12 py-8 md:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] md:items-center md:py-12 lg:gap-16">
-          <div className="max-w-3xl">
+          <div className="max-w-2xl">
             {/* Open to Roles */}
             {/* <p className="eyebrow inline-flex items-center gap-3">
               <span className="relative flex h-2 w-2">
@@ -117,22 +117,42 @@ function Home() {
               Open to Staff / Principal & Tech Lead roles
             </p> */}
             {/* Hero Description Text */}
-            <h1 className="display-serif mt-6 text-4xl sm:text-5xl md:text-6xl">
+            <h1 className="display-serif mt-6 text-3xl sm:text-4xl md:text-5xl">
               Leading the intersection of user-centric{" "}
               <span className="italic text-primary">product strategy</span> and{" "}
               <span className="italic text-accent">resilient engineering.</span>
             </h1>
             {/* Hero subtext */}
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
               I’m <span className="font-medium text-foreground">Bhavin Shah</span> — a full-stack
               engineer with <span className="italic text-accent">15 years</span> of experience
               bridging product and engineering. I have delivered cloud-native microservices & web
               applications across distributed teams. I have translated customer needs into roadmaps
               & driven product strategy as Agile Scrum Master.
             </p>
+
+            {/* Hero Buttons */}
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <CtaLink href="/experience" variant="primary">
+                View Work Experience <ArrowRight className="h-4 w-4" />
+              </CtaLink>
+              <CtaLink href={resume.url} target="_blank" rel="noreferrer" variant="secondary">
+                <Download className="h-4 w-4" /> Download Résumé
+              </CtaLink>
+            </div>
+
+            {/* Hero Social Links */}
+            <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-border pt-4">
+              <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="ghost">
+                <Github className="h-4 w-4" /> GitHub
+              </CtaLink>
+              <CtaLink href={SOCIAL.linkedin} target="_blank" rel="noreferrer" variant="ghost">
+                <Linkedin className="h-4 w-4" /> LinkedIn
+              </CtaLink>
+            </div>
           </div>
 
-          {/* Portrait and actions */}
+          {/* Portrait */}
           <div className="relative">
             <div className="relative mx-auto flex w-full max-w-[16.5rem] flex-col gap-5 rounded-3xl p-4 sm:max-w-[17rem] lg:max-w-[18rem]">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border bg-card">
@@ -141,26 +161,6 @@ function Home() {
                   alt="Portrait of Bhavin Shah"
                   className="h-full w-full object-cover"
                 />
-              </div>
-
-              {/* Hero Buttons */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap md:flex-col">
-                <CtaLink href="/experience" variant="primary">
-                  View Work Experience <ArrowRight className="h-4 w-4" />
-                </CtaLink>
-                <CtaLink href={resume.url} target="_blank" rel="noreferrer" variant="secondary">
-                  <Download className="h-4 w-4" /> Download Résumé
-                </CtaLink>
-              </div>
-
-              {/* Hero Social Links */}
-              <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4">
-                <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="ghost">
-                  <Github className="h-4 w-4" /> GitHub
-                </CtaLink>
-                <CtaLink href={SOCIAL.linkedin} target="_blank" rel="noreferrer" variant="ghost">
-                  <Linkedin className="h-4 w-4" /> LinkedIn
-                </CtaLink>
               </div>
             </div>
           </div>
@@ -298,30 +298,24 @@ function Home() {
         <div className="container-page py-20">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <p className="eyebrow">Skills snapshot</p>
-              <h2 className="display-serif mt-2 text-4xl sm:text-5xl">
-                A working stack, not a wishlist.
-              </h2>
-              <p className="mt-3 max-w-xl text-sm text-muted-foreground">
-                Grouped by how I actually use them in production — no percentage bars, no filler.
-              </p>
+              <h2 className="display-serif text-4xl sm:text-5xl">Skills Snapshot</h2>
             </div>
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skillGroups.map(({ icon: Icon, label, items }) => (
-              <div key={label} className="card-surface p-6">
+              <div key={label} className="card-surface p-4">
                 <div className="flex items-center gap-3">
                   <span className="grid h-9 w-9 place-items-center rounded-md bg-primary/10 text-primary">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <p className="text-sm font-semibold">{label}</p>
+                  <p className="text-base font-semibold">{label}</p>
                 </div>
-                <ul className="mt-4 flex flex-wrap gap-1.5">
+                <ul className="mt-3 flex flex-wrap gap-1.5">
                   {items.map((i) => (
                     <li
                       key={i}
-                      className="rounded-full border border-border px-2.5 py-1 font-mono text-[11px] text-muted-foreground"
+                      className="rounded-full border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
                     >
                       {i}
                     </li>
