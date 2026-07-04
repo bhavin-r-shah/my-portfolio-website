@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Browser tab icon preview">
+  <rect width="160" height="160" rx="20" fill="#FBFAF2"/>
+  <rect x="48" y="48" width="64" height="64" rx="12" fill="#256B5B"/>
+  <text
+    x="80"
+    y="89"
+    text-anchor="middle"
+    font-family="'JetBrains Mono', 'SFMono-Regular', Consolas, monospace"
+    font-size="26"
+    font-weight="500"
+    letter-spacing="-1"
+    fill="#FBFAF2"
+  >bs</text>
+</svg>
