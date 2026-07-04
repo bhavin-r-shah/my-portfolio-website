@@ -136,7 +136,7 @@ function Home() {
               <CtaLink href="/experience" variant="primary">
                 View Work Experience <ArrowRight className="h-4 w-4" />
               </CtaLink>
-              <CtaLink href={resume.url} target="_blank" rel="noreferrer" variant="secondary">
+              <CtaLink href={resume.url} download={resume.original_filename} variant="secondary">
                 <Download className="h-4 w-4" /> Download Résumé
               </CtaLink>
             </div>
@@ -163,6 +163,40 @@ function Home() {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SKILLS SNAPSHOT */}
+      <section className="border-y border-border bg-surface/60">
+        <div className="container-page py-20">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="display-serif text-4xl sm:text-5xl">Skills Snapshot</h2>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {skillGroups.map(({ icon: Icon, label, items }) => (
+              <div key={label} className="card-surface p-4">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 place-items-center rounded-md bg-primary/10 text-primary">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <p className="text-base font-semibold">{label}</p>
+                </div>
+                <ul className="mt-3 flex flex-wrap gap-1.5">
+                  {items.map((i) => (
+                    <li
+                      key={i}
+                      className="rounded-full border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
+                    >
+                      {i}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -196,7 +230,7 @@ function Home() {
           ].map(({ icon: Icon, label, value, sub, emphasis, italic, glow, span }) => (
             <div
               key={label}
-              className={`group relative flex flex-col justify-between overflow-hidden bg-card p-6 transition-colors hover:bg-surface ${span}`}
+              className={`group relative flex flex-col overflow-hidden bg-card p-6 transition-colors hover:bg-surface ${span}`}
             >
               {glow && (
                 <div
@@ -204,7 +238,7 @@ function Home() {
                   className="pointer-events-none absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl"
                 />
               )}
-              <div className="mb-8 flex items-center gap-3">
+              <div className="mb-4 flex items-center gap-3">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <Icon className="h-4 w-4" />
                 </span>
@@ -290,40 +324,6 @@ function Home() {
               </div>
             </Link>
           ))}
-        </div>
-      </section>
-
-      {/* SKILLS SNAPSHOT */}
-      <section className="border-y border-border bg-surface/60">
-        <div className="container-page py-20">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="display-serif text-4xl sm:text-5xl">Skills Snapshot</h2>
-            </div>
-          </div>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {skillGroups.map(({ icon: Icon, label, items }) => (
-              <div key={label} className="card-surface p-4">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-md bg-primary/10 text-primary">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <p className="text-base font-semibold">{label}</p>
-                </div>
-                <ul className="mt-3 flex flex-wrap gap-1.5">
-                  {items.map((i) => (
-                    <li
-                      key={i}
-                      className="rounded-full border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
-                    >
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -460,7 +460,7 @@ function Home() {
             day.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <CtaLink href={resume.url} target="_blank" rel="noreferrer" variant="primary">
+            <CtaLink href={resume.url} download={resume.original_filename} variant="primary">
               <Download className="h-4 w-4" /> Download Résumé
             </CtaLink>
             <CtaLink href={SOCIAL.email} variant="secondary">
