@@ -431,7 +431,7 @@ function Home() {
           <h2 className="display-serif mt-2 text-4xl sm:text-5xl">On working with me.</h2>
           <Carousel
             opts={{ align: "start" }}
-            className="mt-10 pb-14"
+            className="mt-10"
             aria-label="LinkedIn recommendations"
           >
             <CarouselContent>
@@ -481,8 +481,8 @@ function Home() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bottom-0 left-0 top-auto translate-y-0" />
-            <CarouselNext className="bottom-0 left-12 right-auto top-auto translate-y-0" />
+            <CarouselPrevious className="-left-4 top-1/2 -translate-y-1/2 sm:-left-12" />
+            <CarouselNext className="-right-4 left-auto top-1/2 -translate-y-1/2 sm:-right-12" />
           </Carousel>
         </div>
       </section>
