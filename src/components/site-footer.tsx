@@ -131,9 +131,9 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="container-page flex flex-col items-start justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
           <p>
-            © {new Date().getFullYear()} Bhavin Shah. Built with React, TanStack Start & Tailwind.
+            © {new Date().getFullYear()} Bhavin Shah.
           </p>
-          <p className="font-mono">v1.0 · handcrafted in Durham, NC</p>
+          <p>Built using AI - Designed using Lovable, Developed using Codex & Deployed using Vercel</p>
         </div>
       </div>
     </footer>
