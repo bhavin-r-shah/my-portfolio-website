@@ -44,13 +44,13 @@ const timeline = [
 
 function ExperiencePage() {
   return (
-    <div className="container-page my-20">
+    <div className="container-page my-10">
       <h1 className="display-serif max-w-3xl text-5xl sm:text-6xl">Experience</h1>
       <p className="mt-5 text-muted-foreground">
         Projects I've led or contributed to across HPE, Nimble Storage, Intuit, IBM and Accenture.
       </p>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-[0.85fr_1.5fr] lg:items-start">
+      <div className="mt-10 grid gap-8 lg:grid-cols-[0.85fr_1.5fr] lg:items-start">
         <aside className="space-y-6 lg:sticky lg:top-24">
           <section className="card-surface p-6">
             <p className="eyebrow inline-flex items-center gap-2">
@@ -118,9 +118,9 @@ function ExperiencePage() {
                 </div>
                 */}
 
-                <div className="flex flex-col p-6 md:p-8">
-                  <div className="flex flex-col gap-4">
-                    <div className="space-y-2">
+                <div className="flex flex-col px-6 py-3 md:px-8 md:py-6">
+                  <div className="flex flex-col gap-2">
+                    <div className="space-y-1">
                       <h3 className="text-2xl font-semibold text-foreground">{p.title}</h3>
                       <p className="text-sm text-muted-foreground">{p.tagline}</p>
                     </div>
@@ -130,19 +130,19 @@ function ExperiencePage() {
                         <dt className="eyebrow inline-flex items-center gap-2">
                           <Building2 className="h-3.5 w-3.5" /> Company
                         </dt>
-                        <dd className="mt-2 text-sm font-semibold text-foreground">{p.company}</dd>
+                        <dd className="mt-1 text-sm font-semibold text-foreground">{p.company}</dd>
                       </div>
                       <div className="rounded-2xl border border-border bg-surface/50 p-4">
                         <dt className="eyebrow inline-flex items-center gap-2">
                           <UserRound className="h-3.5 w-3.5" /> Project role
                         </dt>
-                        <dd className="mt-2 text-sm font-semibold text-foreground">{p.role}</dd>
+                        <dd className="mt-1 text-sm font-semibold text-foreground">{p.role}</dd>
                       </div>
                     </dl>
                   </div>
-                  <p className="mt-4 text-sm leading-relaxed">{p.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed">{p.description}</p>
 
-                  <ul className="mt-5 space-y-1.5 text-sm">
+                  <ul className="mt-3 space-y-1.5 text-sm">
                     {p.impact.map((i) => (
                       <li key={i} className="flex gap-2">
                         <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
@@ -151,7 +151,7 @@ function ExperiencePage() {
                     ))}
                   </ul>
 
-                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex flex-wrap gap-1.5">
                       {p.tags.map((t) => (
                         <span
