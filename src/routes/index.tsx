@@ -423,7 +423,12 @@ function Home() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
               <figure key={t.name} className="card-surface flex flex-col p-6">
-                <details className="group flex flex-1 flex-col">
+                <figcaption className="border-b border-border pb-4 text-sm">
+                  <p className="font-medium text-foreground">{t.name}</p>
+                  <p className="text-muted-foreground">{t.role}</p>
+                </figcaption>
+
+                <details className="group mt-6 flex flex-1 flex-col">
                   <blockquote className="display-serif line-clamp-5 whitespace-pre-line text-xl leading-snug text-foreground group-open:line-clamp-none">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
@@ -432,19 +437,16 @@ function Home() {
                     <span className="hidden group-open:inline">Show less</span>
                   </summary>
                 </details>
-                <figcaption className="mt-6 border-t border-border pt-4 text-sm">
-                  <p className="font-medium text-foreground">{t.name}</p>
-                  <p className="text-muted-foreground">{t.role}</p>
-                  <a
-                    href={t.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-3 inline-flex items-center gap-1 text-primary"
-                    aria-label={`Open ${t.name}'s LinkedIn recommendation`}
-                  >
-                    View on LinkedIn <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </figcaption>
+
+                <a
+                  href={t.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center gap-1 border-t border-border pt-4 text-sm text-primary"
+                  aria-label={`Open ${t.name}'s LinkedIn recommendation`}
+                >
+                  View on LinkedIn <ArrowUpRight className="h-4 w-4" />
+                </a>
               </figure>
             ))}
           </div>
