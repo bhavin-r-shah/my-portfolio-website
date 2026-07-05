@@ -10,7 +10,7 @@ const SOCIAL = {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border bg-surface/60">
+    <footer className="border-t border-border bg-surface/60">
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <p className="display-serif text-3xl">Bhavin Shah</p>

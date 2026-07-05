@@ -44,8 +44,7 @@ export function HeroSection() {
               engineer with <span className="italic text-accent">15 years</span> of experience
               bridging product and engineering. I've delivered cloud-native microservices & web
               applications across distributed teams. I've owned features end-to-end — from customer
-              discovery to system design & development through UI, APIs, BE, storage, CI/CD and
-              iterative imporovement. I have translated customer needs into roadmaps & driven
+              discovery to system design & development. I have translated customer needs into roadmaps & driven
               product strategy as Agile Scrum Master.
             </p>
 

@@ -8,15 +8,14 @@ export function FeaturedWorkSection() {
   return (
     <>
       {/* FEATURED PROJECTS */}
-      <section className="container-page py-20">
+      <section className="container-page my-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="eyebrow">Selected work</p>
-            <h2 className="display-serif mt-2 text-4xl sm:text-5xl">Work that hires me back.</h2>
+            <h2 className="display-serif mt-2 text-4xl sm:text-5xl">Professional Projects</h2>
           </div>
           <Link
             to="/experience"
-            className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline-flex items-center gap-1"
+            className="hidden text-lg text-muted-foreground hover:text-foreground sm:inline-flex items-center gap-1"
           >
             All experience <ArrowRight className="h-4 w-4" />
           </Link>
@@ -30,7 +29,7 @@ export function FeaturedWorkSection() {
               hash={p.slug}
               className="card-surface card-surface-hover group flex flex-col overflow-hidden"
             >
-              <div
+              {/* <div
                 className="aspect-[16/10] w-full border-b border-border"
                 style={{
                   background:
@@ -46,13 +45,13 @@ export function FeaturedWorkSection() {
                       .join("")}
                   </span>
                 </div>
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <p className="eyebrow">{p.year}</p>
+              </div> */}
+              <div className="flex flex-1 flex-col px-6 py-3">
+                {/* <p className="eyebrow">{p.year}</p> */}
                 <h3 className="mt-2 text-lg font-semibold text-foreground">{p.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
+                {/* <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p> */}
                 <div className="mt-4 flex flex-wrap gap-1.5">
-                  {p.tags.slice(0, 4).map((t) => (
+                  {p.tags.slice(0, 10).map((t) => (
                     <span
                       key={t}
                       className="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
@@ -62,7 +61,7 @@ export function FeaturedWorkSection() {
                   ))}
                 </div>
                 <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Case study{" "}
+                  Details{" "}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </div>
