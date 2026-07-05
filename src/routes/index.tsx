@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -114,6 +115,7 @@ const testimonials = [
 
 function Home() {
   const featured = projects.filter((p) => p.featured);
+  const [expandedTestimonials, setExpandedTestimonials] = useState<Record<string, boolean>>({});
   return (
     <>
       {/* HERO */}
@@ -421,22 +423,37 @@ function Home() {
           <p className="eyebrow">What colleagues say</p>
           <h2 className="display-serif mt-2 text-4xl sm:text-5xl">On working with me.</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
+            {testimonials.map((t, index) => (
               <figure key={t.name} className="card-surface flex flex-col p-6">
                 <figcaption className="border-b border-border pb-4 text-sm">
                   <p className="font-medium text-foreground">{t.name}</p>
                   <p className="text-muted-foreground">{t.role}</p>
                 </figcaption>
 
-                <details className="group mt-6 flex flex-1 flex-col">
-                  <blockquote className="display-serif line-clamp-5 whitespace-pre-line text-xl leading-snug text-foreground group-open:line-clamp-none">
+                <div className="mt-6 flex flex-1 flex-col">
+                  <blockquote
+                    id={`recommendation-${index}`}
+                    className={`display-serif whitespace-pre-line text-xl leading-snug text-foreground ${
+                      expandedTestimonials[t.name] ? "" : "line-clamp-5"
+                    }`}
+                  >
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
-                  <summary className="mt-4 cursor-pointer list-none text-sm font-medium text-primary underline-offset-4 hover:underline">
-                    <span className="group-open:hidden">Read full recommendation</span>
-                    <span className="hidden group-open:inline">Show less</span>
-                  </summary>
-                </details>
+                  <button
+                    type="button"
+                    aria-expanded={Boolean(expandedTestimonials[t.name])}
+                    aria-controls={`recommendation-${index}`}
+                    className="mt-4 self-start text-sm font-medium text-primary underline-offset-4 hover:underline"
+                    onClick={() =>
+                      setExpandedTestimonials((current) => ({
+                        ...current,
+                        [t.name]: !current[t.name],
+                      }))
+                    }
+                  >
+                    {expandedTestimonials[t.name] ? "Show less" : "Read full recommendation"}
+                  </button>
+                </div>
 
                 <a
                   href={t.href}
