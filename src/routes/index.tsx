@@ -112,7 +112,7 @@ function Home() {
               "radial-gradient(600px 300px at 15% 10%, color-mix(in oklab, var(--primary) 12%, transparent), transparent), radial-gradient(500px 260px at 90% 0%, color-mix(in oklab, var(--accent) 15%, transparent), transparent)",
           }}
         />
-        <div className="container-page grid gap-12 py-8 md:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] md:items-center md:py-12 lg:gap-16">
+        <div className="container-page grid gap-12 py-6 md:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] md:items-center md:py-10 lg:gap-16">
           <div className="max-w-2xl">
             {/* Open to Roles */}
             {/* <p className="eyebrow inline-flex items-center gap-3">
@@ -123,17 +123,24 @@ function Home() {
               Open to Staff / Principal & Tech Lead roles
             </p> */}
             {/* Hero Description Text */}
-            <h1 className="display-serif mt-6 text-3xl sm:text-4xl md:text-5xl">
+            {/* <h1 className="display-serif mt-6 text-3xl sm:text-4xl md:text-5xl">
               Leading the intersection of user-centric{" "}
               <span className="italic text-primary">product strategy</span> and{" "}
               <span className="italic text-accent">resilient engineering.</span>
+            </h1> */}
+            <h1 className="display-serif mt-6 text-3xl sm:text-4xl md:text-5xl">
+              <span className="italic text-primary">Product-Minded.</span>{" "}
+              <span className="italic text-accent">Engineering-Native</span>
             </h1>
             {/* Hero subtext */}
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-              I’m <span className="font-medium text-foreground">Bhavin Shah</span> — a full-stack
+              I’m <span className="font-medium text-foreground">Bhavin Shah</span> — a 
+              <span className="italic text-primary"> full-stack </span> 
               engineer with <span className="italic text-accent">15 years</span> of experience
-              bridging product and engineering. I have delivered cloud-native microservices & web
-              applications across distributed teams. I have translated customer needs into roadmaps
+              bridging product and engineering. I've delivered cloud-native microservices & web
+              applications across distributed teams.  I've owned features end-to-end — from customer 
+              discovery to system design & development through UI, APIs, BE, storage, CI/CD and 
+              iterative imporovement. I have translated customer needs into roadmaps
               & driven product strategy as Agile Scrum Master.
             </p>
 
@@ -173,65 +180,41 @@ function Home() {
         </div>
       </section>
 
-      {/* SKILLS SNAPSHOT */}
-      <section>
-        <div className="container-page py-5">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="display-serif text-4xl sm:text-5xl">Skills Snapshot</h2>
-            </div>
-          </div>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {skillGroups.map(({ icon: Icon, label, items }) => (
-              <div key={label} className="card-surface p-4">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-md bg-primary/10 text-primary">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <p className="text-base font-semibold">{label}</p>
-                </div>
-                <ul className="mt-3 flex flex-wrap gap-1.5">
-                  {items.map((i) => (
-                    <li
-                      key={i}
-                      className="rounded-full border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
-                    >
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      {/* Core Strengths */}
+      <section className="container-page my-10">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <h2 className="display-serif text-4xl sm:text-5xl">Core Strengths</h2>
           </div>
         </div>
-      </section>
-
-      {/* Highlights */}
-      {/* <section className="container-page mt-3">
-        <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-border bg-border/60 shadow-sm lg:grid-cols-10 lg:gap-px">
+        <div className="grid grid-cols-1 mt-5 overflow-hidden rounded-2xl border border-border bg-border/60 shadow-sm lg:grid-cols-10 lg:gap-px">
           {[
-            { icon: Briefcase, label: "Experience", value: "15+ Years", span: "lg:col-span-2" },
             {
               icon: Code2,
-              label: "Core Tech",
-              value: "Go, React, REST API, PostgreSQL,",
-              emphasis: "Design Systems",
+              label: "End to End Ownership",
+              value: "System architecture, UX, API & DB design, UI & BE development, deployment and iterative improvement",
               span: "lg:col-span-3",
             },
+            // {
+            //   icon: Code2,
+            //   label: "Full Stack Development",
+            //   value: "Scalable web applications and cloud microservices",
+            //   // emphasis: "Design Systems",
+            //   span: "lg:col-span-2",
+            // },
             {
-              icon: Target,
-              label: "Focus",
-              value: "Product Strategy &",
-              emphasis: "Delivery",
-              span: "lg:col-span-2",
+              icon: Palette,
+              label: "UI/UX & Design Systems",
+              value: "Designed & developed UI component library reducing dev time by ~30% across 8+ products",
+              // emphasis: "Design Systems",
+              span: "lg:col-span-3",
             },
             {
               icon: Heart,
-              label: "Passion",
-              value: "User-Friendly Applications, Accessibility & Sustainability",
+              label: "Passion: Accessibility & Sustainability",
+              value: "Responsive & WCAG 2.2 AA-compliant component library; Sustaniable web design, optimized bundle size, curated API traffic",
               glow: true,
-              span: "lg:col-span-3",
+              span: "lg:col-span-4",
             },
           ].map(({ icon: Icon, label, value, sub, emphasis, italic, glow, span }) => (
             <div
@@ -267,7 +250,39 @@ function Home() {
             </div>
           ))}
         </div>
-      </section> */}
+      </section>
+
+      {/* SKILLS SNAPSHOT */}
+      <section className="container-page my-10">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <h2 className="display-serif text-4xl sm:text-5xl">Skills</h2>
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skillGroups.map(({ icon: Icon, label, items }) => (
+            <div key={label} className="card-surface p-4">
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-md bg-primary/10 text-primary">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <p className="text-base font-semibold">{label}</p>
+              </div>
+              <ul className="mt-3 flex flex-wrap gap-1.5">
+                {items.map((i) => (
+                  <li
+                    key={i}
+                    className="rounded-full border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground"
+                  >
+                    {i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* FEATURED PROJECTS */}
       <section className="container-page py-20">
@@ -334,7 +349,7 @@ function Home() {
       </section>
 
       {/* PROOF OF WORK */}
-      <section className="container-page py-20">
+      {/* <section className="container-page py-20">
         <div className="grid gap-10 md:grid-cols-[1fr_1.4fr] md:items-center">
           <div>
             <p className="eyebrow">Proof of work</p>
@@ -399,7 +414,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* TESTIMONIALS */}
       <section className="border-t border-border bg-surface/60">
