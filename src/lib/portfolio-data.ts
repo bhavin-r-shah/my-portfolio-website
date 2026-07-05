@@ -9,6 +9,7 @@ export interface Project {
   impact: string[];
   repo?: string;
   live?: string;
+  year?: string;
   featured?: boolean;
 }
 
@@ -22,9 +23,7 @@ export const projects: Project[] = [
     role: "Tech Lead · Co-Designer & Developer",
     company: "HPE",
     tags: ["React", "Stencil.js", "Tailwind", "Figma"],
-    impact: [
-      "Reduced feature dev time by ~30% across 8+ product teams",
-    ],
+    impact: ["Reduced feature dev time by ~30% across 8+ product teams"],
     featured: true,
   },
   {
@@ -50,6 +49,7 @@ export const projects: Project[] = [
     description:
       "Explored a green-by-design frontend: tree-shaken bundles, CDN-first delivery, curated API calls, lazy loading, dark theme, SVG sprites, and reduced-motion respect.",
     role: "Full-Stack Engineer",
+    company: "HPE",
     year: "2024",
     tags: ["Sustainability", "Performance", "Web Vitals", "CDN"],
     impact: [
@@ -66,6 +66,7 @@ export const projects: Project[] = [
     description:
       "Snapshots critical UI states per PR, diffs against baseline, and posts inline results. Cut post-merge visual bugs to near-zero on adopting teams.",
     role: "Author",
+    company: "HPE",
     year: "2023",
     tags: ["Cypress", "GitHub Actions", "Testing"],
     impact: [
@@ -80,6 +81,7 @@ export const projects: Project[] = [
     description:
       "Wrote lint rules and Cypress helpers that fail builds on axe violations. Ran enablement sessions to drive adoption across product teams.",
     role: "Accessibility Lead",
+    company: "HPE",
     year: "2023",
     tags: ["A11y", "ESLint", "Cypress", "axe-core"],
     impact: [
@@ -94,6 +96,7 @@ export const projects: Project[] = [
     description:
       "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
     role: "Senior Engineer",
+    company: "Nimble Storage",
     year: "2015 – 2017",
     tags: ["Ember.js", "Google Analytics", "UX"],
     impact: [
