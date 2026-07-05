@@ -20,19 +20,14 @@ export const Route = createFileRoute("/projects")({
 function ProjectsPage() {
   const upcoming = [
     {
-      title: "AI-Assisted Résumé Reviewer",
-      blurb: "LLM-powered feedback on résumés with rubric-driven scoring and inline rewrites.",
-      tags: ["React", "TypeScript", "LLM"],
+      title: "Natural Healing Web App",
+      blurb: "My personal library of natural remedies, using food as medicine, yoga, healthy lifestlye practices and holistic health resources.",
+      tags: ["React", "TypeScript", "Tailwind CSS"],
     },
     {
-      title: "Sustainable Web Audit Tool",
-      blurb: "Chrome extension that scores pages on data-transfer, CPU idle, and green-web heuristics.",
-      tags: ["Chrome API", "Web Vitals", "Sustainability"],
-    },
-    {
-      title: "A11y Component Playground",
-      blurb: "Open-source library of accessible React primitives with keyboard-first demos.",
-      tags: ["React", "WCAG 2.2", "Storybook"],
+      title: "RAG System for my Natural Healing Web App",
+      blurb: "RAG system that enabled users to add their own remedies, and search for remedies based on symptoms, ingredients and health conditions.",
+      tags: ["Python", "RAG"],
     },
   ];
 
@@ -79,9 +74,9 @@ function ProjectsPage() {
           <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="primary">
             <Github className="h-4 w-4" /> Follow on GitHub
           </CtaLink>
-          <CtaLink href="/learnings" variant="secondary">
+          {/* <CtaLink href="/learnings" variant="secondary">
             Read Learnings <ArrowRight className="h-4 w-4" />
-          </CtaLink>
+          </CtaLink> */}
         </div>
       </div>
 
