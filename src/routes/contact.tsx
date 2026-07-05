@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, Github, Linkedin, Download, MapPin, Plane } from "lucide-react";
+import { Mail, Github, Linkedin, Download, MapPin, Plane, Phone } from "lucide-react";
 import { CtaLink } from "@/components/cta-button";
 import resume from "@/assets/resume.asset.json";
 import { SOCIAL } from "@/components/site-footer";
@@ -20,17 +20,12 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   return (
-    <div className="container-page py-20">
+    <div className="container-page my-20">
       <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start">
         <div>
-          <p className="eyebrow">Contact</p>
-          <h1 className="display-serif mt-3 text-5xl sm:text-6xl">
+          <h1 className="display-serif text-5xl sm:text-6xl">
             Interested in working together?
           </h1>
-          <p className="mt-5 max-w-xl text-muted-foreground">
-            The fastest path is email. I read every message and reply within
-            one business day. If you'd rather DM, LinkedIn works too.
-          </p>
 
           <div className="mt-10 grid gap-3 sm:grid-cols-2">
             <a href={SOCIAL.email} className="card-surface card-surface-hover flex items-center gap-3 p-5">
@@ -51,6 +46,15 @@ function ContactPage() {
                 <p className="truncate font-mono text-xs text-muted-foreground">shah-bhavin-r</p>
               </div>
             </a>
+            <a className="card-surface card-surface-hover flex items-center gap-3 p-5">
+              <span className="grid h-10 w-10 place-items-center rounded-md bg-primary/10 text-primary">
+                <Phone className="h-4 w-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-sm font-medium">Phone</p>
+                <p className="truncate font-mono text-xs text-muted-foreground">+91 7400272708</p>
+              </div>
+            </a>
             <a href={SOCIAL.github} target="_blank" rel="noreferrer" className="card-surface card-surface-hover flex items-center gap-3 p-5">
               <span className="grid h-10 w-10 place-items-center rounded-md bg-primary/10 text-primary">
                 <Github className="h-4 w-4" />
@@ -58,15 +62,6 @@ function ContactPage() {
               <div className="min-w-0">
                 <p className="text-sm font-medium">GitHub</p>
                 <p className="truncate font-mono text-xs text-muted-foreground">github.com/bhavin-r-shah</p>
-              </div>
-            </a>
-            <a href={resume.url} target="_blank" rel="noreferrer" className="card-surface card-surface-hover flex items-center gap-3 p-5">
-              <span className="grid h-10 w-10 place-items-center rounded-md bg-primary/10 text-primary">
-                <Download className="h-4 w-4" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-sm font-medium">Résumé (PDF)</p>
-                <p className="truncate font-mono text-xs text-muted-foreground">Bhavin_Shah_Resume.pdf</p>
               </div>
             </a>
           </div>
@@ -94,13 +89,7 @@ function ContactPage() {
 
           <div className="mt-6 rounded-lg border border-dashed border-border p-4 text-xs text-muted-foreground">
             <p className="font-mono">// looking for</p>
-            <p className="mt-2">Staff / Principal / Tech Lead roles bridging product & engineering. Especially interested in platforms, developer tooling, design systems, and applied AI.</p>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <CtaLink href={SOCIAL.email} variant="primary">
-              <Mail className="h-4 w-4" /> Email me
-            </CtaLink>
+            <p className="mt-2">Staff / Principal / Tech Lead roles bridging product & engineering.</p>
           </div>
         </aside>
       </div>
