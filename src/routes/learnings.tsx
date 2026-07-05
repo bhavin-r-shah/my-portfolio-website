@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+// import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { learnings, categories, type LearningCategory } from "@/lib/learnings-data";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/learnings")({
+/* export const Route = createFileRoute("/learnings")({
   component: NotesPage,
   head: () => ({
     meta: [
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/learnings")({
     ],
     links: [{ rel: "canonical", href: "/learnings" }],
   }),
-});
+}); */
 
 function NotesPage() {
   const [active, setActive] = useState<LearningCategory | "All">("All");
@@ -29,8 +29,8 @@ function NotesPage() {
         A working knowledge base — not a blog.
       </h1>
       <p className="mt-5 max-w-2xl text-muted-foreground">
-        Short, opinionated notes I keep as I learn. Categorized so recruiters
-        and engineers can jump straight to what's relevant.
+        Short, opinionated notes I keep as I learn. Categorized so recruiters and engineers can jump
+        straight to what's relevant.
       </p>
 
       <div className="mt-10 flex flex-wrap gap-2">
@@ -54,7 +54,9 @@ function NotesPage() {
         {filtered.map((n) => (
           <article key={n.slug} className="card-surface card-surface-hover flex flex-col p-6">
             <div className="flex items-center justify-between">
-              <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[11px] text-primary">{n.category}</span>
+              <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[11px] text-primary">
+                {n.category}
+              </span>
               <span className="inline-flex items-center gap-1 font-mono text-[11px] text-muted-foreground">
                 <Clock className="h-3 w-3" /> {n.readingTime}
               </span>
@@ -64,7 +66,12 @@ function NotesPage() {
             <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-xs">
               <span className="font-mono text-muted-foreground">Updated {n.updated}</span>
               {n.related && (
-                <a href={n.related.href} target={n.related.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="inline-flex items-center gap-1 text-primary">
+                <a
+                  href={n.related.href}
+                  target={n.related.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-primary"
+                >
                   {n.related.label} <ArrowUpRight className="h-3 w-3" />
                 </a>
               )}
@@ -75,3 +82,5 @@ function NotesPage() {
     </div>
   );
 }
+
+export {};

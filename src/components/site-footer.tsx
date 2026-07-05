@@ -69,11 +69,11 @@ export function SiteFooter() {
                 Projects
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/learnings" className="text-muted-foreground hover:text-foreground">
                 Learnings
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/about" className="text-muted-foreground hover:text-foreground">
                 About
