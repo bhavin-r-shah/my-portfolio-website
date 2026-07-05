@@ -15,6 +15,7 @@ import {
   Gauge,
   Code2,
   Target,
+  Palette,
 } from "lucide-react";
 import photo from "@/assets/bhavin-photo.asset.json";
 import resume from "@/assets/resume.asset.json";
@@ -42,7 +43,12 @@ const skillGroups = [
   {
     icon: Code2,
     label: "Frontend",
-    items: ["React", "TypeScript", "Stencil.js", "Tailwind CSS", "Cypress", "Jest"],
+    items: ["ReactJS", "TypeScript", "StencilJS", "Tailwind CSS", "EmberJS", "AngularJS", "HTML", "Google Analytics"],
+  },
+  {
+    icon: Palette,
+    label: "UX",
+    items: ["WCAG 2.2 AA", "Design Systems", "Figma"],
   },
   {
     icon: Cpu,
@@ -50,19 +56,19 @@ const skillGroups = [
     items: ["Go (Golang)", "Java", "REST", "gRPC", "Kafka", "PostgreSQL", "Redis", "MongoDB"],
   },
   {
+    icon: Gauge,
+    label: "Quality",
+    items: ["Cypress", "Jest", "BDD", "Gherkin"],
+  },
+  {
     icon: Layers,
     label: "Platform",
-    items: ["GitHub Actions", "Jenkins", "Docker", "Git", "Unix"],
+    items: ["GitHub Actions", "Jenkins", "Git", "Unix"],
   },
   {
     icon: Sparkles,
     label: "AI-Assisted Dev",
-    items: ["GitHub Copilot", "VS Code AI", "ChatGPT workflows"],
-  },
-  {
-    icon: Gauge,
-    label: "Quality & UX",
-    items: ["WCAG 2.2 AA", "Design Systems", "Figma", "Web Vitals"],
+    items: ["GitHub Copilot", "Codex", "Lovable", "Vercel v0"],
   },
   {
     icon: Leaf,
@@ -202,7 +208,7 @@ function Home() {
       </section>
 
       {/* Highlights */}
-      <section className="container-page mt-3">
+      {/* <section className="container-page mt-3">
         <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-border bg-border/60 shadow-sm lg:grid-cols-10 lg:gap-px">
           {[
             { icon: Briefcase, label: "Experience", value: "15+ Years", span: "lg:col-span-2" },
@@ -261,7 +267,7 @@ function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* FEATURED PROJECTS */}
       <section className="container-page py-20">
