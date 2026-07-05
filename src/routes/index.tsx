@@ -118,6 +118,13 @@ const testimonials = [
     role: "Staff Software Engineer at Nimble Storage",
     href: linkedinRecommendationsUrl,
   },
+  {
+    quote:
+      "Bhavin has exceptional expertise across the full stack. On the front end, he has strong experience with React, Vite, Jest, and Cypress, and have played a key role in developing high-quality, reusable component libraries that drive consistency and scalability. His code reviews are thorough, insightful, and always aimed at elevating team standards. On the backend, he is equally skilled with Go, gRPC, REST APIs, and Postgres, making him a well-rounded and dependable engineer. Beyond technical skills, Bhavin is a great team player—approachable, collaborative, and always willing to help. Bhavin's positive attitude and willingness to share knowledge make him a joy to work with.",
+    name: "Yugandhar Pathi",
+    role: "Principal Cloud Developer at HPE",
+    href: linkedinRecommendationsUrl,
+  },
 ];
 
 function Home() {
@@ -481,8 +488,8 @@ function Home() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-4 top-1/2 -translate-y-1/2 sm:-left-12" />
-            <CarouselNext className="-right-4 left-auto top-1/2 -translate-y-1/2 sm:-right-12" />
+            <CarouselPrevious className="-left-4 top-1/2 w-16 -translate-y-1/2 sm:-left-16" />
+            <CarouselNext className="-right-4 left-auto top-1/2 w-16 -translate-y-1/2 sm:-right-16" />
           </Carousel>
         </div>
       </section>
