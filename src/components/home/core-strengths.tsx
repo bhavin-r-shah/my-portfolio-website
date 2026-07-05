@@ -29,7 +29,7 @@ const coreStrengths: CoreStrength[] = [
     icon: Heart,
     label: "Passion: Accessibility & Sustainability",
     value:
-      "Responsive & WCAG 2.2 AA-compliant component library; Sustaniable web design, optimized bundle size, curated API traffic",
+      "Responsive & WCAG 2.2 AA-compliant UI; Sustaniable web design, optimized bundle size, curated API traffic",
     glow: true,
     span: "lg:col-span-4",
   },
