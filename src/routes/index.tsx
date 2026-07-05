@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -20,6 +21,13 @@ import {
 import photo from "@/assets/bhavin-photo.asset.json";
 import resume from "@/assets/resume.asset.json";
 import { CtaLink } from "@/components/cta-button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { projects } from "@/lib/portfolio-data";
 import { SOCIAL } from "@/components/site-footer";
 
@@ -43,7 +51,16 @@ const skillGroups = [
   {
     icon: Code2,
     label: "Frontend",
-    items: ["ReactJS", "TypeScript", "StencilJS", "Tailwind CSS", "EmberJS", "AngularJS", "HTML", "Google Analytics"],
+    items: [
+      "ReactJS",
+      "TypeScript",
+      "StencilJS",
+      "Tailwind CSS",
+      "EmberJS",
+      "AngularJS",
+      "HTML",
+      "Google Analytics",
+    ],
   },
   {
     icon: Palette,
@@ -77,29 +94,42 @@ const skillGroups = [
   },
 ];
 
+const linkedinRecommendationsUrl = `${SOCIAL.linkedin}details/recommendations/`;
+
 const testimonials = [
   {
     quote:
-      "Bhavin is the rare engineer who leads with product intuition. He'd walk into a review with the architecture, the trade-offs, and the customer story ready.",
-    name: "Engineering Manager, HPE",
-    role: "Manager (former)",
+      "I highly recommend Bhavin Shah as an exceptional Engineer. I've had the pleasure of collaborating with Bhavin and have consistently been impressed by his technical prowess and his invaluable contributions to our team.\n\nBhavin possesses a comprehensive skill set across various programming languages, frameworks, system design, and testing. His problem-solving abilities are outstanding; he approaches complex challenges with a keen analytical mind and consistently delivers robust, well-debugged solutions.\n\nBeyond his technical expertise, Bhavin is an exemplary team member. He excels at collaboration and communication, always willing to share his knowledge and support his peers. His positive attitude and unwavering reliability make him a true asset to any project. I've also witnessed his strong mentorship qualities and his remarkable ability to quickly grasp new concepts, which speaks volumes about his commitment to continuous learning and his leadership potential.\n\nBhavin's contributions significantly enhance our team's success, and his dedication to quality and collaboration is evident in everything he does.",
+    name: "Yashwanth Pinneka",
+    role: "Principal Engineer at HPE",
+    href: linkedinRecommendationsUrl,
   },
   {
     quote:
-      "He raised the accessibility bar for the whole org. Our components shipped a11y by default because of the guardrails he built.",
-    name: "Principal Engineer",
-    role: "Peer at HPE",
+      "I've had the pleasure of working with Bhavin on several projects, and he consistently demonstrates a deep understanding of frontend development coupled with a meticulous eye for design. His commitment to ensuring that applications not only function flawlessly but also provide a cohesive and intuitive user experience is truly commendable.\n\nBhavin's attention to detail in UI design ensures that every component aligns with the overall aesthetic and functionality of the application. He proactively identifies inconsistencies and addresses them, ensuring a polished final product that resonates with users.\n\nBeyond his UI expertise, Bhavin plays a pivotal role in maintaining the health of our continuous integration processes. His proactive approach to identifying and resolving issues ensures that our development pipeline remains smooth and efficient, minimizing disruptions and facilitating timely releases.\n\nWorking with Bhavin is a seamless experience. He communicates effectively, collaborates well with cross-functional teams, and always brings a solution-oriented mindset to the table. Any team would benefit immensely from his technical acumen and dedication to excellence.",
+    name: "Guglielmo Turco",
+    role: "Staff Software Engineer at HPE",
+    href: linkedinRecommendationsUrl,
   },
   {
     quote:
-      "Clear communicator across PMs, designers, and backend teams. Bhavin unblocks conversations that other people avoid.",
-    name: "Product Manager",
-    role: "Cross-functional partner",
+      "I've had the pleasure of working closely with Bhavin and continue to be impressed by his problem-solving abilities, sharp analytical mindset, and collaborative nature. He approaches challenges with clarity and focus, consistently offering thoughtful and effective solutions that drive results. Bhavin has a natural ability to think outside the box while staying grounded in what's practical. He's an excellent collaborator, equally comfortable working alongside peers or engaging with leadership to move initiatives forward.",
+    name: "Mandy Shen",
+    role: "Staff Software Engineer at Nimble Storage",
+    href: linkedinRecommendationsUrl,
+  },
+  {
+    quote:
+      "Bhavin has exceptional expertise across the full stack. On the front end, he has strong experience with React, Vite, Jest, and Cypress, and have played a key role in developing high-quality, reusable component libraries that drive consistency and scalability. His code reviews are thorough, insightful, and always aimed at elevating team standards. On the backend, he is equally skilled with Go, gRPC, REST APIs, and Postgres, making him a well-rounded and dependable engineer. Beyond technical skills, Bhavin is a great team player—approachable, collaborative, and always willing to help. Bhavin's positive attitude and willingness to share knowledge make him a joy to work with.",
+    name: "Yugandhar Pathi",
+    role: "Principal Cloud Developer at HPE",
+    href: linkedinRecommendationsUrl,
   },
 ];
 
 function Home() {
   const featured = projects.filter((p) => p.featured);
+  const [expandedTestimonials, setExpandedTestimonials] = useState<Record<string, boolean>>({});
   return (
     <>
       {/* HERO */}
@@ -421,19 +451,61 @@ function Home() {
         <div className="container-page py-20">
           <p className="eyebrow">What colleagues say</p>
           <h2 className="display-serif mt-2 text-4xl sm:text-5xl">On working with me.</h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="card-surface flex flex-col p-6">
-                <blockquote className="display-serif text-xl leading-snug text-foreground">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-6 border-t border-border pt-4 text-sm">
-                  <p className="font-medium text-foreground">{t.name}</p>
-                  <p className="text-muted-foreground">{t.role}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <Carousel
+            opts={{ align: "start" }}
+            className="mt-10"
+            aria-label="LinkedIn recommendations"
+          >
+            <CarouselContent>
+              {testimonials.map((t, index) => (
+                <CarouselItem key={t.name} className="md:basis-1/2 lg:basis-1/3">
+                  <figure className="card-surface flex h-full flex-col p-6">
+                    <figcaption className="border-b border-border pb-4 text-sm">
+                      <p className="font-medium text-foreground">{t.name}</p>
+                      <p className="text-muted-foreground">{t.role}</p>
+                    </figcaption>
+
+                    <div className="mt-6 flex flex-1 flex-col">
+                      <blockquote
+                        id={`recommendation-${index}`}
+                        className={`display-serif whitespace-pre-line text-xl leading-snug text-foreground ${
+                          expandedTestimonials[t.name] ? "" : "line-clamp-5"
+                        }`}
+                      >
+                        &ldquo;{t.quote}&rdquo;
+                      </blockquote>
+                      <button
+                        type="button"
+                        aria-expanded={Boolean(expandedTestimonials[t.name])}
+                        aria-controls={`recommendation-${index}`}
+                        className="mt-4 self-start text-sm font-medium text-primary underline-offset-4 hover:underline"
+                        onClick={() =>
+                          setExpandedTestimonials((current) => ({
+                            ...current,
+                            [t.name]: !current[t.name],
+                          }))
+                        }
+                      >
+                        {expandedTestimonials[t.name] ? "Show less" : "Read full recommendation"}
+                      </button>
+                    </div>
+
+                    <a
+                      href={t.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-6 inline-flex items-center gap-1 border-t border-border pt-4 text-sm text-primary"
+                      aria-label={`Open ${t.name}'s LinkedIn recommendation`}
+                    >
+                      View on LinkedIn <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </figure>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 top-1/2 w-16 -translate-y-1/2 sm:-left-16" />
+            <CarouselNext className="-right-4 left-auto top-1/2 w-16 -translate-y-1/2 sm:-right-16" />
+          </Carousel>
         </div>
       </section>
 
