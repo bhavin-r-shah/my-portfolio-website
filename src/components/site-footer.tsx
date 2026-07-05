@@ -70,7 +70,7 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link to="/notes" className="text-muted-foreground hover:text-foreground">
+              <Link to="/learnings" className="text-muted-foreground hover:text-foreground">
                 Learnings
               </Link>
             </li>

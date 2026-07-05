@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as NotesRouteImport } from './routes/notes'
+import { Route as LearningsRouteImport } from './routes/learnings'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -27,9 +27,9 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesRoute = NotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
+const LearningsRoute = LearningsRouteImport.update({
+  id: '/learnings',
+  path: '/learnings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienceRoute = ExperienceRouteImport.update({
@@ -58,7 +58,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
-  '/notes': typeof NotesRoute
+  '/learnings': typeof LearningsRoute
   '/projects': typeof ProjectsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -67,7 +67,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
-  '/notes': typeof NotesRoute
+  '/learnings': typeof LearningsRoute
   '/projects': typeof ProjectsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -77,7 +77,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
-  '/notes': typeof NotesRoute
+  '/learnings': typeof LearningsRoute
   '/projects': typeof ProjectsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -88,7 +88,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
-    | '/notes'
+    | '/learnings'
     | '/projects'
     | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
@@ -97,7 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
-    | '/notes'
+    | '/learnings'
     | '/projects'
     | '/sitemap.xml'
   id:
@@ -106,7 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
-    | '/notes'
+    | '/learnings'
     | '/projects'
     | '/sitemap.xml'
   fileRoutesById: FileRoutesById
@@ -116,7 +116,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ExperienceRoute: typeof ExperienceRoute
-  NotesRoute: typeof NotesRoute
+  LearningsRoute: typeof LearningsRoute
   ProjectsRoute: typeof ProjectsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
@@ -137,11 +137,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes': {
-      id: '/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesRouteImport
+    '/learnings': {
+      id: '/learnings'
+      path: '/learnings'
+      fullPath: '/learnings'
+      preLoaderRoute: typeof LearningsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/experience': {
@@ -180,7 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
-  NotesRoute: NotesRoute,
+  LearningsRoute: LearningsRoute,
   ProjectsRoute: ProjectsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }

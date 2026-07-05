@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Clock, ArrowUpRight } from "lucide-react";
-import { notes, categories, type NoteCategory } from "@/lib/notes-data";
+import { learnings, categories, type LearningCategory } from "@/lib/learnings-data";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/notes")({
+export const Route = createFileRoute("/learnings")({
   component: NotesPage,
   head: () => ({
     meta: [
@@ -12,15 +12,15 @@ export const Route = createFileRoute("/notes")({
       { name: "description", content: "Curated learnings on AI engineering, React & frontend, DSA patterns, sustainable web, and system design basics." },
       { property: "og:title", content: "Learnings — Bhavin Shah" },
       { property: "og:description", content: "A knowledge-base of practical engineering learnings." },
-      { property: "og:url", content: "/notes" },
+      { property: "og:url", content: "/learnings" },
     ],
-    links: [{ rel: "canonical", href: "/notes" }],
+    links: [{ rel: "canonical", href: "/learnings" }],
   }),
 });
 
 function NotesPage() {
-  const [active, setActive] = useState<NoteCategory | "All">("All");
-  const filtered = active === "All" ? notes : notes.filter((n) => n.category === active);
+  const [active, setActive] = useState<LearningCategory | "All">("All");
+  const filtered = active === "All" ? learnings : learnings.filter((n) => n.category === active);
 
   return (
     <div className="container-page py-20">
