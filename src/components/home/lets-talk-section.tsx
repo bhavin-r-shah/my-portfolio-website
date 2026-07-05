@@ -20,8 +20,7 @@ export function LetsTalkSection() {
             Interested in working together?
           </h2>
           <p className="mt-4 max-w-xl text-muted-foreground">
-            View my résumé, explore my GitHub, or contact me directly. I reply within a business
-            day.
+            View my résumé, explore my GitHub, or contact me directly.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <CtaLink href={resume.url} download={resume.original_filename} variant="primary">
