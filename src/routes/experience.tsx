@@ -6,13 +6,13 @@ export const Route = createFileRoute("/experience")({
   component: ExperiencePage,
   head: () => ({
     meta: [
-      { title: "Work Experience — Bhavin Shah" },
+      { title: "Experience — Bhavin Shah" },
       {
         name: "description",
         content:
           "Case studies from 15 years of work: enterprise UI component libraries, cloud-native microservices in Go, sustainable web POCs, and accessibility tooling.",
       },
-      { property: "og:title", content: "Work Experience — Bhavin Shah" },
+      { property: "og:title", content: "Experience — Bhavin Shah" },
       {
         property: "og:description",
         content: "Projects delivered across HPE, Nimble Storage, Intuit, IBM, and Accenture.",
@@ -28,7 +28,7 @@ const timeline = [
     years: "2017 – 2025",
     role: "Staff Software Engineer",
     org: "Hewlett Packard Enterprise",
-    where: "Mumbai, India",
+    where: "Durham, NC",
   },
   {
     years: "2015 – 2017",
@@ -44,14 +44,12 @@ const timeline = [
 
 function ExperiencePage() {
   return (
-    <div className="container-page py-20">
-      <p className="eyebrow">Work experience</p>
-      <h1 className="display-serif mt-3 max-w-3xl text-5xl sm:text-6xl">
-        Case studies from 15 years of shipping.
+    <div className="container-page my-20">
+      <h1 className="display-serif max-w-3xl text-5xl sm:text-6xl">
+        Experience
       </h1>
-      <p className="mt-5 max-w-2xl text-muted-foreground">
-        Projects I've led or contributed to across HPE, Nimble Storage, Intuit, IBM, and Accenture.
-        Each entry captures the problem, my role, the stack, and the outcome.
+      <p className="mt-5 text-muted-foreground">
+        Projects I've led or contributed to across HPE, Nimble Storage, Intuit, IBM and Accenture.
       </p>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.85fr_1.5fr] lg:items-start">
@@ -123,11 +121,12 @@ function ExperiencePage() {
                 */}
 
                 <div className="flex flex-col p-6 md:p-8">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 className="text-2xl font-semibold text-foreground">{p.title}</h2>
-                    <p className="font-mono text-xs text-muted-foreground">{p.role}</p>
+                  <div className="flex flex-col flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="text-2xl font-semibold text-foreground">{p.title}</h3>
+                    <p className="text-sm text-muted-foreground">{p.tagline}</p>
+                    <p className="font-mono text-xs text-muted-foreground">Company: {p.company}</p>
+                    <p className="font-mono text-xs text-muted-foreground">Role in Project: {p.role}</p>
                   </div>
-                  <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
                   <p className="mt-4 text-sm leading-relaxed">{p.description}</p>
 
                   <ul className="mt-5 space-y-1.5 text-sm">

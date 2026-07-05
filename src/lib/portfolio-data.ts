@@ -4,7 +4,7 @@ export interface Project {
   tagline: string;
   description: string;
   role: string;
-  year: string;
+  company: string;
   tags: string[];
   impact: string[];
   repo?: string;
@@ -16,27 +16,25 @@ export const projects: Project[] = [
   {
     slug: "ui-component-library",
     title: "Enterprise UI Component Library",
-    tagline: "~60 reusable, WCAG 2.2 AA components adopted across 8+ products.",
+    tagline: "~60 reusable components adopted across 8+ products.",
     description:
-      "Designed patterns in Figma and led the build of a React + Stencil.js component library styled with Tailwind CSS. Standardized tokens, motion, and a11y primitives across the org.",
-    role: "Tech Lead · Design Systems",
-    year: "2022 – 2025",
-    tags: ["React", "Stencil.js", "Tailwind", "Figma", "WCAG 2.2"],
+      "Designed component patterns in Figma and led development of a React + Stencil.js component library styled with Tailwind CSS. Standardized tokens, motion, and a11y primitives across the org.",
+    role: "Tech Lead · Co-Designer & Developer",
+    company: "HPE",
+    tags: ["React", "Stencil.js", "Tailwind", "Figma"],
     impact: [
-      "Reduced feature dev time by 30% across 8+ product teams",
-      "Keyboard, mouse & screen-reader accessible by default",
-      "Automated visual-regression coverage via Cypress + GitHub Actions",
+      "Reduced feature dev time by ~30% across 8+ product teams",
     ],
     featured: true,
   },
   {
     slug: "cloud-microservices-platform",
-    title: "Cloud-Native Microservices Platform",
-    tagline: "Go, gRPC, Kafka, PostgreSQL, Redis — production workflows at HPE.",
+    title: "Cloud-Native Microservices",
+    tagline: "Go, gRPC, Kafka, PostgreSQL",
     description:
       "Owned system architecture end-to-end: high-level workflows, API and DB contracts, and low-level service design. Migrated CI/CD from Jenkins to GitHub Actions.",
-    role: "Staff Engineer",
-    year: "2019 – 2024",
+    role: "Tech Lead · Co-Designer & Developer",
+    company: "HPE",
     tags: ["Go", "gRPC", "Kafka", "PostgreSQL", "Redis", "Docker"],
     impact: [
       "Delivered 5 product initiatives from requirements to production",

@@ -42,10 +42,10 @@ function ProjectsPage() {
       <p className="mt-5 max-w-2xl text-muted-foreground">
         This space is reserved for things I'm building on the side — small
         tools, weekend experiments, AI-assisted projects, and open-source
-        contributions. New entries land here as I ship them. For delivered
+        contributions. New entries land here as I ship them. For professional
         production work, see{" "}
         <Link to="/experience" className="text-primary underline-offset-4 hover:underline">
-          Work Experience
+          Experience
         </Link>
         .
       </p>
