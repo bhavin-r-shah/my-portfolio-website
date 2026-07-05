@@ -24,9 +24,9 @@ export const projects: Project[] = [
     company: "Hewlett Packard Enterprise",
     tags: ["Go", "gRPC", "Kafka", "PostgreSQL", "Redis", "Docker","StencilJS", "Tailwind CSS"],
     impact: [
-      "Designed end-to-end systems — high-level (market needs, features, end-to-end workflows, dependencies) and low-level (UX flows, UI interfaces, API & DB contracts, technology choices, test plan)",
-      "Developed cloud-native microservices for Data Services Cloud Console",
-      "Led development of reusable web components that interacted with these web services",
+      "Designed end-to-end systems — high-level (market needs, features, workflows, dependencies) and low-level (UX flows, UI interfaces, API & DB contracts, technology choices, test plan)",
+      "Developed cloud-native microservices for Data Services Cloud Console (DSCC)",
+      "Led development of reusable web components that worked across DSCC web services",
       "Migrated CI/CD from Jenkins to GitHub Actions"
     ],
     featured: true,
@@ -71,18 +71,78 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "analytics-driven-ui",
-    title: "Analytics-Driven UI Modernization",
-    tagline: "Ember.js rebuild of a legacy GWT data-center UI at Nimble Storage.",
-    description:
-      "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
-    role: "Senior Engineer",
+    slug: "nimble-array-gui",
+    title: "Data Center Web App",
+    // tagline: "Ember.js rebuild of a legacy GWT data-center UI at Nimble Storage.",
+    // description:
+    //   "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
+    role: "Developer",
     company: "Nimble Storage",
-    year: "2015 – 2017",
-    tags: ["Ember.js", "Google Analytics", "UX"],
+    // year: "2015 – 2017",
+    tags: ["Ember.js", "Google Analytics", "Google Web Toolkit (GWT)"],
     impact: [
-      "Traded legacy GWT for a modern SPA with measurable UX gains",
-      "Fed analytics into PM/UX planning cycles",
+      "Modernized the data center management & monitoring UI from legacy Google Web Toolkit to Ember.js",
+      "Embedded user tracking via Google Analytics. Partnered with PM & UX to translate insights into roadmap decisions."
+    ],
+  },
+  {
+    slug: "intuit-full-time",
+    title: "Business.intuit.com & Reputation Profile Web App",
+    // tagline: "Ember.js rebuild of a legacy GWT data-center UI at Nimble Storage.",
+    // description:
+    //   "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
+    role: "Developer",
+    company: "Intuit",
+    // year: "2015 – 2017",
+    tags: ["AngularJS", "Google Analytics", "Java", "MongoDB", "Rest API", "Java Mail API", "MS Exchange Web Services", "FreeMarker"],
+    impact: [
+      "Developed a web app that manages the online reputation profile for businesses. Built it using AngularJS, HTML, CSS and Java Rest APIs that mined data using Java Mail API & MS exchange web services.",
+      "Rebuilt business.intuit.com using jQuery, MongoDB and Java REST APIs. Engineered SEO-optimized webpages with FreeMarker template and embedded Google Analytics tracking."
+    ],
+  },
+  {
+    slug: "intuit-internship",
+    title: "Intuit Internship",
+    // tagline: "Ember.js rebuild of a legacy GWT data-center UI at Nimble Storage.",
+    // description:
+    //   "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
+    role: "Developer",
+    company: "Intuit",
+    // year: "2015 – 2017",
+    tags: ["DOJO", "Java", "HTML", "CSS"],
+    impact: [
+      "Developed Java REST web services and MCVS / SPA based web pages using DOJO 1.8 AMD JS, HTML and CSS."
+    ],
+  },
+  {
+    slug: "ibm-internship",
+    title: "IBM Internship",
+    // tagline: "Ember.js rebuild of a legacy GWT data-center UI at Nimble Storage.",
+    // description:
+    //   "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
+    role: "Developer",
+    company: "IBM",
+    // year: "2015 – 2017",
+    tags: ["Java", "Tomcat", "JAX-RS", "Jersey", "jQuery", "Multi-Threading"],
+    impact: [
+      "Built a multi-threaded client-server application in Java and Tomcat for server workload management, handling concurrent job execution.",
+      "Developed REST APIs in JAX-RS, Jersey & Tomcat and a jQuery UI to track runtime job status."
+    ],
+  },
+  {
+    slug: "accenture",
+    title: "Data Warehousing & ETL",
+    // tagline: "Ember.js rebuild of a legacy GWT data-center UI at Nimble Storage.",
+    // description:
+    //   "Migrated the monitoring UI to Ember.js and instrumented Google Analytics to guide roadmap decisions with real usage data.",
+    role: "Developer",
+    company: "Accenture",
+    // year: "2015 – 2017",
+    tags: ["Java", "SQL", "Oracle", "SAS Base & Macros", "SAS Data Integration Tool"],
+    impact: [
+      "Re-engineered UNIX scripts.",
+      "Built tool using Java Servlets, SQL, Oracle to fetch Informatica workflow stats.",
+      "Developed SAS Base & Macros code and SAS Data Integration Tool jobs to update data warehouse tables."
     ],
   },
 ];
