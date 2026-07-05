@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, Github, Linkedin, Download, MapPin, Clock } from "lucide-react";
+import { Mail, Github, Linkedin, Download, MapPin, Plane } from "lucide-react";
 import { CtaLink } from "@/components/cta-button";
 import resume from "@/assets/resume.asset.json";
 import { SOCIAL } from "@/components/site-footer";
@@ -78,15 +78,16 @@ function ContactPage() {
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 text-primary" />
               <div>
-                <p className="font-medium">Durham, North Carolina</p>
+                <p className="font-medium">Mumbai, India</p>
                 <p className="text-muted-foreground">Open to remote, hybrid, or relocation.</p>
               </div>
             </li>
             <li className="flex items-start gap-3">
-              <Clock className="mt-0.5 h-4 w-4 text-primary" />
+              {/* <Clock className="mt-0.5 h-4 w-4 text-primary" /> */}
+              <Plane className="mt-0.5 h-4 w-4 text-primary" />
               <div>
-                <p className="font-medium">Response time</p>
-                <p className="text-muted-foreground">Within one business day.</p>
+                <p className="font-medium">USA Visa Status</p>
+                <p className="text-muted-foreground">Approved Perm and I 140. Require H1 B visa transfer</p>
               </div>
             </li>
           </ul>
