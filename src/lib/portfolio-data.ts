@@ -57,7 +57,7 @@ export const projects: Project[] = [
   },
   {
     slug: "a11y-&-sustainability-POC",
-    title: "Side Projects: Accessibility & Sustainable Web Design",
+    title: "Accessibility & Sustainable Web Design",
     // tagline: "Org-wide adoption of WCAG 2.2 AA via linting + Cypress a11y tests.",
     // description:
     //   "Wrote lint rules and Cypress helpers that fail builds on axe violations. Ran enablement sessions to drive adoption across product teams.",
@@ -69,6 +69,8 @@ export const projects: Project[] = [
       "Trained UI Chapter on adoption of UI Accessibility WCAG 2.2 AA standards. Built POC that implemented A11y using linters & Cypress tests and enabled keyboard, mouse & screen reader accessibility",
       "Explored a green-by-design frontend to reduce data transfer & client side energy consumption. Design Themes: Optimize bundle size using tree shaking & minification, CDN-first delivery, curated API calls, lazy loading, dark theme, SVG sprites"
     ],
+    featured: true,
+
   },
   {
     slug: "nimble-array-gui",

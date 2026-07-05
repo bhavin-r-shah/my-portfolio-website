@@ -7,7 +7,7 @@ export function LetsTalkSection() {
   return (
     <>
       {/* FINAL CTA */}
-      <section className="container-page pb-24">
+      <section className="container-page my-20">
         <div
           className="card-surface relative overflow-hidden p-8 sm:p-14"
           style={{

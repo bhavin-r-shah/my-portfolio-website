@@ -39,7 +39,7 @@ export function CoreStrengths() {
   return (
     <>
       {/* Core Strengths */}
-      <section className="container-page my-10">
+      <section className="container-page mt-5 mb-10">
         <div className="flex items-end justify-between gap-6">
           <div>
             <h2 className="display-serif text-4xl sm:text-5xl">Core Strengths</h2>
