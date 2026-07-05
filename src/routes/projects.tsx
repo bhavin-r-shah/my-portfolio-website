@@ -79,7 +79,7 @@ function ProjectsPage() {
           <CtaLink href={SOCIAL.github} target="_blank" rel="noreferrer" variant="primary">
             <Github className="h-4 w-4" /> Follow on GitHub
           </CtaLink>
-          <CtaLink href="/notes" variant="secondary">
+          <CtaLink href="/learnings" variant="secondary">
             Read Learnings <ArrowRight className="h-4 w-4" />
           </CtaLink>
         </div>

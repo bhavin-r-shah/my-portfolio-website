@@ -1,21 +1,21 @@
-export type NoteCategory =
+export type LearningCategory =
   | "AI Engineering"
   | "React / Frontend"
   | "DSA Patterns"
   | "Sustainable Web"
   | "System Design Basics";
 
-export interface Note {
+export interface Learning {
   slug: string;
   title: string;
   summary: string;
-  category: NoteCategory;
+  category: LearningCategory;
   readingTime: string;
   updated: string;
   related?: { label: string; href: string };
 }
 
-export const categories: NoteCategory[] = [
+export const categories: LearningCategory[] = [
   "AI Engineering",
   "React / Frontend",
   "DSA Patterns",
@@ -23,7 +23,7 @@ export const categories: NoteCategory[] = [
   "System Design Basics",
 ];
 
-export const notes: Note[] = [
+export const learnings: Learning[] = [
   {
     slug: "shipping-with-copilot",
     title: "Shipping Faster with GitHub Copilot Without Losing Rigor",
