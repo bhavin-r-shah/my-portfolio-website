@@ -43,7 +43,16 @@ const skillGroups = [
   {
     icon: Code2,
     label: "Frontend",
-    items: ["ReactJS", "TypeScript", "StencilJS", "Tailwind CSS", "EmberJS", "AngularJS", "HTML", "Google Analytics"],
+    items: [
+      "ReactJS",
+      "TypeScript",
+      "StencilJS",
+      "Tailwind CSS",
+      "EmberJS",
+      "AngularJS",
+      "HTML",
+      "Google Analytics",
+    ],
   },
   {
     icon: Palette,
@@ -77,24 +86,29 @@ const skillGroups = [
   },
 ];
 
+const linkedinRecommendationsUrl = `${SOCIAL.linkedin}details/recommendations/`;
+
 const testimonials = [
   {
     quote:
-      "Bhavin is the rare engineer who leads with product intuition. He'd walk into a review with the architecture, the trade-offs, and the customer story ready.",
-    name: "Engineering Manager, HPE",
-    role: "Manager (former)",
+      "I highly recommend Bhavin Shah as an exceptional Engineer. I've had the pleasure of collaborating with Bhavin and have consistently been impressed by his technical prowess and his invaluable contributions to our team.\n\nBhavin possesses a comprehensive skill set across various programming languages, frameworks, system design, and testing. His problem-solving abilities are outstanding; he approaches complex challenges with a keen analytical mind and consistently delivers robust, well-debugged solutions.\n\nBeyond his technical expertise, Bhavin is an exemplary team member. He excels at collaboration and communication, always willing to share his knowledge and support his peers. His positive attitude and unwavering reliability make him a true asset to any project. I've also witnessed his strong mentorship qualities and his remarkable ability to quickly grasp new concepts, which speaks volumes about his commitment to continuous learning and his leadership potential.\n\nBhavin's contributions significantly enhance our team's success, and his dedication to quality and collaboration is evident in everything he does.",
+    name: "Yashwanth Pinneka",
+    role: "Principal Engineer at HPE",
+    href: linkedinRecommendationsUrl,
   },
   {
     quote:
-      "He raised the accessibility bar for the whole org. Our components shipped a11y by default because of the guardrails he built.",
-    name: "Principal Engineer",
-    role: "Peer at HPE",
+      "I've had the pleasure of working with Bhavin on several projects, and he consistently demonstrates a deep understanding of frontend development coupled with a meticulous eye for design. His commitment to ensuring that applications not only function flawlessly but also provide a cohesive and intuitive user experience is truly commendable.\n\nBhavin's attention to detail in UI design ensures that every component aligns with the overall aesthetic and functionality of the application. He proactively identifies inconsistencies and addresses them, ensuring a polished final product that resonates with users.\n\nBeyond his UI expertise, Bhavin plays a pivotal role in maintaining the health of our continuous integration processes. His proactive approach to identifying and resolving issues ensures that our development pipeline remains smooth and efficient, minimizing disruptions and facilitating timely releases.\n\nWorking with Bhavin is a seamless experience. He communicates effectively, collaborates well with cross-functional teams, and always brings a solution-oriented mindset to the table. Any team would benefit immensely from his technical acumen and dedication to excellence.",
+    name: "Guglielmo Turco",
+    role: "Staff Software Engineer at HPE",
+    href: linkedinRecommendationsUrl,
   },
   {
     quote:
-      "Clear communicator across PMs, designers, and backend teams. Bhavin unblocks conversations that other people avoid.",
-    name: "Product Manager",
-    role: "Cross-functional partner",
+      "I've had the pleasure of working closely with Bhavin and continue to be impressed by his problem-solving abilities, sharp analytical mindset, and collaborative nature. He approaches challenges with clarity and focus, consistently offering thoughtful and effective solutions that drive results. Bhavin has a natural ability to think outside the box while staying grounded in what's practical. He's an excellent collaborator, equally comfortable working alongside peers or engaging with leadership to move initiatives forward.",
+    name: "Mandy Shen",
+    role: "Staff Software Engineer at Nimble Storage",
+    href: linkedinRecommendationsUrl,
   },
 ];
 
@@ -409,12 +423,27 @@ function Home() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
               <figure key={t.name} className="card-surface flex flex-col p-6">
-                <blockquote className="display-serif text-xl leading-snug text-foreground">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
+                <details className="group flex flex-1 flex-col">
+                  <blockquote className="display-serif line-clamp-5 whitespace-pre-line text-xl leading-snug text-foreground group-open:line-clamp-none">
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+                  <summary className="mt-4 cursor-pointer list-none text-sm font-medium text-primary underline-offset-4 hover:underline">
+                    <span className="group-open:hidden">Read full recommendation</span>
+                    <span className="hidden group-open:inline">Show less</span>
+                  </summary>
+                </details>
                 <figcaption className="mt-6 border-t border-border pt-4 text-sm">
                   <p className="font-medium text-foreground">{t.name}</p>
                   <p className="text-muted-foreground">{t.role}</p>
+                  <a
+                    href={t.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-1 text-primary"
+                    aria-label={`Open ${t.name}'s LinkedIn recommendation`}
+                  >
+                    View on LinkedIn <ArrowUpRight className="h-4 w-4" />
+                  </a>
                 </figcaption>
               </figure>
             ))}
