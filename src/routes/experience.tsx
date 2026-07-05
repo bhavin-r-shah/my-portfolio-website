@@ -121,12 +121,12 @@ function ExperiencePage() {
                 */}
 
                 <div className="flex flex-col p-6 md:p-8">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <div className="flex flex-col flex-wrap items-baseline justify-between gap-2">
                     <h3 className="text-2xl font-semibold text-foreground">{p.title}</h3>
+                    <p className="text-sm text-muted-foreground">{p.tagline}</p>
                     <p className="font-mono text-xs text-muted-foreground">Company: {p.company}</p>
-                    <p className="font-mono text-xs text-muted-foreground">Role: {p.role}</p>
+                    <p className="font-mono text-xs text-muted-foreground">Role in Project: {p.role}</p>
                   </div>
-                  <p className="mt-2 text-sm text-muted-foreground">{p.tagline}</p>
                   <p className="mt-4 text-sm leading-relaxed">{p.description}</p>
 
                   <ul className="mt-5 space-y-1.5 text-sm">
