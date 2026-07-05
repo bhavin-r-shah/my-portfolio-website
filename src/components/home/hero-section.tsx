@@ -52,7 +52,7 @@ export function HeroSection() {
             {/* Hero Buttons */}
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <CtaLink href="/experience" variant="primary">
-                View Work Experience <ArrowRight className="h-4 w-4" />
+                View Experience <ArrowRight className="h-4 w-4" />
               </CtaLink>
               <CtaLink href={resume.url} download={resume.original_filename} variant="secondary">
                 <Download className="h-4 w-4" /> Download Résumé

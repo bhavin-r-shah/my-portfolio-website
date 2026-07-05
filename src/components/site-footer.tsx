@@ -61,7 +61,7 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2 text-sm">
             <li>
               <Link to="/experience" className="text-muted-foreground hover:text-foreground">
-                Work Experience
+                Experience
               </Link>
             </li>
             <li>
