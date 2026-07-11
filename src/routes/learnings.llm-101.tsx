@@ -47,12 +47,12 @@ function Llm101Blog() {
           {/* <h2 className="display-serif text-4xl sm:text-5xl"></h2> */}
           LLM 101: prompts, tokens, and context windows
         </h1>
-        <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
+        {/* <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
           These are my first-principles notes while learning AI engineering: what a large language
           model is, why it feels smart without “thinking,” and how better prompts shape better
           outputs. The goal is to convert raw notes into interview-ready engineering clarity.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        </p> */}
+        <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
           <span className="rounded-full bg-primary/10 px-3 py-1 font-mono text-primary">Updated Jul 2026</span>
           <span className="inline-flex items-center gap-1"><Clock className="h-4 w-4" /> 7 min read</span>
           <span className="inline-flex items-center gap-1"><Sparkles className="h-4 w-4" /> Built from handwritten notes</span>

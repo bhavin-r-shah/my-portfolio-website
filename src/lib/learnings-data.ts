@@ -28,7 +28,7 @@ export const learnings: Learning[] = [
     slug: "llm-101",
     title: "LLM 101: Prompts, Tokens, and Context Windows",
     summary:
-      "A beginner-friendly mental model for how LLMs generate responses, how tokens drive cost, and how to write prompts with role, task, context, rules, and output format.",
+      "A beginner-friendly mental model for how LLMs generate responses, how tokens drive cost, and how to write effective prompts.",
     category: "AI Engineering",
     readingTime: "7 min",
     updated: "Jul 2026",
