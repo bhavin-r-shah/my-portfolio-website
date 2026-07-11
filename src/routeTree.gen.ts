@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as LearningsLlm101RouteImport } from './routes/learnings.llm-101'
+import { Route as LearningsIndexRouteImport } from './routes/learnings.index'
+import { Route as LearningsRouteImport } from './routes/learnings'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,6 +22,21 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LearningsRoute = LearningsRouteImport.update({
+  id: '/learnings',
+  path: '/learnings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningsIndexRoute = LearningsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearningsRoute,
+} as any)
+const LearningsLlm101Route = LearningsLlm101RouteImport.update({
+  id: '/llm-101',
+  path: '/llm-101',
+  getParentRoute: () => LearningsRoute,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -46,6 +64,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
   '/projects': typeof ProjectsRoute
+  '/learnings': typeof LearningsRouteWithChildren
+  '/learnings/': typeof LearningsIndexRoute
+  '/learnings/llm-101': typeof LearningsLlm101Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +74,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
   '/projects': typeof ProjectsRoute
+  '/learnings': typeof LearningsIndexRoute
+  '/learnings/llm-101': typeof LearningsLlm101Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
@@ -61,22 +84,30 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
   '/projects': typeof ProjectsRoute
+  '/learnings': typeof LearningsRouteWithChildren
+  '/learnings/': typeof LearningsIndexRoute
+  '/learnings/llm-101': typeof LearningsLlm101Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/experience' | '/projects' | '/sitemap.xml'
+  fullPaths: '/' | '/contact' | '/experience' | '/projects' | '/learnings' | '/learnings/' | '/learnings/llm-101' | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/experience' | '/projects' | '/sitemap.xml'
+  to: '/' | '/contact' | '/experience' | '/projects' | '/learnings' | '/learnings/llm-101' | '/sitemap.xml'
   id:
-    '__root__' | '/' | '/contact' | '/experience' | '/projects' | '/sitemap.xml'
+    '__root__' | '/' | '/contact' | '/experience' | '/projects' | '/learnings' | '/learnings/' | '/learnings/llm-101' | '/sitemap.xml'
   fileRoutesById: FileRoutesById
+}
+export interface LearningsRouteChildren {
+  LearningsIndexRoute: typeof LearningsIndexRoute
+  LearningsLlm101Route: typeof LearningsLlm101Route
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   ExperienceRoute: typeof ExperienceRoute
   ProjectsRoute: typeof ProjectsRoute
+  LearningsRoute: typeof LearningsRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -88,6 +119,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/learnings': {
+      id: '/learnings'
+      path: '/learnings'
+      fullPath: '/learnings'
+      preLoaderRoute: typeof LearningsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learnings/': {
+      id: '/learnings/'
+      path: '/'
+      fullPath: '/learnings/'
+      preLoaderRoute: typeof LearningsIndexRouteImport
+      parentRoute: typeof LearningsRoute
+    }
+    '/learnings/llm-101': {
+      id: '/learnings/llm-101'
+      path: '/llm-101'
+      fullPath: '/learnings/llm-101'
+      preLoaderRoute: typeof LearningsLlm101RouteImport
+      parentRoute: typeof LearningsRoute
     }
     '/projects': {
       id: '/projects'
@@ -120,11 +172,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+const LearningsRouteChildren: LearningsRouteChildren = {
+  LearningsIndexRoute: LearningsIndexRoute,
+  LearningsLlm101Route: LearningsLlm101Route,
+}
+const LearningsRouteWithChildren = LearningsRoute._addFileChildren(LearningsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
   ProjectsRoute: ProjectsRoute,
+  LearningsRoute: LearningsRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
