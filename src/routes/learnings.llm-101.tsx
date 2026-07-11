@@ -36,14 +36,15 @@ const contextParts = [
 
 function Llm101Blog() {
   return (
-    <article className="container-page py-16 sm:py-20">
-      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+    <article className="container-page my-10 sm:my-14">
+      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
         <ArrowLeft className="h-4 w-4" /> Back to learnings
       </Link>
 
       <header className="mt-8 max-w-4xl">
         <p className="eyebrow">AI Engineering / LLM 101</p>
-        <h1 className="display-serif mt-3 text-5xl sm:text-7xl">
+        <h1 className="display-serif mt-3 text-4xl sm:text-5xl text-primary">
+          {/* <h2 className="display-serif text-4xl sm:text-5xl"></h2> */}
           LLM 101: prompts, tokens, and context windows
         </h1>
         <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
