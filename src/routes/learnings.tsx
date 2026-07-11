@@ -1,37 +1,61 @@
-// import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Clock, ArrowUpRight } from "lucide-react";
+import { Clock, ArrowRight } from "lucide-react";
 import { learnings, categories, type LearningCategory } from "@/lib/learnings-data";
 import { cn } from "@/lib/utils";
 
-/* export const Route = createFileRoute("/learnings")({
-  component: NotesPage,
+export const Route = createFileRoute("/learnings")({
+  component: LearningsPage,
   head: () => ({
     meta: [
-      { title: "Learnings — Bhavin Shah" },
-      { name: "description", content: "Curated learnings on AI engineering, React & frontend, DSA patterns, sustainable web, and system design basics." },
-      { property: "og:title", content: "Learnings — Bhavin Shah" },
-      { property: "og:description", content: "A knowledge-base of practical engineering learnings." },
+      { title: "AI Learnings & Engineering Notes — Bhavin Shah" },
+      {
+        name: "description",
+        content:
+          "Practical AI engineering learnings, including LLM fundamentals, prompts, tokens, context windows, and production patterns.",
+      },
+      { property: "og:title", content: "AI Learnings & Engineering Notes — Bhavin Shah" },
+      {
+        property: "og:description",
+        content: "A public learning journal on AI engineering and software craftsmanship.",
+      },
       { property: "og:url", content: "/learnings" },
     ],
     links: [{ rel: "canonical", href: "/learnings" }],
   }),
-}); */
+});
 
-function NotesPage() {
+function LearningsPage() {
   const [active, setActive] = useState<LearningCategory | "All">("All");
   const filtered = active === "All" ? learnings : learnings.filter((n) => n.category === active);
 
   return (
     <div className="container-page py-20">
-      <p className="eyebrow">Learnings</p>
-      <h1 className="display-serif mt-3 max-w-3xl text-5xl sm:text-6xl">
-        A working knowledge base — not a blog.
-      </h1>
-      <p className="mt-5 max-w-2xl text-muted-foreground">
-        Short, opinionated notes I keep as I learn. Categorized so recruiters and engineers can jump
-        straight to what's relevant.
-      </p>
+      <p className="eyebrow">AI Learnings</p>
+      <div className="mt-3 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div>
+          <h1 className="display-serif max-w-3xl text-5xl sm:text-6xl">
+            Building in public: AI notes turned into practical engineering blogs.
+          </h1>
+          <p className="mt-5 max-w-2xl text-muted-foreground">
+            I am documenting the fundamentals I am learning, then translating them into crisp
+            mental models, diagrams, and implementation-ready patterns for AI product teams.
+          </p>
+        </div>
+        <div className="card-surface bg-primary/5 p-5">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Featured</p>
+          <h2 className="mt-3 text-xl font-semibold">LLM 101: prompts, tokens, and context</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            A beginner-friendly walkthrough from my handwritten AI engineering notes.
+          </p>
+          <Link
+            to="/learnings/llm-101"
+            className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            Read the blog <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
 
       <div className="mt-10 flex flex-wrap gap-2">
         {(["All", ...categories] as const).map((c) => (
@@ -65,15 +89,12 @@ function NotesPage() {
             <p className="mt-2 flex-1 text-sm text-muted-foreground">{n.summary}</p>
             <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-xs">
               <span className="font-mono text-muted-foreground">Updated {n.updated}</span>
-              {n.related && (
-                <a
-                  href={n.related.href}
-                  target={n.related.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-primary"
-                >
-                  {n.related.label} <ArrowUpRight className="h-3 w-3" />
-                </a>
+              {n.slug === "llm-101" ? (
+                <Link to="/learnings/llm-101" className="inline-flex items-center gap-1 text-primary">
+                  Read <ArrowRight className="h-3 w-3" />
+                </Link>
+              ) : (
+                <span className="text-muted-foreground">Coming soon</span>
               )}
             </div>
           </article>
@@ -82,5 +103,3 @@ function NotesPage() {
     </div>
   );
 }
-
-export {};

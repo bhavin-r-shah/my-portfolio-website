@@ -12,7 +12,7 @@ export interface Learning {
   category: LearningCategory;
   readingTime: string;
   updated: string;
-  related?: { label: string; href: string };
+  href: string;
 }
 
 export const categories: LearningCategory[] = [
@@ -25,6 +25,16 @@ export const categories: LearningCategory[] = [
 
 export const learnings: Learning[] = [
   {
+    slug: "llm-101",
+    title: "LLM 101: Prompts, Tokens, and Context Windows",
+    summary:
+      "A beginner-friendly mental model for how LLMs generate responses, how tokens drive cost, and how to write prompts with role, task, context, rules, and output format.",
+    category: "AI Engineering",
+    readingTime: "7 min",
+    updated: "Jul 2026",
+    href: "/learnings/llm-101",
+  },
+  {
     slug: "shipping-with-copilot",
     title: "Shipping Faster with GitHub Copilot Without Losing Rigor",
     summary:
@@ -32,7 +42,7 @@ export const learnings: Learning[] = [
     category: "AI Engineering",
     readingTime: "6 min",
     updated: "May 2026",
-    related: { label: "Related repo", href: "https://github.com/" },
+    href: "/learnings/shipping-with-copilot",
   },
   {
     slug: "prompting-for-code-review",
@@ -42,6 +52,7 @@ export const learnings: Learning[] = [
     category: "AI Engineering",
     readingTime: "7 min",
     updated: "Apr 2026",
+    href: "/learnings/prompting-for-code-review",
   },
   {
     slug: "react-suspense-loaders",
@@ -51,7 +62,7 @@ export const learnings: Learning[] = [
     category: "React / Frontend",
     readingTime: "8 min",
     updated: "Mar 2026",
-    related: { label: "See in Projects", href: "/projects" },
+    href: "/learnings/react-suspense-loaders",
   },
   {
     slug: "design-tokens-tailwind-v4",
@@ -61,6 +72,7 @@ export const learnings: Learning[] = [
     category: "React / Frontend",
     readingTime: "5 min",
     updated: "Feb 2026",
+    href: "/learnings/design-tokens-tailwind-v4",
   },
   {
     slug: "sliding-window-cheatsheet",
@@ -70,6 +82,7 @@ export const learnings: Learning[] = [
     category: "DSA Patterns",
     readingTime: "9 min",
     updated: "Jan 2026",
+    href: "/learnings/sliding-window-cheatsheet",
   },
   {
     slug: "graph-bfs-templates",
@@ -79,6 +92,7 @@ export const learnings: Learning[] = [
     category: "DSA Patterns",
     readingTime: "6 min",
     updated: "Dec 2025",
+    href: "/learnings/graph-bfs-templates",
   },
   {
     slug: "green-frontend-checklist",
@@ -88,7 +102,7 @@ export const learnings: Learning[] = [
     category: "Sustainable Web",
     readingTime: "10 min",
     updated: "Nov 2025",
-    related: { label: "Related project", href: "/projects" },
+    href: "/learnings/green-frontend-checklist",
   },
   {
     slug: "system-design-primer-101",
@@ -98,6 +112,7 @@ export const learnings: Learning[] = [
     category: "System Design Basics",
     readingTime: "12 min",
     updated: "Oct 2025",
+    href: "/learnings/system-design-primer-101",
   },
   {
     slug: "caching-layers",
@@ -107,5 +122,6 @@ export const learnings: Learning[] = [
     category: "System Design Basics",
     readingTime: "8 min",
     updated: "Sep 2025",
+    href: "/learnings/caching-layers",
   },
 ];
