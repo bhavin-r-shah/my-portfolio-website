@@ -45,10 +45,12 @@ const examplePromptParts = [
 function Llm101Blog() {
   return (
     <article className="container-page my-10 sm:my-14">
+      {/* Back Link */}
       <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
         <ArrowLeft className="h-4 w-4" /> Back to learnings
       </Link>
 
+      {/* Header */}
       <header className="mt-8 max-w-4xl">
         <p className="eyebrow">AI Engineering / LLM 101</p>
         <h1 className="display-serif mt-3 text-4xl sm:text-5xl text-primary">
@@ -67,6 +69,7 @@ function Llm101Blog() {
         </div>
       </header>
 
+      {/* LLM Intro */}
       <section className="mt-12">
         <div>
           <h2 className="text-2xl font-semibold">What is an LLM?</h2>
@@ -79,6 +82,7 @@ function Llm101Blog() {
         </div>
       </section>
 
+      {/* LLM Response */}
       <section className="mt-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <div>
           <h2 className="text-2xl font-semibold">How does it respond?</h2>
@@ -95,6 +99,7 @@ function Llm101Blog() {
         <LlmFlowDiagram />
       </section>
 
+      {/* Token */}
       <Section title="Token">
         <p>
           A token is the smallest unit an LLM processes. It can be a word or a part of the word. Roughly 1 token is ~ 4 characters, but every
@@ -110,6 +115,7 @@ function Llm101Blog() {
         </ul>
       </Section>
 
+      {/* Prompt */}
       <Section title="Prompt">
         <p>
           Prompt is the instruction given to the model. 2 types: the user prompt and the system prompt.
@@ -118,7 +124,7 @@ function Llm101Blog() {
           <Definition title="User prompt">
             The message written by the user i.e. the question you ask or task you give to ChatGPT. e.g.<br/>
             "Explain RAG to a beginner."<br/>
-            "Modify my resume so that it is ATS complaint and has high ATS score."
+            "Modify my resume so that it is ATS compliant and has high ATS score."
           </Definition>
           <Definition title="System prompt">
             Instruction given to the LLM on what it needs to do. These are set when designing AI apps. e.g.<br />
@@ -126,19 +132,16 @@ function Llm101Blog() {
             "Do not add any skills or experience that the user has not provided in the resume.”
           </Definition>
         </div>
-      </Section>
-
-      <Section title="A good prompt has five parts">
-        <div className="mt-5 flex flex-wrap gap-2">
-          {promptParts.map((part, index) => (
-            <span key={part} className={`rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-sm text-${colorParts[index]}`}>
-              {index + 1}. {part}
-            </span>
-          ))}
+        <div className="mt-5">
+          <h2 className="text-xl font-semibold text-foreground">A good prompt has five parts</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {promptParts.map((part, index) => (
+              <span key={part} className={`rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-sm text-${colorParts[index]}`}>
+                {index + 1}. {part}
+              </span>
+            ))}
+          </div>
         </div>
-        {/* const colorParts = ["primary", "foreground", "accent", "muted", "destructive"]; */}
-
-
         <div className="mt-6 rounded-2xl border border-border bg-card p-5">
           <p className="font-mono text-sm text-muted-foreground">Example prompt structure</p>
           <p className="mt-3 text-sm leading-7">
@@ -147,20 +150,22 @@ function Llm101Blog() {
             ))}
           </p>
         </div>
-      </Section>
-
-      <Section title="System prompt --> Key to Sucess">
-        <p>
-          System prompts are especially important as they define behavior,
-          safety boundaries, and source-of-truth rules for the LLM before user input arrives. e.g.
-        </p>
-        <ul>
-          <li>Answer only from provided or retrieved documents.</li>
-          <li>If the answer is not in the documents, say “I don’t know.”</li>
-          <li>Do not hallucinate; cite sources when possible.</li>
-          <li>Use only retrieved documents, not the open internet, unless the app explicitly allows it.</li>
-          <li>Ask a clarifying question when the request is ambiguous.</li>
-        </ul>
+        <div className="mt-5">
+          <h2 className="text-xl font-semibold text-foreground">
+            System prompt: Key to Success
+          </h2>
+          <p className="mt-3">
+            System prompts are especially important as they define behavior,
+            safety boundaries, and source-of-truth rules for the LLM before user input arrives. e.g.
+          </p>
+          <ul>
+            <li>Answer only from provided or retrieved documents.</li>
+            <li>If the answer is not in the documents, say “I don’t know.”</li>
+            <li>Do not hallucinate; cite sources when possible.</li>
+            <li>Use only retrieved documents, not the open internet, unless the app explicitly allows it.</li>
+            <li>Ask a clarifying question when the request is ambiguous.</li>
+          </ul>
+        </div>
       </Section>
 
       <Section title="Context window">

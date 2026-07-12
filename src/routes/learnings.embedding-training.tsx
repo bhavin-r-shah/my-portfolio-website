@@ -78,11 +78,11 @@ function EmbeddingTrainingBlog() {
         </div>
       </header>
 
-      <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">Beginner mental model</h2>
+      <section className="mt-12 rounded-3xl bg-primary p-6 text-primary-foreground">
+        <h2 className="text-xl font-semibold text-primary-foreground">Mental Model</h2>
         <p className="mt-3 text-primary-foreground/85">
           An LLM does not directly compare English words the way humans do. It turns text into
-          numbers, learns patterns in those numbers during training, and then uses those learned
+          numbers, learns patterns in those numbers during training and then uses those learned
           patterns to predict useful answers.
         </p>
       </section>
