@@ -47,8 +47,8 @@ function RagArchitectureBlog() {
         </div>
       </header>
 
-      <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">Beginner mental model</h2>
+      <section className="mt-10 rounded-3xl bg-primary p-6 text-primary-foreground">
+        <h2 className="text-xl font-semibold text-primary-foreground">Mental Model</h2>
         <p className="mt-3 text-primary-foreground/85">
           RAG stands for Retrieval Augmented Generation. It gives an LLM extra relevant context at
           answer time, so the model can answer from your documents, not only from what it learned
@@ -57,26 +57,26 @@ function RagArchitectureBlog() {
       </section>
 
       <Section title="Why RAG exists">
-        <p>LLMs have two common failures.</p>
-        <ol>
-          <li>
-            <strong>Knowledge cutoff:</strong> once the LLM has completed its training, it will not
-            learn anything new. For example, if an LLM was trained on web development knowledge up
+        <p>LLMs have two common failures:</p>
+        <p className="mt-3">
+            1. <strong>Knowledge cutoff:</strong><br/>
+            - Once the LLM has completed its training, it will not
+            learn anything new.<br/>
+            - For example, if an LLM was trained on web development knowledge up
             to June 2025, it will not know features from a new React version released after June
-            2025. It also will not know your private component library and CSS styles because that
+            2025.<br/>
+            - It also will not know your private component library and CSS styles because that
             data was not part of training.
-          </li>
-          <li>
-            <strong>Hallucination:</strong> if you ask an LLM something it does not know, it may
+        </p>
+        <p className="mt-3">
+            2. <strong>Hallucination:</strong> if you ask an LLM something it does not know, it may
             guess. It still produces an answer, but the answer may be wrong, unrelated, or
             irrelevant. Since the model has to answer something, it can hallucinate instead of
             saying, “I do not know this.”
-          </li>
-        </ol>
+        </p>
       </Section>
 
-      <Section title="Two memories in a RAG system">
-        <p>RAG combines two memories.</p>
+      <Section title="RAG combines two memories">
         <div className="grid gap-4 md:grid-cols-2">
           <Callout title="1. Parametric memory">
             What the LLM already knows from the parameters it has already been trained on.
@@ -89,24 +89,25 @@ function RagArchitectureBlog() {
       </Section>
 
       <Section title="Example: leave policy question">
-        <p>User asks: “What is the leave policy?”</p>
-        <div className="grid gap-5 lg:grid-cols-2">
+        <p>User asks: <span className="text-ring">“What is the leave policy?”</span></p>
+        <div className="grid gap-5 lg:grid-cols-2 mt-3">
           <Callout title="Without RAG">
-            The LLM may guess: “In India, typically IT firms give 10 floating holidays.” Or it may
-            hallucinate: “Leave policy describes the company&apos;s rules on how an employee can
+            The LLM may guess:<br/>
+            “Typically 10 paid leaves” OR <br/>
+            It may hallucinate: “Leave policy describes the company&apos;s rules on how an employee can
             take time off.”
           </Callout>
           <Callout title="With RAG">
             <ol>
-              <li>User asks a question.</li>
-              <li>RAG system searches company documents.</li>
-              <li>It finds the leave policy.</li>
-              <li>It sends the user prompt plus leave policy to the LLM.</li>
-              <li>LLM answers using this retrieved leave policy.</li>
+              <li>1. User asks a question.</li>
+              <li>2. RAG system searches company documents.</li>
+              <li>3. It finds the leave policy.</li>
+              <li>4. It sends the user prompt plus leave policy to the LLM.</li>
+              <li>5. LLM answers using this retrieved leave policy.</li>
             </ol>
           </Callout>
         </div>
-        <p>
+        <p className="mt-3">
           Your RAG application is not part of the LLM. You build the RAG app for your company to
           provide extra relevant information to the LLM, so when it answers, it can answer from data
           your RAG gave, its own training, the user prompt, and the retrieved context.
