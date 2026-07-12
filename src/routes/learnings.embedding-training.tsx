@@ -26,12 +26,12 @@ export const Route = createFileRoute("/learnings/embedding-training")({
 
 const vectorRows = [
   { text: "Car", vector: "[0.95, 0.05]", note: "very vehicle-like, not fruit-like" },
-  { text: "Automobile", vector: "[0.96, 0.04]", note: "very close to car" },
+  { text: "Automobile", vector: "[0.96, 0.04]", note: "very vehicle-like, not fruit-like" },
   { text: "Banana", vector: "[0.08, 0.96]", note: "not vehicle-like, very fruit-like" },
   {
     text: "Yellow vehicle",
     vector: "[0.81, 0.45]",
-    note: "part vehicle-like, part yellow/fruit-like",
+    note: "part vehicle-like, part yellow-like",
   },
 ];
 
@@ -93,33 +93,29 @@ function EmbeddingTrainingBlog() {
           <li>Magnitude means a list of numbers.</li>
         </ul>
         <p>
-          For AI, the useful beginner idea is: a vector is a position in meaning space. If two
-          pieces of text mean similar things, their vectors should point in a similar direction.
+          If two pieces of text mean similar things, their vectors should point in a similar direction.
         </p>
       </Section>
 
       <Section title="Embedding">
         <ul>
           <li>In LLM, each token is represented by a vector.</li>
-          <li>
+          {/* <li>
             In RAG, a data chunk like a sentence or a document may be represented by a vector.
-          </li>
+          </li> */}
           <li>
             Each LLM gives its own vector to a token. Claude, Gemini, and other LLMs can give
             different vectors for the same token.
           </li>
-          <li>Embedding is a vector that represents meaning of text.</li>
+          <li>Embedding is a vector that represents LLM's meaning of the text.</li>
         </ul>
-        <p>
-          Example: a 2-dimensional vector can use Dimension 1 for vehicle-like meaning and Dimension
-          2 for fruit-like / yellow color meaning.
-        </p>
-        <EmbeddingSpaceDiagram />
-      </Section>
-
-      <Section title="Example embedding table">
-        <div className="overflow-hidden rounded-2xl border border-border">
-          <table className="w-full text-left text-sm">
+        <div className="overflow-hidden mt-7">
+          <h2 className="text-l font-semibold text-foreground">Example embedding table</h2>
+          <p className="mt-3">
+            A 2-dimensional vector can use Dimension 1 for text with vehicle-like meaning and Dimension
+            2 text with for fruit-like / yellow color like meaning.
+          </p>
+          <table className="w-full text-left text-sm mt-5">
             <thead className="bg-secondary text-foreground">
               <tr>
                 <th className="px-4 py-3">Text</th>
@@ -138,41 +134,45 @@ function EmbeddingTrainingBlog() {
             </tbody>
           </table>
         </div>
+        <EmbeddingSpaceDiagram />
         <p>
-          Direction of car and automobile is similar. Banana is a different direction. Similar
+          Direction of car and automobile is similar. Banana is a different direction. <span className="text-primary">Similar
           meaning means close vectors and similar direction. Different meaning means far vectors and
-          different direction.
+          different direction.</span>
         </p>
-      </Section>
-
-      <Section title="Training teaches the embedding space">
-        <p>
-          During training you teach LLM that “car” and “automobile” are related. During embedding
-          you give close vectors to them.
-        </p>
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground">How does LLM know car is vehicle-like but banana is not?</h2>
+          <p className="mt-3">
+            During training you teach LLM that “car” and “automobile” are related and are vehicle-like. Hence during embedding
+            you give close vectors to them.
+          </p>
         <TrainingEmbeddingDiagram />
-        <p>
-          Training: car = automobile ≠ banana. Embedding: embedding("car") becomes Vector A,
-          embedding("automobile") becomes Vector B, and embedding("banana") becomes Vector C. Vector
-          A and Vector B are close vectors, while Vector C is far from Vector A and Vector B.
-        </p>
+        </div>
       </Section>
 
       <Section title="Cosine similarity">
+        Cosine similarity asks: how close two vectors are? Ideally if 2 vecors are in:
         <ul>
-          <li>Cosine similarity asks: how close two vectors are?</li>
-          <li>It gives ideal numbers for direction comparison.</li>
-          <li>Identical Direction → cosine similarity 1.</li>
-          <li>Opposite Direction → cosine similarity -1.</li>
-          <li>Unrelated → cosine similarity 0.</li>
+          <li>Identical Direction → cosine similarity = 1</li>
+          <li>Opposite Direction → cosine similarity = -1</li>
+          <li>Unrelated → cosine similarity = 0</li>
         </ul>
-        <CosineSimilarityDiagram />
-        <p>
-          If we only compare English words without meaning, “The car won't start” and “My automobile
-          broke down” do not repeat the same words, so plain word comparison may say they are not
-          similar. This is why embedding is needed: embedding tells the LLM that both sentences are
-          similar meaning and should have close vectors and high cosine similarity.
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground mb-3">Why is it needed?</h2>
+          Let's take 3 sentences:
+          <ol className="list-decimal mx-5">
+            <li>The car won't start</li>
+            <li>My automobile broke down</li>
+            <li>I love chocolate shake</li>
+          </ol>
+          <p className="mt-3">
+            If we only compare English words <span className="text-destructive">without meaning</span>, sentences “The car won't start” and “My automobile
+            broke down” do not repeat any words, so plain word comparison will say they are not
+            similar. This is why embedding is needed: <span className="text-primary">embedding tells the LLM that both sentences are
+            similar meaning and should have close vectors and high cosine similarity.</span>
         </p>
+        </div>
+        {/* <CosineSimilarityDiagram /> */}
       </Section>
 
       <Section title="Text → Vector">
@@ -329,9 +329,9 @@ function DiagramCard({ title, children }: { title: string; children: ReactNode }
 
 function EmbeddingSpaceDiagram() {
   return (
-    <DiagramCard title="2D meaning space">
+    <DiagramCard title="2D Vector Space">
       <svg
-        viewBox="0 0 640 320"
+        viewBox="00 0 640 320"
         role="img"
         aria-label="Embedding space diagram"
         className="mt-4 w-full"
@@ -342,7 +342,7 @@ function EmbeddingSpaceDiagram() {
           </marker>
         </defs>
         <path
-          d="M80 260 L570 260"
+          d="M80 260 L470 260"
           className="fill-none stroke-primary stroke-2"
           markerEnd="url(#axisArrow)"
         />
@@ -351,17 +351,17 @@ function EmbeddingSpaceDiagram() {
           className="fill-none stroke-primary stroke-2"
           markerEnd="url(#axisArrow)"
         />
-        <text x="410" y="292" className="fill-muted-foreground text-[14px]">
+        <text x="350" y="292" className="fill-muted-foreground text-[14px]">
           vehicle-like →
         </text>
-        <text x="18" y="80" className="fill-muted-foreground text-[14px]">
+        <text x="0" y="80" className="fill-muted-foreground text-[14px]">
           fruit-like ↑
         </text>
         {[
-          { x: 510, y: 235, label: "Car", color: "fill-primary" },
-          { x: 525, y: 232, label: "Automobile", color: "fill-primary" },
+          { x: 450, y: 235, label: "Car", color: "fill-primary" },
+          { x: 325, y: 232, label: "Automobile", color: "fill-primary" },
           { x: 120, y: 65, label: "Banana", color: "fill-accent" },
-          { x: 445, y: 150, label: "Yellow vehicle", color: "fill-destructive" },
+          { x: 300, y: 150, label: "Yellow vehicle", color: "fill-accent" },
         ].map((point) => (
           <g key={point.label}>
             <circle cx={point.x} cy={point.y} r="7" className={point.color} />
@@ -397,24 +397,24 @@ function TrainingEmbeddingDiagram() {
             <path d="M0,0 L0,6 L9,3 z" className="fill-primary" />
           </marker>
         </defs>
-        <Box x={30} y={40} w={155} text="Training: car = automobile ≠ banana" />
+        <Box x={0} y={40} w={220} text="Training: car = automobile ≠ banana" />
         <Box x={275} y={20} w={135} text="Vector A: car" />
         <Box x={275} y={93} w={170} text="Vector B: automobile" />
         <Box x={275} y={166} w={155} text="Vector C: banana" />
         <Box x={530} y={56} w={145} text="A & B close" />
         <Box x={530} y={150} w={145} text="C far away" />
         <path
-          d="M185 61 L275 42"
+          d="M220 61 L275 42"
           className="fill-none stroke-primary stroke-2"
           markerEnd="url(#flowArrow)"
         />
         <path
-          d="M185 74 L275 114"
+          d="M220 74 L275 114"
           className="fill-none stroke-primary stroke-2"
           markerEnd="url(#flowArrow)"
         />
         <path
-          d="M185 88 L275 187"
+          d="M140 82 L275 187"
           className="fill-none stroke-primary stroke-2"
           markerEnd="url(#flowArrow)"
         />
