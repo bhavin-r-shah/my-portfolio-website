@@ -25,6 +25,16 @@ export const categories: LearningCategory[] = [
 
 export const learnings: Learning[] = [
   {
+    slug: "embedding-training",
+    title: "Embedding & Training",
+    summary:
+      "A beginner-friendly mental model for vectors, embeddings, cosine similarity, training phases, preference tuning, safety tuning, and parameters.",
+    category: "AI Engineering",
+    readingTime: "11 min",
+    updated: "Jul 2026",
+    href: "/learnings/embedding-training",
+  },
+  {
     slug: "llm-101",
     title: "LLM 101: Prompts, Tokens, and Context Windows",
     summary:
