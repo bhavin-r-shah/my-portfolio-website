@@ -61,17 +61,12 @@ function AttentionBlog() {
         </div>
       </header>
 
-      <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">Beginner mental model</h2>
-        <p className="mt-3 text-primary-foreground/85">
-          Attention is the mechanism that helps an LLM decide: “When I am processing this token,
-          what other words or tokens should I pay attention to?” It lets each token look at other
-          tokens and decide which ones are important for understanding context or predicting the
-          next token.
-        </p>
-      </section>
-
       <Section title="What is attention?">
+        <p>
+          Q) How does LLM understand entire sentences or paragraphs? <br/>
+          Q) How does it understand the context of the text? <br />
+          Ans) <span className="text-primary">Attention Mechanism</span>
+        </p>
         <ul>
           <li>
             Attention is a mechanism that helps an LLM decide: “When I am processing this word or
@@ -98,36 +93,24 @@ function AttentionBlog() {
         </p>
       </Section>
 
-      <Section title="Example 1: attention when predicting the next token">
-        <p className="font-medium text-foreground">The capital of India is _____</p>
+      <Section title="Attention Score">
+        <p>When LLM reads a word (token), it asks: What other related words shall I pay attention to so that I understand the sentence?</p>
+        Let's take an example.
+        <p>User Prompt: <span className="font-medium text-primary">The capital of India is _____ ?</span></p>
         <p>
-          During pre-training, an LLM sees lots of text. It may see examples like “India's capital,
-          New Delhi,” “New Delhi, the capital of India,” “Red Fort is in New Delhi, India,” and
-          “PM's residence is in New Delhi, India.”
+          When looking at the token <span className="text-accent">“India”</span> the attention mechanism <span className="text-accent">calculates a score</span> between
+          “India” and all other words in the sentence.
         </p>
         <p>
-          From repeated patterns, it learns that India and New Delhi are related. Both are like a
-          place, but “India” and “New Delhi” are more closely related than “India” and “France” in
-          this sentence context.
+          Now during pre-training, the LLM has seen lots of text like:<br/>
+          - “India's capital, New Delhi, .... ”<br/>
+          - “New Delhi, the capital of India, ....”<br/>
+          - “Red Fort is in New Delhi, India”<br/>
+          - “PM's resides in the captial - New Delhi, India.”<br/>
         </p>
-        <RelationTable />
+        
         <p>
-          So when predicting the next token, the model has seen lots of text saying India and New
-          Delhi are closely related. The vectors change so India and New Delhi point close together,
-          and the LLM predicts “New Delhi.”
-        </p>
-      </Section>
-
-      <Section title="Diagram: token relationships shape the next prediction">
-        <TokenRelationDiagram />
-      </Section>
-
-      <Section title="Diagram: attention scores inside the sentence">
-        <p className="font-medium text-foreground">The capital of India is _____</p>
-        <p>
-          When looking at the token “India,” the attention mechanism calculates a score between
-          “India” and all other words. Because the model has seen many texts containing “capital”
-          and “India” together, it knows they are related.
+          The model has seen the tokens “capital” and “India” together many times. So LLM determines that when looking at token India, the token Capital can help me understand the context of this sentence. So it gives a high attention score to token Capital.
         </p>
         <AttentionScoreDiagram />
         <div className="overflow-hidden rounded-2xl border border-border">
@@ -154,15 +137,36 @@ function AttentionBlog() {
         </p>
       </Section>
 
+      <Section title="Example 1: Attention when predicting the next token">
+        <p>User Prompt: <span className="font-medium text-primary">The capital of India is _____ ?</span></p>
+        <p>
+          Now during pre-training, the LLM has seen lots of text like:<br/>
+          - “India's capital, New Delhi, .... ”<br/>
+          - “New Delhi, the capital of India, ....”<br/>
+          - “Red Fort is in New Delhi, India”<br/>
+          - “PM's resides in the captial - New Delhi, India.”<br/>
+        </p>
+        <p>
+          From repeated patterns, it learns that India and New Delhi are related.
+        </p>
+        <RelationTable />
+        <p>
+          From the above table you can see that there are other places which are also semantically related to India like France (both are like a place, so vectors are close).
+          So the answer to user's query can be France or New Delhi. <br/>
+          But since the model has seen lots of text referring to India and New Delhi in the same context, it knows that India & New Delhi are more closely related than India & France.
+          Hence when predicting the next token, the model predicts “New Delhi” instead of France.
+        </p>
+      </Section>
+
       <Section title="Example 2: attention by understanding the pattern">
-        <p className="font-medium text-foreground">
+        <p className="font-medium text-primary">
           The animal did not cross the road because it was tired.
         </p>
         <p>
-          When the LLM looks at the token “it,” what other tokens should it attend to so that the
+          When the LLM looks at the token <span className="text-accent">“it”</span>, it asks: What other tokens should it attend to so that the
           LLM understands the context?
         </p>
-        <p>The LLM asks a query: who was tired?</p>
+        <p>The LLM asks a query: Who was tired?</p>
         <ul>
           <li>
             The model is trained to know that “tired” is an adjective, and some noun in this
@@ -170,9 +174,8 @@ function AttentionBlog() {
           </li>
           <li>Two nouns appear: animal and road.</li>
           <li>The model has been trained that only living things can get tired.</li>
-          <li>So it knows the animal was tired.</li>
+          <li>So it knows the animal was tired and not road.</li>
         </ul>
-        <PatternDiagram />
         <p>
           Hence, the attention score of “it” with “animal” is high. It understands the context by
           looking at patterns: “tired” belongs to a noun, only living things can be tired, and
@@ -181,7 +184,7 @@ function AttentionBlog() {
       </Section>
 
       <section className="mt-12 rounded-3xl bg-card p-8 shadow-sm ring-1 ring-border">
-        <h2 className="text-2xl font-semibold">Takeaway</h2>
+        <h2 className="text-2xl font-semibold text-ring">Takeaway</h2>
         <p className="mt-3 text-muted-foreground">
           Attention is not magic. It is a learned scoring process. For each token, the model asks
           which other tokens are useful right now, assigns higher scores to the useful tokens, and
@@ -233,40 +236,17 @@ function RelationTable() {
   );
 }
 
-function TokenRelationDiagram() {
-  return (
-    <DiagramCard title="Pre-training evidence becomes a next-token prediction">
-      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-center">
-        <div className="rounded-2xl border border-border bg-secondary/50 p-4 text-sm">
-          <p className="font-semibold text-foreground">Patterns seen during pre-training</p>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-muted-foreground">
-            <li>India's capital, New Delhi</li>
-            <li>New Delhi, the capital of India</li>
-            <li>Red Fort is in New Delhi, India</li>
-            <li>PM's residence is in New Delhi, India</li>
-          </ul>
-        </div>
-        <ArrowRight className="mx-auto h-6 w-6 text-primary" />
-        <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4 text-sm">
-          <p className="font-semibold text-foreground">Prediction</p>
-          <p className="mt-3 text-muted-foreground">The capital of India is</p>
-          <p className="mt-2 text-2xl font-semibold text-primary">New Delhi</p>
-        </div>
-      </div>
-    </DiagramCard>
-  );
-}
 
 function AttentionScoreDiagram() {
   const tokens = ["The", "capital", "of", "India", "is", "_____"];
 
   return (
-    <DiagramCard title="India attends to the words around it">
+    <DiagramCard title="Attention between word 'India' and the words around it">
       <svg
-        viewBox="0 0 760 270"
+        viewBox="0 40 760 200"
         role="img"
         aria-label="Attention score diagram"
-        className="mt-4 w-full"
+        className="w-full"
       >
         <defs>
           <marker
@@ -299,8 +279,8 @@ function AttentionScoreDiagram() {
           );
         })}
         <path
-          d="M430 170 C390 70 205 70 200 170"
-          className="fill-none stroke-primary stroke-[5]"
+          d="M430 170 C390 70 205 70 205 166"
+          className="fill-none stroke-primary stroke-[3]"
           markerEnd="url(#attentionArrow)"
         />
         <path
@@ -313,35 +293,16 @@ function AttentionScoreDiagram() {
           className="fill-none stroke-muted-foreground stroke-2 opacity-40"
           markerEnd="url(#attentionArrow)"
         />
-        <text x="295" y="58" className="fill-primary text-[15px] font-semibold">
+        <text x="235" y="78" className="fill-primary text-[14px] font-semibold">
           high attention to “capital”
         </text>
-        <text x="68" y="105" className="fill-muted-foreground text-[13px]">
-          low
-        </text>
-        <text x="315" y="100" className="fill-muted-foreground text-[13px]">
+        <text x="140" y="150" className="fill-muted-foreground text-[13px]">
           lower
         </text>
+        <text x="335" y="150" className="fill-muted-foreground text-[13px]">
+          low
+        </text>
       </svg>
-    </DiagramCard>
-  );
-}
-
-function PatternDiagram() {
-  return (
-    <DiagramCard title="Resolving what “it” refers to">
-      <div className="mt-5 grid gap-4 md:grid-cols-3">
-        <PatternStep title="Pattern 1" text="Adjective ‘tired’ belongs to a noun." />
-        <PatternStep title="Pattern 2" text="Only living things can be tired." />
-        <PatternStep title="Pattern 3" text="Animal is a living thing; road is not." />
-      </div>
-      <div className="mt-5 rounded-2xl border border-primary/30 bg-primary/5 p-4 text-sm">
-        <p className="font-medium text-foreground">Attention result</p>
-        <p className="mt-2 text-muted-foreground">
-          The token “it” gives high attention to “animal,” so the sentence means the animal was
-          tired.
-        </p>
-      </div>
     </DiagramCard>
   );
 }

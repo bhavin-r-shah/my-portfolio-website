@@ -58,7 +58,7 @@ export const learnings: Learning[] = [
     slug: "attention",
     title: "Attention",
     summary:
-      "A beginner-friendly mental model for how attention helps an LLM decide which tokens matter for context and next-token prediction.",
+      "Attention mechanism helps LLM understand the context of the text and help predict the next token.",
     category: "AI Engineering",
     readingTime: "9 min",
     updated: "Jul 2026",
