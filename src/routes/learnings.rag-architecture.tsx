@@ -125,22 +125,26 @@ function RagArchitectureBlog() {
 
       <Section title="1. Ingest">
         <p>
-          Provide the RAG app the company documents. These could be PDFs, Word documents, web pages,
+          - Provide the RAG app the company documents.<br/>
+          - These could be PDFs, Word documents, web pages,
           code, GitHub links, support tickets, support logs, images, videos, or other internal
-          sources. Examples include a leave policy document, GitHub repository, or support logs.
+          sources.<br/>
+          - Examples include a leave policy document, GitHub repository, or support logs.
         </p>
       </Section>
 
       <Section title="2. Chunking">
         <p>
-          Split documents into smaller chunks. If company data is large, not all of it will fit in
-          the LLM context window. When answering, the LLM may use only part of the data or
-          summarized data, which can cause hallucination. Chunking helps limit the LLM context
-          window.
+          - Split documents into smaller chunks<br/>
+          - If company data is large, not all of it will fit in
+          the LLM context window. So when answering, the LLM may use only part of the company data or
+          use summarized data, which can cause hallucination.<br/>
+          - <span className="text-primary">Chunking helps limit the LLM context window.</span>
         </p>
-        <p>
-          For example, an HR policies document may become separate chunks for leave policy, travel
-          policy, holiday calendar, and work-from-home policy. If the user asks “What is the leave
+        <p className="mt-3">
+          - For example, an HR policies document may become separate chunks for leave policy, travel
+          policy, holiday calendar, and work-from-home policy.<br/>
+          - If the user asks “What is the leave
           policy?”, your RAG can retrieve only the relevant leave policy chunk, not the whole
           document.
         </p>
@@ -148,17 +152,18 @@ function RagArchitectureBlog() {
 
       <Section title="3. Embedding">
         <p>
-          Convert chunks to vectors. LLMs do not understand text directly; they understand vectors.
-          The user query is also converted to an embedding. Use the same embedding model for chunks
+          - Convert chunks to vectors.<br/>
+          - LLMs do not understand text directly; they understand vectors.
+          - The user query is also converted to an embedding. Use the same embedding model for chunks
           and the user query so similar meaning lands close together in the same vector space.
         </p>
       </Section>
 
       <Section title="4. Vector database">
-        <p>
-          Store embeddings in a vector database, such as Chroma DB, Pinecone, or Postgres with
-          pgvector. A regular SQL database is not enough when the goal is vector comparison rather
-          than text comparison or keyword search.
+        <p className="mb-3">
+          - Store embeddings in a vector database, such as Chroma DB, Pinecone, or Postgres with
+          pgvector.<br/>
+          - We cannot use a regular SQL database since we are not doing text comparison or keyword search. We do vector comparison, hence we need vector DB.
         </p>
         <CodeBlock>{`{
   "id": "employee-policy-leave-001",
@@ -175,30 +180,20 @@ function RagArchitectureBlog() {
 
       <Section title="5. Retrieval">
         <p>
-          Retrieval performs similarity search to compare the user query embedding vector with chunk
-          vectors. It retrieves the top K chunks. These are the most relevant chunks likely to have
-          the right data to feed the LLM. K is decided by you when designing the RAG system.
+          - Retrieval performs similarity search to compare the user query embedding vector with chunk
+          vectors.<br/>
+          - It retrieves the top K chunks. These are the most relevant chunks likely to have
+          the right data to feed the LLM.<br/>
+          - K is decided by you when designing the RAG system.
         </p>
-        <RetrievalDiagram />
       </Section>
 
       <Section title="Final generation step">
-        <p>
+        <p className="mb-3">
           The LLM gets the user query and relevant chunks from RAG. The LLM answers using this
           additional context.
         </p>
         <GenerationDiagram />
-      </Section>
-
-      <Section title="Takeaways">
-        <ul>
-          <li>RAG does not retrain the LLM; it adds relevant context at answer time.</li>
-          <li>
-            RAG helps with private data, fresh data, and grounding answers in source material.
-          </li>
-          <li>Embeddings and vector search help retrieve by meaning instead of exact keywords.</li>
-          <li>The retrieved context should be small enough to fit the model context window.</li>
-        </ul>
       </Section>
     </article>
   );
@@ -273,24 +268,6 @@ function ArchitectureDiagram() {
   );
 }
 
-function RetrievalDiagram() {
-  return (
-    <div className="not-prose rounded-3xl border border-border bg-card p-6">
-      <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
-        <FlowBox>User query</FlowBox>
-        <Arrow />
-        <FlowBox>Query embedding</FlowBox>
-        <Arrow />
-        <FlowBox accent>Vector DB similarity search</FlowBox>
-      </div>
-      <div className="mt-5 flex items-center justify-center gap-3 text-sm text-muted-foreground">
-        <Database className="h-5 w-5 text-accent" /> Compare with stored chunk embeddings → retrieve
-        top K
-      </div>
-    </div>
-  );
-}
-
 function GenerationDiagram() {
   return (
     <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
@@ -308,6 +285,7 @@ function GenerationDiagram() {
 function CodeBlock({ children }: { children: ReactNode }) {
   return (
     <pre className="overflow-x-auto rounded-2xl bg-primary p-5 text-sm text-primary-foreground">
+      Example of a chunk stored in DB:<br/><br/>
       <code>{children}</code>
     </pre>
   );
