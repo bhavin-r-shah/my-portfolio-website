@@ -25,6 +25,16 @@ export const categories: LearningCategory[] = [
 
 export const learnings: Learning[] = [
   {
+    slug: "rag-storage-retrieval",
+    title: "RAG: Storage & Retrieval",
+    summary:
+      "A beginner-friendly guide to RAG vector databases, storage, similarity search, indexing, HNSW, and retrieval trade-offs.",
+    category: "AI Engineering",
+    readingTime: "12 min",
+    updated: "Jul 2026",
+    href: "/learnings/rag-storage-retrieval",
+  },
+  {
     slug: "rag-chunking-embedding",
     title: "RAG: Chunking & Embedding",
     summary:
