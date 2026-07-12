@@ -48,7 +48,7 @@ export const learnings: Learning[] = [
     slug: "rag-architecture",
     title: "RAG: Architecture",
     summary:
-      "A beginner-friendly mental model for Retrieval Augmented Generation, including architecture, embeddings, vector databases, retrieval, and hallucination reduction.",
+      "RAG 101 & its architecture.",
     category: "AI Engineering",
     readingTime: "10 min",
     updated: "Jul 2026",
