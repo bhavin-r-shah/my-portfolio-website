@@ -259,15 +259,18 @@ function ArchitectureDiagram() {
     <div className="not-prose overflow-hidden rounded-3xl border border-border bg-secondary/40 p-5 sm:p-6">
       <div className="mb-6 text-center">
         <p className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
-          Ingest → Chunk → Embed → Index in DB → Retrieve
+          Offline Indexing + Online Retrieval
         </p>
         <h3 className="mt-2 text-xl font-semibold text-foreground">Basic RAG Architecture</h3>
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:items-start">
-        <div className="space-y-4">
+        <DiagramBoundary
+          title="Offline"
+          caption="Prepare knowledge before the user asks a question"
+        >
           <DiagramStep title="Ingest" caption="e.g. company docs, latest papers">
-            <div className="grid gap-2 sm:grid-cols-3">
+            <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
               {documentCards.map((document) => (
                 <div
                   key={document}
@@ -283,7 +286,7 @@ function ArchitectureDiagram() {
           <DiagramArrowLabel label="Break docs into chunks to fit the LLM context window and reduce hallucination." />
 
           <DiagramStep title="Chunking" caption="Split source material into useful pieces">
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
               {chunks.map((chunk) => (
                 <div key={chunk} className="rounded-lg border border-primary/30 bg-primary/10 p-3">
                   <div className="mx-auto mb-2 h-10 w-8 rounded border border-primary/40 bg-background" />
@@ -296,65 +299,104 @@ function ArchitectureDiagram() {
           <DiagramArrowLabel label="Convert each text chunk into vectors. LLM systems compare vectors, not raw text." />
 
           <DiagramStep title="Embedding" caption="Represent every chunk in vector space">
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
               {chunks.map((chunk) => (
                 <VectorCard key={chunk} bars={embeddingBars} label={chunk} />
               ))}
             </div>
           </DiagramStep>
-        </div>
+
+          <DiagramArrowLabel label="Store chunk embeddings in the vector database." />
+
+          <VectorDatabase title="Vector DB" caption="Indexed chunk embeddings" />
+        </DiagramBoundary>
 
         <div className="hidden h-full items-center justify-center xl:flex">
           <ArrowRight className="h-8 w-8 text-accent" />
         </div>
 
-        <div className="space-y-4">
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center">
+        <DiagramBoundary title="Online" caption="Run when the user asks a question" accent>
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
             <DiagramStep title="User Query" caption="Embed query with the same model">
               <div className="rounded-xl border border-border bg-background p-4 text-center font-semibold text-foreground">
                 “What is the leave policy?”
               </div>
               <div className="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
-                <ArrowDown className="h-4 w-4 text-accent" /> Same embedding model
+                <ArrowDown className="h-4 w-4 text-accent" /> Query vector
               </div>
-              <VectorCard bars={["w-10", "w-14", "w-8"]} label="Query vector" />
+              <VectorCard bars={["w-10", "w-14", "w-8"]} label="Embedded query" />
             </DiagramStep>
 
-            <DiagramStep title="LLM" caption="Receives the query and retrieved context" accent>
-              <div className="rounded-xl border border-primary/30 bg-primary/10 p-4 text-center font-semibold text-primary">
-                Generate grounded answer
-              </div>
-            </DiagramStep>
-          </div>
-
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
-            <VectorDatabase />
             <div className="flex items-center justify-center">
               <ArrowRight className="h-6 w-6 rotate-90 text-accent lg:rotate-0" />
             </div>
-            <DiagramStep
-              title="Retrieve Relevant Chunks"
-              caption="Compare chunk embeddings with the query embedding"
-              accent
-            >
+
+            <VectorDatabase
+              title="Search within DB"
+              caption="Compare query vector with chunk vectors"
+            />
+          </div>
+
+          <DiagramArrowLabel label="Similarity search returns the most relevant chunks." />
+
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
+            <DiagramStep title="Top K Relevant Chunks" caption="K = 5 most similar chunks" accent>
+              <div className="grid grid-cols-2 gap-2">
+                <VectorCard bars={["w-9", "w-12", "w-7"]} label="Leave policy" />
+                <VectorCard bars={["w-8", "w-10", "w-12"]} label="Benefits FAQ" />
+              </div>
+            </DiagramStep>
+
+            <div className="flex flex-col items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
+              <ArrowRight className="h-6 w-6 rotate-90 text-accent lg:rotate-0" />
+              <span className="text-center">User query + chunks</span>
+            </div>
+
+            <DiagramStep title="LLM" caption="Receives both inputs individually" accent>
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">Top K = 5 most similar chunks</p>
-                <div className="grid grid-cols-2 gap-2">
-                  <VectorCard bars={["w-9", "w-12", "w-7"]} label="Leave policy" />
-                  <VectorCard bars={["w-8", "w-10", "w-12"]} label="Benefits FAQ" />
+                <div className="rounded-xl border border-border bg-background p-3 text-center text-sm font-semibold text-foreground">
+                  User Query → LLM
                 </div>
+                <div className="rounded-xl border border-primary/30 bg-primary/10 p-3 text-center text-sm font-semibold text-primary">
+                  Top K Relevant Chunks → LLM
+                </div>
+                <p className="text-center text-sm text-muted-foreground">
+                  Generate grounded answer
+                </p>
               </div>
             </DiagramStep>
           </div>
-
-          <div className="rounded-2xl border border-border bg-background p-4 text-sm text-muted-foreground">
-            <strong className="text-foreground">Flow:</strong> store chunk embeddings in the vector
-            DB, embed the user query, retrieve the closest chunks, then send the user query +
-            relevant chunks to the LLM.
-          </div>
-        </div>
+        </DiagramBoundary>
       </div>
     </div>
+  );
+}
+
+function DiagramBoundary({
+  title,
+  caption,
+  children,
+  accent = false,
+}: {
+  title: string;
+  caption: string;
+  children: ReactNode;
+  accent?: boolean;
+}) {
+  return (
+    <section
+      className={
+        accent
+          ? "space-y-4 rounded-3xl border-2 border-primary/30 bg-primary/5 p-4 sm:p-5"
+          : "space-y-4 rounded-3xl border-2 border-border bg-background/60 p-4 sm:p-5"
+      }
+    >
+      <div>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">{title}</p>
+        <h4 className="mt-1 text-lg font-semibold text-foreground">{caption}</h4>
+      </div>
+      {children}
+    </section>
   );
 }
 
@@ -408,16 +450,14 @@ function VectorCard({ bars, label }: { bars: string[]; label: string }) {
   );
 }
 
-function VectorDatabase() {
+function VectorDatabase({ title, caption }: { title: string; caption: string }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-4 text-center shadow-sm">
       <Database className="mx-auto h-12 w-12 text-accent" />
-      <h4 className="mt-3 text-lg font-semibold text-foreground">Vector DB</h4>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Store chunk embeddings and search by similarity
-      </p>
+      <h4 className="mt-3 text-lg font-semibold text-foreground">{title}</h4>
+      <p className="mt-1 text-sm text-muted-foreground">{caption}</p>
       <div className="mt-4 rounded-xl border border-border bg-background p-3 text-sm font-medium text-foreground">
-        Index embeddings
+        Vector similarity
       </div>
     </div>
   );
