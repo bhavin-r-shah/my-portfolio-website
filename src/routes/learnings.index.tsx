@@ -33,9 +33,7 @@ function LearningsIndexPage() {
     <div className="container-page my-10">
       <div className="mt-3 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
-          <h2 className="display-serif text-4xl sm:text-5xl">
-            My Learnings
-          </h2>
+          <h2 className="display-serif text-4xl sm:text-5xl">My Learnings</h2>
           <p className="mt-5 max-w-2xl text-muted-foreground">
             Documenting the concepts I am learning and translating my hand written notes into crisp
             mental models illutrated with diagrams and implementation handy nuances.
@@ -84,19 +82,15 @@ function LearningsIndexPage() {
                 <Clock className="h-3 w-3" /> {n.readingTime}
               </span>
             </div>
-            <Link to="/learnings/llm-101" className="mt-4 text-lg font-semibold leading-snug text-primary">
+            <Link to={n.href} className="mt-4 text-lg font-semibold leading-snug text-primary">
               {n.title}
             </Link>
             <p className="mt-2 flex-1 text-sm text-muted-foreground">{n.summary}</p>
             <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-xs">
               <span className="font-mono text-muted-foreground">Updated {n.updated}</span>
-              {n.slug === "llm-101" ? (
-                <Link to="/learnings/llm-101" className="inline-flex items-center gap-1 text-accent">
-                  Read <ArrowRight className="h-3 w-3" />
-                </Link>
-              ) : (
-                <span className="text-muted-foreground">Coming soon</span>
-              )}
+              <Link to={n.href} className="inline-flex items-center gap-1 text-accent">
+                Read <ArrowRight className="h-3 w-3" />
+              </Link>
             </div>
           </article>
         ))}
