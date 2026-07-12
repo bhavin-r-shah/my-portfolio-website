@@ -68,7 +68,7 @@ export const learnings: Learning[] = [
     slug: "embedding-training",
     title: "Embedding & Training",
     summary:
-      "A beginner-friendly mental model for vectors, embeddings, cosine similarity, training phases, preference tuning, safety tuning, and parameters.",
+      "How is an LLM trained? How does it relate 2 concepts?",
     category: "AI Engineering",
     readingTime: "11 min",
     updated: "Jul 2026",
