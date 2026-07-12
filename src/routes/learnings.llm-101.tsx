@@ -25,7 +25,7 @@ export const Route = createFileRoute("/learnings/llm-101")({
 });
 
 const promptParts = ["Role", "Task", "Context", "Rules", "Output format"];
-const colorParts = ["primary", "muted", "accent", "foreground", "destructive"];
+const colorParts = ["primary", "ring", "accent", "foreground", "destructive"];
 const contextParts = [
   "User prompt",
   "System prompt",

@@ -172,79 +172,84 @@ function EmbeddingTrainingBlog() {
             similar meaning and should have close vectors and high cosine similarity.</span>
         </p>
         </div>
-        {/* <CosineSimilarityDiagram /> */}
       </Section>
 
       <Section title="Text → Vector">
-        <p>Each time LLM sees a text, LLM understands vectors, not English words.</p>
+        <p>LLM understands vectors, not English words.</p>
         <TextToVectorDiagram />
       </Section>
 
-      <Section title="1. Pre-training">
+      <Section title="Pre-training Stage">
         <ul>
           <li>Gives the Base Model.</li>
           <li>
             In pre-training, you give huge datasets to LLM, e.g. whole internet, whole English
             library.
           </li>
-          <li>Then LLM is asked: given this text, what is the likely next token?</li>
-          <li>If prediction is right, move on. If wrong, LLM re-trains itself.</li>
+          <li>Then LLM is asked: given this text, what is the likely next token? If prediction is right, move on. If wrong, LLM re-trains itself.</li>
           <li>
-            Here it learns associations, reasoning patterns, code patterns, style patterns,
-            language, grammar, and facts.
+            Here LLM <span className="text-ring">learns associations, reasoning patterns, code patterns, style patterns,
+            language, grammar and facts.</span>
+          </li>
+          <li>
+            Example: LLM sees multiple texts referring to France as capital of Paris. So when we ask
+          “What is the capital of France?” it predicts next token = "Paris".
           </li>
         </ul>
         <PreTrainingDiagram />
-        <p>
-          Example: LLM sees multiple texts referring to France as capital of Paris. So when we ask
-          “The capital of France is ?” it predicts next token = Paris.
-        </p>
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground mb-3">How does it learn?</h2>
+          <p>
+            Example: take vector of car and vector of bus. LLM sees multiple texts where car and bus
+            have been used in similar context or both have similar patterns. It has seen this hundreds
+            / millions of times.
+          </p>
+          <RelationshipLearningDiagram />
+        </div>
       </Section>
 
-      <Section title="How does it learn relationships?">
+      <Section title="Post-training Stage">
         <p>
-          Example: take vector of car and vector of bus. LLM sees multiple texts where car and bus
-          have been used in similar context or both have similar patterns. It has seen this hundreds
-          / millions of times.
-        </p>
-        <RelationshipLearningDiagram />
-        <p>
-          The model modifies Vcar and Vbus to bring them closer. Base model knows relations and
+          Base model knows relations and
           patterns, but it cannot yet reliably chat in Q/A format. Base model is like a person who
           knows entire internet but does not know how to talk or assist. It is not trained in
           customer support or teaching style yet.
         </p>
-      </Section>
-
-      <Section title="2. Post-training">
         <p>Post-training turns a knowledgeable base model into a more helpful assistant.</p>
-        <div className="grid gap-4 md:grid-cols-2">
-          <Definition title="2.1 Supervised Fine Tuning (SFT)">
-            Humans show the model tons of high quality Q/A pairs and instruct model to answer in a
-            particular fashion.
-          </Definition>
-          <Definition title="2.2 Reinforcement Learning / Preference Tuning">
-            Give three answer variations. Each user may choose A or B or C to be most useful. This
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground mb-3">Supervised Fine Tuning (SFT)</h2>
+          <ul>
+            <li>
+              After pre-training, we want LLM to follow instructions. Humans show the model tons of high quality Q/A pairs and instruct model to answer in a
+              particular fashion.
+            </li>
+            <li>
+              For example, User Prompt: “Explain cosine similarity in AI”
+            </li>
+            <li>
+              Base Model may answer:
+              <ol>
+                <li>
+                  Cosine similarity is a measure used in mathematics. This article desribes ....
+                </li>
+                <li>OR</li>
+                <li>
+                  AI uses cosine similariy. It involves vector ...
+                </li>
+              </ol>
+            </li>
+            <li>In SFT, you instruct the LLM to answer: 
+            <span className="text-ring"> Cosine Similarity checks whether 2 vectors point in the same direction.</span></li>
+          </ul>
+        </div>
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground mb-3">Reinforcement Learning / Preference Tuning</h2>
+          <p>
+            Give the user 3 answer variations - A) Concise Style B) Verbose Style C) Bullet Points. Each user may choose A or B or C to be most useful. This
             is stored as user metadata. Next time AI answers it will choose answer based on your
             preference.
-          </Definition>
+          </p>
         </div>
-      </Section>
-
-      <Section title="Supervised Fine Tuning (SFT)">
-        <p>
-          After pre-training, we want LLM to follow instructions. For example, user prompt: “Explain
-          cosine similarity simply for AI”. A base model can have lots of different ways to answer
-          this question and lots of data can be given. SFT provides ideal Q/A pairs that instruct
-          LLM to answer in a particular way.
-        </p>
-        <SftDiagram />
-        <p>
-          In SFT, you instruct: Question: Explain cosine similarity simply in AI. Ideal Answer:
-          Cosine similarity checks whether two vectors point in the same direction. Question: What
-          is Arkanoid? Ideal answer: I don't know. This helps so that LLM does not hallucinate;
-          without this, LLM will give random answer.
-        </p>
       </Section>
 
       <Section title="3. Safety Tuning">
@@ -433,26 +438,6 @@ function TrainingEmbeddingDiagram() {
   );
 }
 
-function CosineSimilarityDiagram() {
-  return (
-    <DiagramCard title="Cosine similarity examples">
-      <div className="mt-4 grid gap-3">
-        {cosineExamples.map((example) => (
-          <div key={example.pair} className="rounded-2xl border border-border bg-secondary/50 p-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="font-medium text-foreground">{example.pair}</p>
-              <span className="rounded-full bg-primary/10 px-3 py-1 font-mono text-primary">
-                {example.score}
-              </span>
-            </div>
-            <p className="mt-1 text-sm text-muted-foreground">{example.label}</p>
-          </div>
-        ))}
-      </div>
-    </DiagramCard>
-  );
-}
-
 function TextToVectorDiagram() {
   return (
     <DiagramCard title="Text becomes vector">
@@ -474,7 +459,6 @@ function Pipeline({ text, vector }: { text: string; vector: string }) {
         <span>Token IDs</span>
         <ArrowRight className="h-4 w-4" />
         <span>Embedding vector</span>
-        <ArrowRight className="h-4 w-4" />
         <span className="font-mono text-primary">{vector}</span>
       </div>
     </div>
@@ -485,7 +469,7 @@ function PreTrainingDiagram() {
   return (
     <DiagramCard title="Pre-training loop">
       <div className="mt-5 grid gap-3 text-sm md:grid-cols-4">
-        {["Huge datasets", "Predict next token", "Compare prediction", "Update parameters"].map(
+        {["Ingest Huge datasets", "Predict next token", "Compare prediction", "Update parameters"].map(
           (step, index) => (
             <div key={step} className="rounded-2xl border border-border bg-secondary/50 p-4">
               <span className="font-mono text-xs text-primary">0{index + 1}</span>
