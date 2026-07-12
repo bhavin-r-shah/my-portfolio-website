@@ -217,7 +217,7 @@ function EmbeddingTrainingBlog() {
         </p>
         <p>Post-training turns a knowledgeable base model into a more helpful assistant.</p>
         <div className="mt-5">
-          <h2 className="text-l font-semibold text-foreground mb-3">Supervised Fine Tuning (SFT)</h2>
+          <h2 className="text-l font-semibold text-foreground mb-3">1. Supervised Fine Tuning (SFT)</h2>
           <ul>
             <li>
               After pre-training, we want LLM to follow instructions. Humans show the model tons of high quality Q/A pairs and instruct model to answer in a
@@ -243,44 +243,44 @@ function EmbeddingTrainingBlog() {
           </ul>
         </div>
         <div className="mt-5">
-          <h2 className="text-l font-semibold text-foreground mb-3">Reinforcement Learning / Preference Tuning</h2>
+          <h2 className="text-l font-semibold text-foreground mb-3">2. Reinforcement Learning / Preference Tuning</h2>
           <p>
             Give the user 3 answer variations - A) Concise Style B) Verbose Style C) Bullet Points. Each user may choose A or B or C to be most useful. This
             is stored as user metadata. Next time AI answers it will choose answer based on your
             preference.
           </p>
         </div>
-      </Section>
-
-      <Section title="3. Safety Tuning">
-        <ul>
-          <li>Teach LLM what not to do.</li>
-          <li>Do not leak data.</li>
-          <li>Do not give harmful instructions.</li>
-          <li>Do not give malware.</li>
-          <li>Do not give misleading advice.</li>
-          <li>Teach LLM to say “I can't help with this”.</li>
-        </ul>
-      </Section>
-
-      <Section title="4. Domain specific fine tuning">
-        <ul>
-          <li>Optional.</li>
-          <li>Teach LLM legal contracts, C++ coding, financial research.</li>
-          <li>
-            Teach ideal format, e.g. answer as ticket id - 1234, category - HW issue, resolution -
-            restart laptop.
-          </li>
-        </ul>
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground mb-3">3. Safety Tuning</h2>
+            Teach LLM what not to do.
+            <ul>
+              <li>Do not leak data.</li>
+              <li>Do not give harmful instructions.</li>
+              <li>Do not give malware.</li>
+              <li>Do not give misleading advice.</li>
+              <li>Teach LLM to say “I can't help with this”.</li>
+          </ul>
+        </div>
+        <div className="mt-5">
+          <h2 className="text-l font-semibold text-foreground mb-3">4. Domain specific fine tuning</h2>
+          <ul>
+            <li>Optional.</li>
+            <li>Teach LLM legal contracts, C++ coding, financial research.</li>
+            <li>
+              Teach ideal response format, e.g. answer as &#123; ticket_id - 1234, category - HW issue, resolution -
+              restart laptop &#125;
+            </li>
+          </ul>
+        </div>
       </Section>
 
       <Section title="Parameter">
+        We can think of parameters as the patterns models have learnt during training.
         <ul>
-          <li>What patterns models have learnt during training are connected to parameters.</li>
           <li>Example: model Llama 70B means Llama model has been trained with 70B parameters.</li>
           <li>Parameters are like connections or weights.</li>
           <li>
-            Parameter helps model decide: given this text, what token is likely next? What concepts
+            They help LLM decide: given this text, what token is likely next? What concepts
             are related? How should grammar work? What does this sentence mean?
           </li>
         </ul>
@@ -290,7 +290,7 @@ function EmbeddingTrainingBlog() {
         </p>
       </Section>
 
-      <section className="mt-12 rounded-3xl bg-card p-8 shadow-sm ring-1 ring-border">
+      {/* <section className="mt-12 rounded-3xl bg-card p-8 shadow-sm ring-1 ring-border">
         <div className="flex items-center gap-3">
           <BrainCircuit className="h-6 w-6 text-primary" />
           <h2 className="text-2xl font-semibold">Takeaway</h2>
@@ -300,7 +300,7 @@ function EmbeddingTrainingBlog() {
           where those numbers should live, what patterns connect them, and how to answer safely and
           usefully.
         </p>
-      </section>
+      </section> */}
     </article>
   );
 }
