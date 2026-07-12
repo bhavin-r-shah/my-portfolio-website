@@ -25,6 +25,16 @@ export const categories: LearningCategory[] = [
 
 export const learnings: Learning[] = [
   {
+    slug: "attention",
+    title: "Attention",
+    summary:
+      "A beginner-friendly mental model for how attention helps an LLM decide which tokens matter for context and next-token prediction.",
+    category: "AI Engineering",
+    readingTime: "9 min",
+    updated: "Jul 2026",
+    href: "/learnings/attention",
+  },
+  {
     slug: "embedding-training",
     title: "Embedding & Training",
     summary:
