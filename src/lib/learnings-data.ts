@@ -25,6 +25,16 @@ export const categories: LearningCategory[] = [
 
 export const learnings: Learning[] = [
   {
+    slug: "rag-chunking-embedding",
+    title: "RAG: Chunking & Embedding",
+    summary:
+      "A beginner-friendly guide to RAG chunking strategies, metadata, embedding model trade-offs, parsers, and retrieval quality.",
+    category: "AI Engineering",
+    readingTime: "13 min",
+    updated: "Jul 2026",
+    href: "/learnings/rag-chunking-embedding",
+  },
+  {
     slug: "rag-architecture",
     title: "RAG: Architecture",
     summary:
