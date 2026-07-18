@@ -46,8 +46,7 @@ export function SiteFooter() {
             </a>
             <a
               href={resumeAsset.url}
-              target="_blank"
-              rel="noreferrer"
+              download={resumeAsset.original_filename}
               aria-label="Resume PDF"
               className="grid h-9 w-9 place-items-center rounded-md border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
             >
@@ -118,8 +117,7 @@ export function SiteFooter() {
             <li>
               <a
                 href={resumeAsset.url}
-                target="_blank"
-                rel="noreferrer"
+                download={resumeAsset.original_filename}
                 className="text-muted-foreground hover:text-foreground"
               >
                 Résumé (PDF)

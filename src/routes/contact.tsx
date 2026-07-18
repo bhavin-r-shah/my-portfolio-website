@@ -65,6 +65,12 @@ function ContactPage() {
               </div>
             </a>
           </div>
+
+          <div className="mt-8">
+            <CtaLink href={resume.url} download={resume.original_filename} variant="primary">
+              <Download className="h-4 w-4" /> Download Résumé
+            </CtaLink>
+          </div>
         </div>
 
         <aside className="card-surface p-6">
