@@ -138,11 +138,11 @@ function RagArchitectureBlog() {
 
       <Section title="1. Ingest">
         <p>
-          - Provide the RAG app the company documents.
+          - Provide the RAG app, extra relevant information like the company documents, codebase, design principles, user feedback etc.
           <br />
           - These could be PDFs, Word documents, web pages, code, GitHub links, support tickets,
           support logs, images, videos, or other internal sources.
-          <br />- Examples include a leave policy document, GitHub repository, or support logs.
+          <br />- e.g. HR policies, GitHub repository, or support logs.
         </p>
       </Section>
 
@@ -166,9 +166,10 @@ function RagArchitectureBlog() {
       <Section title="3. Embedding">
         <p>
           - Convert chunks to vectors.
-          <br />- LLMs do not understand text directly; they understand vectors. - The user query is
-          also converted to an embedding. Use the same embedding model for chunks and the user query
-          so similar meaning lands close together in the same vector space.
+          <br />- LLMs do not understand text directly; they understand vectors.<br />
+          - The user query is
+          also converted to an embedding. <span className="text-primary">Use the same embedding model for chunks and the user query
+          so similar meaning tokens lands close together in the same vector space.</span>
         </p>
       </Section>
 
@@ -194,18 +195,18 @@ function RagArchitectureBlog() {
 
       <Section title="5. Retrieval">
         <p>
-          - Retrieval performs similarity search to compare the user query embedding vector with
+          - Retrieval performs vector similarity search to compare the user query embedding vector with
           chunk vectors.
           <br />
           - It retrieves the top K chunks. These are the most relevant chunks likely to have the
           right data to feed the LLM.
-          <br />- K is decided by you when designing the RAG system.
+          <br />- K is decided when designing the RAG system.
         </p>
       </Section>
 
       <Section title="Final generation step">
         <p className="mb-3">
-          The LLM gets the user query and relevant chunks from RAG. The LLM answers using this
+          The LLM gets the user query vector & relevant chunks from RAG. The LLM answers using this
           additional context.
         </p>
         <GenerationDiagram />
@@ -355,7 +356,7 @@ function ArchitectureDiagram() {
             />
           </div>
 
-          <DiagramArrowLabel label="Similarity search returns the most relevant chunks." />
+          <DiagramArrowLabel label="Vector similarity search returns the most relevant chunks." />
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
             <DiagramStep
@@ -522,8 +523,8 @@ function GenerationDiagram() {
   return (
     <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
       <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
-        <FlowBox>User query</FlowBox>
-        <Arrow />
+        <FlowBox>User query vector</FlowBox>
+        <span className="text-2xl text-accent">+</span>
         <FlowBox>Relevant chunks</FlowBox>
         <Arrow />
         <FlowBox accent>LLM answers using additional context</FlowBox>
