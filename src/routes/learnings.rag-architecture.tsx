@@ -125,7 +125,7 @@ function RagArchitectureBlog() {
         </p>
       </Section>
 
-      <Section title="Basic RAG architecture">
+      <Section title="Basic RAG architecture" wide>
         <ArchitectureDiagram />
         <p>
           The high-level path is: ingest data, split it into useful pieces, embed it, index it in a
@@ -212,9 +212,17 @@ function RagArchitectureBlog() {
   );
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({
+  title,
+  children,
+  wide = false,
+}: {
+  title: string;
+  children: ReactNode;
+  wide?: boolean;
+}) {
   return (
-    <section className="mt-12 max-w-4xl">
+    <section className={wide ? "mt-12 w-full max-w-none" : "mt-12 max-w-4xl"}>
       <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
       <div className="prose prose-neutral mt-4 max-w-none text-muted-foreground prose-li:my-1 prose-strong:text-foreground">
         {children}
@@ -269,7 +277,7 @@ function ArchitectureDiagram() {
           title="Offline"
           caption="Prepare knowledge before the user asks a question"
         >
-          <DiagramStep title="Ingest" caption="e.g. company docs, latest papers">
+          <DiagramStep number={1} title="Ingest" caption="e.g. company docs, latest papers">
             <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
               {documentCards.map((document) => (
                 <div
@@ -285,7 +293,11 @@ function ArchitectureDiagram() {
 
           <DiagramArrowLabel label="Break docs into chunks to fit the LLM context window and reduce hallucination." />
 
-          <DiagramStep title="Chunking" caption="Split source material into useful pieces">
+          <DiagramStep
+            number={2}
+            title="Chunking"
+            caption="Split source material into useful pieces"
+          >
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
               {chunks.map((chunk) => (
                 <div key={chunk} className="rounded-lg border border-primary/30 bg-primary/10 p-3">
@@ -298,7 +310,7 @@ function ArchitectureDiagram() {
 
           <DiagramArrowLabel label="Convert each text chunk into vectors. LLM systems compare vectors, not raw text." />
 
-          <DiagramStep title="Embedding" caption="Represent every chunk in vector space">
+          <DiagramStep number={3} title="Embedding" caption="Represent every chunk in vector space">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
               {chunks.map((chunk) => (
                 <VectorCard key={chunk} bars={embeddingBars} label={chunk} />
@@ -308,16 +320,16 @@ function ArchitectureDiagram() {
 
           <DiagramArrowLabel label="Store chunk embeddings in the vector database." />
 
-          <VectorDatabase title="Vector DB" caption="Indexed chunk embeddings" />
+          <VectorDatabase number={4} title="Vector DB" caption="Indexed chunk embeddings" />
         </DiagramBoundary>
 
         <div className="hidden h-full items-center justify-center xl:flex">
-          <ArrowRight className="h-8 w-8 text-accent" />
+          <ArrowRight className="h-12 w-12 text-accent" strokeWidth={2.5} />
         </div>
 
         <DiagramBoundary title="Online" caption="Run when the user asks a question" accent>
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
-            <DiagramStep title="User Query" caption="Embed query with the same model">
+            <DiagramStep number={5} title="User Query" caption="Embed query with the same model">
               <div className="rounded-xl border border-border bg-background p-4 text-center font-semibold text-foreground">
                 “What is the leave policy?”
               </div>
@@ -328,10 +340,14 @@ function ArchitectureDiagram() {
             </DiagramStep>
 
             <div className="flex items-center justify-center">
-              <ArrowRight className="h-6 w-6 rotate-90 text-accent lg:rotate-0" />
+              <ArrowRight
+                className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
+                strokeWidth={2.5}
+              />
             </div>
 
             <VectorDatabase
+              number={6}
               title="Search within DB"
               caption="Compare query vector with chunk vectors"
             />
@@ -340,7 +356,12 @@ function ArchitectureDiagram() {
           <DiagramArrowLabel label="Similarity search returns the most relevant chunks." />
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
-            <DiagramStep title="Top K Relevant Chunks" caption="K = 5 most similar chunks" accent>
+            <DiagramStep
+              number={7}
+              title="Top K Relevant Chunks"
+              caption="K = 5 most similar chunks"
+              accent
+            >
               <div className="grid grid-cols-2 gap-2">
                 <VectorCard bars={["w-9", "w-12", "w-7"]} label="Leave policy" />
                 <VectorCard bars={["w-8", "w-10", "w-12"]} label="Benefits FAQ" />
@@ -348,11 +369,14 @@ function ArchitectureDiagram() {
             </DiagramStep>
 
             <div className="flex flex-col items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
-              <ArrowRight className="h-6 w-6 rotate-90 text-accent lg:rotate-0" />
+              <ArrowRight
+                className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
+                strokeWidth={2.5}
+              />
               <span className="text-center">User query + chunks</span>
             </div>
 
-            <DiagramStep title="LLM" caption="Receives both inputs individually" accent>
+            <DiagramStep number={8} title="LLM" caption="Receives both inputs individually" accent>
               <div className="space-y-2">
                 <div className="rounded-xl border border-border bg-background p-3 text-center text-sm font-semibold text-foreground">
                   User Query → LLM
@@ -401,11 +425,13 @@ function DiagramBoundary({
 }
 
 function DiagramStep({
+  number,
   title,
   caption,
   children,
   accent = false,
 }: {
+  number: number;
   title: string;
   caption: string;
   children: ReactNode;
@@ -419,9 +445,12 @@ function DiagramStep({
           : "rounded-2xl border border-border bg-card p-4 shadow-sm"
       }
     >
-      <div className="mb-3">
-        <h4 className="text-lg font-semibold text-foreground">{title}</h4>
-        <p className="text-sm text-muted-foreground">{caption}</p>
+      <div className="mb-3 flex min-w-0 items-start gap-3">
+        <StepNumber number={number} />
+        <div className="min-w-0">
+          <h4 className="break-words text-lg font-semibold text-foreground">{title}</h4>
+          <p className="break-words text-sm text-muted-foreground">{caption}</p>
+        </div>
       </div>
       {children}
     </div>
@@ -431,8 +460,8 @@ function DiagramStep({
 function DiagramArrowLabel({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-background/80 px-4 py-3 text-sm text-muted-foreground">
-      <ArrowDown className="h-5 w-5 shrink-0 text-accent" />
-      <span>{label}</span>
+      <ArrowDown className="h-9 w-9 shrink-0 text-accent" strokeWidth={2.5} />
+      <span className="min-w-0 break-words">{label}</span>
     </div>
   );
 }
@@ -450,9 +479,18 @@ function VectorCard({ bars, label }: { bars: string[]; label: string }) {
   );
 }
 
-function VectorDatabase({ title, caption }: { title: string; caption: string }) {
+function VectorDatabase({
+  number,
+  title,
+  caption,
+}: {
+  number: number;
+  title: string;
+  caption: string;
+}) {
   return (
     <div className="rounded-2xl border border-border bg-card p-4 text-center shadow-sm">
+      <StepNumber number={number} className="mx-auto mb-3" />
       <Database className="mx-auto h-12 w-12 text-accent" />
       <h4 className="mt-3 text-lg font-semibold text-foreground">{title}</h4>
       <p className="mt-1 text-sm text-muted-foreground">{caption}</p>
@@ -460,6 +498,17 @@ function VectorDatabase({ title, caption }: { title: string; caption: string }) 
         Vector similarity
       </div>
     </div>
+  );
+}
+
+function StepNumber({ number, className = "" }: { number: number; className?: string }) {
+  return (
+    <span
+      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary font-mono text-sm font-bold text-primary-foreground shadow-sm ${className}`}
+      aria-label={`Step ${number}`}
+    >
+      {number}
+    </span>
   );
 }
 
