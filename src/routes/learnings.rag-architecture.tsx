@@ -58,8 +58,7 @@ function RagArchitectureBlog() {
       <section className="mt-10 rounded-3xl bg-primary p-6 text-primary-foreground">
         <h2 className="text-xl font-semibold text-primary-foreground">Mental Model</h2>
         <p className="mt-3 text-primary-foreground/85">
-          RAG stands for Retrieval Augmented Generation. It gives an LLM extra relevant context at
-          answer time, so the model can answer from your documents, not only from what it learned
+          RAG is a sytem to provide extra relevant information to an LLM, so that the model can answer from your documents and not only from what it learned
           during training.
         </p>
       </section>
@@ -77,70 +76,73 @@ function RagArchitectureBlog() {
           data was not part of training.
         </p>
         <p className="mt-3">
-          2. <strong>Hallucination:</strong> if you ask an LLM something it does not know, it may
-          guess. It still produces an answer, but the answer may be wrong, unrelated, or irrelevant.
-          Since the model has to answer something, it can hallucinate instead of saying, “I do not
+          2. <strong>Hallucination:</strong>
+          <br/> - If you ask an LLM something it does not know, it may
+          guess. It will produce an answer, that too confidently. But the answer may be wrong, unrelated, or irrelevant.
+          <br />- Since the model has to answer something, it can hallucinate instead of saying, “I do not
           know this.”
         </p>
       </Section>
 
-      <Section title="RAG combines two memories">
-        <div className="grid gap-4 md:grid-cols-2">
-          <Callout title="1. Parametric memory">
-            What the LLM already knows from the parameters it has already been trained on.
-          </Callout>
-          <Callout title="2. Non-parametric memory">
-            An external index of documents your model can read from when answering the question. It
-            provides extra relevant context.
-          </Callout>
-        </div>
-      </Section>
-
-      <Section title="Example: leave policy question">
+      <Section title="RAG">
         <p>
-          User asks: <span className="text-ring">“What is the leave policy?”</span>
-        </p>
-        <div className="grid gap-5 lg:grid-cols-2 mt-3">
-          <Callout title="Without RAG">
-            The LLM may guess:
-            <br />
-            “Typically 10 paid leaves” OR <br />
-            It may hallucinate: “Leave policy describes the company&apos;s rules on how an employee
-            can take time off.”
-          </Callout>
-          <Callout title="With RAG">
-            <ol>
-              <li>1. User asks a question.</li>
-              <li>2. RAG system searches company documents.</li>
-              <li>3. It finds the leave policy.</li>
-              <li>4. It sends the user prompt plus leave policy to the LLM.</li>
-              <li>5. LLM answers using this retrieved leave policy.</li>
-            </ol>
-          </Callout>
-        </div>
-        <p className="mt-3">
-          Your RAG application is not part of the LLM. You build the RAG app for your company to
+          - RAG stands for Retrieval Augmented Generation.<br/>
+          - Your RAG application is not part of the LLM. You build the RAG app to
           provide extra relevant information to the LLM, so when it answers, it can answer from data
-          your RAG gave, its own training, the user prompt, and the retrieved context.
-        </p>
+          your RAG gave, its own training, the user prompt and the retrieved context.
+          </p>
+
+          <h2 className="text-l font-semibold text-foreground mt-5">RAG combines two memories</h2>
+          <div className="grid gap-4 md:grid-cols-2 mt-3">
+            <Callout title="1. Parametric memory">
+              What the LLM already knows from the parameters it has already been trained on.
+            </Callout>
+            <Callout title="2. Non-parametric memory">
+              External set of documents your model can read from when answering the question. It
+              provides extra relevant context.
+            </Callout>
+          </div>
+
+          <h2 className="text-l font-semibold text-foreground mt-5">Example:</h2>
+          <p className="mt-3">
+            User asks: <span className="text-ring">“What is the leave policy?”</span>
+          </p>
+          <div className="grid gap-5 lg:grid-cols-2 mt-3">
+            <Callout title="Without RAG">
+              The LLM may guess:
+              <br />
+              - “Typically 10 paid leaves” OR <br />
+              - It may hallucinate: “Leave policy describes the company&apos;s rules on how an employee
+              can take time off.”
+            </Callout>
+            <Callout title="With RAG">
+              <ol>
+                <li>1. User asks a question.</li>
+                <li>2. RAG system searches company documents.</li>
+                <li>3. It finds the leave policy.</li>
+                <li>4. It sends the user prompt & the leave policy to the LLM.</li>
+                <li>5. LLM answers using this retrieved leave policy.</li>
+              </ol>
+            </Callout>
+          </div>
       </Section>
 
       <Section title="Basic RAG architecture" wide>
         <ArchitectureDiagram />
-        <p>
+        {/* <p>
           The high-level path is: ingest data, split it into useful pieces, embed it, index it in a
           vector database, retrieve relevant chunks, and send the user query plus retrieved chunks
           to the LLM.
-        </p>
+        </p> */}
       </Section>
 
       <Section title="1. Ingest">
         <p>
-          - Provide the RAG app the company documents.
+          - Provide the RAG app, extra relevant information like the company documents, codebase, design principles, user feedback etc.
           <br />
           - These could be PDFs, Word documents, web pages, code, GitHub links, support tickets,
           support logs, images, videos, or other internal sources.
-          <br />- Examples include a leave policy document, GitHub repository, or support logs.
+          <br />- e.g. HR policies, GitHub repository, or support logs.
         </p>
       </Section>
 
@@ -164,9 +166,10 @@ function RagArchitectureBlog() {
       <Section title="3. Embedding">
         <p>
           - Convert chunks to vectors.
-          <br />- LLMs do not understand text directly; they understand vectors. - The user query is
-          also converted to an embedding. Use the same embedding model for chunks and the user query
-          so similar meaning lands close together in the same vector space.
+          <br />- LLMs do not understand text directly; they understand vectors.<br />
+          - The user query is
+          also converted to an embedding. <span className="text-primary">Use the same embedding model for chunks and the user query
+          so similar meaning tokens lands close together in the same vector space.</span>
         </p>
       </Section>
 
@@ -192,18 +195,18 @@ function RagArchitectureBlog() {
 
       <Section title="5. Retrieval">
         <p>
-          - Retrieval performs similarity search to compare the user query embedding vector with
+          - Retrieval performs vector similarity search to compare the user query embedding vector with
           chunk vectors.
           <br />
           - It retrieves the top K chunks. These are the most relevant chunks likely to have the
           right data to feed the LLM.
-          <br />- K is decided by you when designing the RAG system.
+          <br />- K is decided when designing the RAG system.
         </p>
       </Section>
 
       <Section title="Final generation step">
         <p className="mb-3">
-          The LLM gets the user query and relevant chunks from RAG. The LLM answers using this
+          The LLM gets the user query vector & relevant chunks from RAG. The LLM answers using this
           additional context.
         </p>
         <GenerationDiagram />
@@ -233,7 +236,7 @@ function Section({
 
 function Callout({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-sm">
       <h3 className="text-base font-semibold text-foreground">{title}</h3>
       <div className="mt-2 text-sm text-muted-foreground">{children}</div>
     </div>
@@ -259,8 +262,8 @@ function Arrow() {
 }
 
 function ArchitectureDiagram() {
-  const documentCards = ["Company docs", "Latest papers", "Support tickets"];
-  const chunks = ["Leave policy", "Holiday calendar", "WFH rules", "Travel policy"];
+  const documentCards = ["Company Policies", "Latest Papers", "Support Tickets"];
+  const chunks = ["Leave policy","Holiday Calendar", "WFH Policy", "Travel policy"];
   const embeddingBars = ["w-8", "w-12", "w-10"];
 
   return (
@@ -277,7 +280,7 @@ function ArchitectureDiagram() {
           title="Offline"
           caption="Prepare knowledge before the user asks a question"
         >
-          <DiagramStep number={1} title="Ingest" caption="e.g. company docs, latest papers">
+          <DiagramStep number={1} title="Ingest" caption="Supply extra relevant information">
             <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
               {documentCards.map((document) => (
                 <div
@@ -291,7 +294,7 @@ function ArchitectureDiagram() {
             </div>
           </DiagramStep>
 
-          <DiagramArrowLabel label="Break docs into chunks to fit the LLM context window and reduce hallucination." />
+          <DiagramArrowLabel label="Break docs into chunks. Helps limit the LLM context window which reduce hallucination." />
 
           <DiagramStep
             number={2}
@@ -334,7 +337,7 @@ function ArchitectureDiagram() {
                 “What is the leave policy?”
               </div>
               <div className="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
-                <ArrowDown className="h-4 w-4 text-accent" /> Query vector
+                <ArrowDown className="h-8 w-8 text-accent mb-3" /> Query vector
               </div>
               <VectorCard bars={["w-10", "w-14", "w-8"]} label="Embedded query" />
             </DiagramStep>
@@ -353,7 +356,7 @@ function ArchitectureDiagram() {
             />
           </div>
 
-          <DiagramArrowLabel label="Similarity search returns the most relevant chunks." />
+          <DiagramArrowLabel label="Vector similarity search returns the most relevant chunks." />
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
             <DiagramStep
@@ -373,16 +376,20 @@ function ArchitectureDiagram() {
                 className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
                 strokeWidth={2.5}
               />
-              <span className="text-center">User query + chunks</span>
+              {/* <span className="text-center">User query</span>
+              <span className="text-center">Vector</span>
+              <span className="text-center text-xl">+</span>
+              <span className="text-center">Top K</span>
+              <span className="text-center">Chunks</span> */}
             </div>
 
-            <DiagramStep number={8} title="LLM" caption="Receives both inputs individually" accent>
+            <DiagramStep number={8} title="LLM" caption="Receives" accent>
               <div className="space-y-2">
-                <div className="rounded-xl border border-border bg-background p-3 text-center text-sm font-semibold text-foreground">
-                  User Query → LLM
+                <div className="rounded-xl border border-border bg-background p-3 text-center text-sm font-semibold text-primary">
+                  User Query Vector
                 </div>
                 <div className="rounded-xl border border-primary/30 bg-primary/10 p-3 text-center text-sm font-semibold text-primary">
-                  Top K Relevant Chunks → LLM
+                  Top K Relevant Chunks
                 </div>
                 <p className="text-center text-sm text-muted-foreground">
                   Generate grounded answer
@@ -494,9 +501,9 @@ function VectorDatabase({
       <Database className="mx-auto h-12 w-12 text-accent" />
       <h4 className="mt-3 text-lg font-semibold text-foreground">{title}</h4>
       <p className="mt-1 text-sm text-muted-foreground">{caption}</p>
-      <div className="mt-4 rounded-xl border border-border bg-background p-3 text-sm font-medium text-foreground">
+      {/* <div className="mt-4 rounded-xl border border-border bg-background p-3 text-sm font-medium text-foreground">
         Vector similarity
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -516,8 +523,8 @@ function GenerationDiagram() {
   return (
     <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
       <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
-        <FlowBox>User query</FlowBox>
-        <Arrow />
+        <FlowBox>User query vector</FlowBox>
+        <span className="text-2xl text-accent">+</span>
         <FlowBox>Relevant chunks</FlowBox>
         <Arrow />
         <FlowBox accent>LLM answers using additional context</FlowBox>
