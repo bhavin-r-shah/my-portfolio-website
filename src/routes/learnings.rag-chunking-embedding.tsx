@@ -50,58 +50,70 @@ function RagChunkingEmbeddingBlog() {
       </header>
 
       <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">Beginner mental model</h2>
+        <h2 className="text-2xl font-semibold text-primary-foreground">Mental Model</h2>
         <p className="mt-3 text-primary-foreground/85">
-          Chunking decides what pieces of your documents can be retrieved. Embedding converts those
+          Chunking splits your documents into pieces. Embedding converts those
           pieces into vectors so the RAG system can search by meaning instead of exact words.
         </p>
       </section>
 
       <Section title="Where chunking and embedding fit in RAG">
-        <p>
-          The LLM gets the user query and relevant chunks from RAG. The LLM answers using this
-          additional context. Page 1 of my notes had a small version of this flow, but I am not
-          including that diagram here because this blog focuses on the chunking and embedding steps.
-        </p>
         <RagPipelineDiagram />
       </Section>
 
       <Section title="Chunking">
         <p>
-          Chunking splits a document into chunks. A good chunk keeps related information together,
-          fits inside the model context window, and is small enough for accurate retrieval.
+          - Chunking splits a document into chunks. A good chunk keeps related information together,
+          fits inside the model context window and is small enough for accurate retrieval.
         </p>
         <p>
-          The hard part is that the splitter does not always know where human meaning begins and
-          ends. If it cuts in the wrong place, a policy sentence, a code function, or an API example
+          - The hard part is that the splitter does not always know where human meaning begins and
+          ends. If it cuts in the wrong place like cutting a policy statement or a code function or an API example, LLM 
           can lose the context needed to answer correctly.
         </p>
       </Section>
 
       <Section title="1. Fixed-size chunking">
-        <p>
+        <p className="my-3">
           Fixed-size chunking splits documents after a fixed number of characters or tokens. For
           example, chunk size might be 500 characters, 10 words, or page-wise chunks.
         </p>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3 my-3">
           <Callout title="Problem 1">It may cut sentences in the middle.</Callout>
           <Callout title="Problem 2">It may separate related topics.</Callout>
           <Callout title="Problem 3">It does not understand document structure.</Callout>
         </div>
-        <CodeBlock>{`chunk size = 8 words
+        {/* <CodeBlock>{`chunk size = 8 words
 
 chunk 1: Leave Policy: Employee gets 10 paid leaves per
-chunk 2: year. No carry forward. Laptop Reimbursement Policy: Up to
-chunk 3: $1000 allowed. Only MAC allowed.`}</CodeBlock>
+chunk 2: year. No carry forward. Laptop Reimbursement Policy: Up
+chunk 3: to $1000 allowed. Only MAC allowed.`}</CodeBlock> */}
+      <p className="overflow-x-auto rounded-2xl bg-primary p-5 text-sm text-primary-foreground">
+          Chunk size = 8 words <br/> <br />
+          chunk 1: Leave Policy: Employee gets 10 paid leaves per <br />
+          chunk 2: year. No carry forward. Laptop Reimbursement Policy: Up <br />
+          chunk 3: to $1000 allowed. Only MAC allowed.
+      </p>
       </Section>
 
       <Section title="2. Overlap chunking">
-        <p>
+        <p className="my-3">
           Overlap chunking is fixed-size chunking where chunks share some text. For example, chunk
           size = 8 words and overlap = 4 words. This increases the chance that related text falls in
           one chunk.
+                  {/* <CodeBlock>{`chunk size = 8 words, overlap = 4 words
+
+chunk 1: Leave Policy: Employee gets 10 paid leaves per year. No carry forward.
+chunk 2: year. No carry forward. Laptop Reimbursement Policy: Up to $1000 allowed. Only
+chunk 3: to $1000 allowed. Only MAC allowed.`}</CodeBlock> */}
         </p>
-        <OverlapDiagram />
+          <p className="overflow-x-auto rounded-2xl bg-primary p-5 text-sm text-primary-foreground my-3">
+            chunk size = 8 words, overlap = 4 words <br/><br/>
+            chunk 1: Leave Policy: Employee gets 10 paid leaves per <span className="text-foreground">year. No carry forward.</span><br/>
+            chunk 2: <span className="text-foreground">year. No carry forward.</span> Laptop Reimbursement Policy: Up <span className="text-foreground">to $1000 allowed. Only</span><br/>
+            chunk 3: <span className="text-foreground">to $1000 allowed. Only</span> MAC allowed
+        </p>
+        {/* <OverlapDiagram /> */}
         <div className="grid gap-4 md:grid-cols-2">
           <Callout title="Pros">Higher chance related text falls in one chunk.</Callout>
           <Callout title="Cons">
@@ -112,12 +124,11 @@ chunk 3: $1000 allowed. Only MAC allowed.`}</CodeBlock>
       </Section>
 
       <Section title="3. Sentence-based chunking">
-        <p>
-          Sentence-based chunking keeps full sentences together. For example, sentences 1 + 2 + 3
-          become chunk 1, and sentences 4 + 5 become chunk 2.
+        <p className="my-3">
+          Sentence-based chunking keeps full sentences together.
         </p>
         <SentenceDiagram />
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 my-3">
           <Callout title="Pros">Better meaning because it does not cut sentences.</Callout>
           <Callout title="Cons">
             It may still not convey the context of a section or paragraph of text.
@@ -126,12 +137,11 @@ chunk 3: $1000 allowed. Only MAC allowed.`}</CodeBlock>
       </Section>
 
       <Section title="4. Paragraph-based chunking">
-        <p>
-          Paragraph-based chunking splits by paragraphs. Paragraph 1 becomes chunk 1, paragraph 2
-          becomes chunk 2, and paragraph 3 becomes chunk 3.
+        <p className="my-3">
+          Paragraph-based chunking splits by paragraphs.
         </p>
         <ParagraphDiagram />
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 my-3">
           <Callout title="Pros">
             Easy to understand and usually has better semantic context.
           </Callout>
@@ -142,12 +152,15 @@ chunk 3: $1000 allowed. Only MAC allowed.`}</CodeBlock>
       </Section>
 
       <Section title="5. Section/header-based chunking">
-        <p>Section/header-based chunking splits documents using section headings.</p>
+        <p className="my-3">
+          - Section/header-based chunking splits documents using section headings.<br/>
+          - Use section-based chunking for documents with fixed stucture like markdown files, technical docs, API docs, HR policies, legal docs.
+          </p>
         <CodeBlock>{`# Leave Policy -> chunk 1
 # Travel Policy -> chunk 2
 # Laptop Refresh Policy -> chunk 3`}</CodeBlock>
-        <SectionDiagram />
-        <div className="grid gap-4 md:grid-cols-2">
+        {/* <SectionDiagram /> */}
+        <div className="grid gap-4 md:grid-cols-2 my-3">
           <Callout title="Pros">
             Preserves document structure and maintains semantic data in one chunk.
           </Callout>
@@ -156,30 +169,27 @@ chunk 3: $1000 allowed. Only MAC allowed.`}</CodeBlock>
             by sections.
           </Callout>
         </div>
-        <p>
-          Use section-based chunking for technical docs, API docs, HR policies, legal docs, and
-          documents with a fixed structure.
-        </p>
       </Section>
 
       <Section title="6. Recursive chunking">
-        <p>
+        <p className="my-3">
           Recursive chunking tries to split a document using the best natural separator first, then
           falls back to smaller separators.
         </p>
         <RecursiveDiagram />
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 my-3">
           <Callout title="Pros">Best general-purpose strategy for many text documents.</Callout>
           <Callout title="Cons">More complex and needs fine-tuning.</Callout>
         </div>
       </Section>
 
       <Section title="7. Semantic chunking">
-        <p>
-          Semantic chunking splits a document based on meaning. It tries to keep related topics
-          together.
+        <p className="my-3">
+          - Semantic chunking splits a document based on meaning. It tries to keep related topics
+          together.<br/>
+          - Works well for systems where high accuracy is needed in responses.
         </p>
-        <SemanticDiagram />
+        <SemanticDiagram /><br/>
         <CodeBlock>{`para 1: Leave Policy
 para 2: Carry-forward Rules
 para 3: Sick Leave Process
@@ -187,69 +197,75 @@ para 4: Laptop Reimbursement
 
 chunk 1 = para 1 + 2 + 3, as all 3 are semantically similar
 chunk 2 = para 4`}</CodeBlock>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 my-3">
           <Callout title="Pros">Better semantic quality and improved retrieval accuracy.</Callout>
           <Callout title="Cons">
-            More expensive and higher latency because documents may go through an LLM, embedding,
-            and similarity search before chunks are created.
+            More expensive and higher latency because documents go through an LLM to create embedding
+            and then similarity search before chunks are created.
           </Callout>
         </div>
-        <p>Semantic chunking works well for systems where high accuracy is needed in responses.</p>
       </Section>
 
       <Section title="8. Custom / structure-aware chunking">
-        <p>
-          Custom chunking uses the document type or document structure. It is mostly used in
+        <p className="my-3">
+          - Chunk based on the document type or document structure.<br/>
+          - It is mostly used in
           production systems where higher accuracy is needed.
         </p>
         <StructureAwareDiagram />
       </Section>
 
-      <Section title="Metadata belongs with chunks">
-        <p>Chunks should also store metadata.</p>
+      <Section title="Metadata">
+        <p className="my-3">
+          - Chunks should also store metadata.<br/>
+          - Metadata helps with citation, filtering, debugging, and source tracking.
+        </p>
         <CodeBlock>{`{
-  "chunk_text": "Employees get 20 paid leaves per year",
-  "source": "HR-Policy.pdf",
-  "section": "Leave Policy",
-  "page": 12,
-  "chunk_id": "hr-policy-leave-policy-pg12-chunk"
+  "id": "employee-policy-leave-001",
+  "text": "Employees get 20 paid leaves per year",
+  "embedding": [0.12, -0.44, 0.9],
+  "metadata": {
+    "source": "employee-handbook.pdf",
+    "section": "HR - Leave Policy",
+    "page": 12,
+    "chunkIndex": 1
+  }
 }`}</CodeBlock>
-        <p>Metadata helps with citation, filtering, debugging, and source tracking.</p>
       </Section>
 
       <Section title="Embedding">
-        <p>
-          Embedding converts text to vectors. Similar meaning should become nearby vectors, which
-          can be compared with cosine similarity.
+        <p className="my-3">
+          Embedding converts text to vectors.
         </p>
         <EmbeddingDiagram />
-        <ul>
-          <li>No single model is best. Choose one that fits your document types and use case.</li>
-          <li>Test embedding models with your documents and retrieval results.</li>
-          <li>The MTEB leaderboard on Hugging Face compares embedding models.</li>
+        <h2 className="text-xl text-foreground mt-5">Which model to choose?</h2>
+        <ul className="py-3">
+          <li>- No single model is best. Choose one that fits your document types and use case.</li>
+          <li>- Test embedding models with your documents and retrieval results.</li>
           <li>
-            Trade-offs to consider include latency, dimensions, and quality. Dimensions such as 256,
+            - The <a href="https://huggingface.co/spaces/mteb/leaderboard" target="_blank" className="text-ring">MTEB leaderboard on Hugging Face</a> compares embedding models.</li>
+          <li>
+            - Trade-offs to consider: latency, dimensions and quality. Dimensions such as 256,
             768, or 1024 mean the text is converted into that many vector numbers.
           </li>
-          <li>Always use the same model to embed chunks and the user query.</li>
+          <li>- Always use the same model to embed chunks and the user query.</li>
+          <li>- If your document has legal jargon, choose a model trained for legal language. If your
+          document has images, choose a model that can embed images and compare their vectors.</li>
         </ul>
         <p>
-          If your document has legal jargon, choose a model trained for legal language. If your
-          document has images, choose a model that can embed images and compare their vectors.
+          
         </p>
       </Section>
 
       <Section title="Parser">
-        <p>
-          For documents with code or complex structure, you need a parser before chunking. A parser
-          understands the document shape so chunks are not created from broken pieces.
-        </p>
-        <ParserDiagram />
-        <p>
-          For PDFs, you might use a PDF parser. For codebases, an AST parser creates an abstract
+        <p className="my-3">
+          - For documents with code or complex structure, you need a parser before chunking. A parser
+          understands the document shape so chunks are not created from broken pieces.<br/>
+          - For PDFs, you might use a PDF parser. For codebases, an AST parser creates an abstract
           syntax tree representation so the chunker can split by class, module, function, or
           component.
         </p>
+        <ParserDiagram />
       </Section>
 
       <Section title="Takeaways">
@@ -287,13 +303,13 @@ function Callout({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-function FlowBox({ children, accent = false }: { children: ReactNode; accent?: boolean }) {
+function FlowBox({ children, accent = false, centered = true }: { children: ReactNode; accent?: boolean, centered?: boolean }) {
   return (
     <div
       className={
         accent
-          ? "rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-center font-semibold text-primary"
-          : "rounded-xl border border-border bg-background px-4 py-3 text-center font-semibold text-foreground"
+          ? `rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 ${centered ? "text-center" : ""} font-semibold text-primary`
+          : `rounded-xl border border-border bg-background px-4 py-3 ${centered ? "text-center" : ""} font-semibold text-foreground`
       }
     >
       {children}
@@ -318,14 +334,16 @@ function DiagramShell({ children }: { children: ReactNode }) {
 function RagPipelineDiagram() {
   return (
     <DiagramShell>
-      <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] md:items-center">
-        <FlowBox>Docs</FlowBox>
+      <div className="grid gap-2 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr_auto_1fr] md:items-center">
+        <FlowBox>Ingest Docs</FlowBox>
         <Arrow />
-        <FlowBox accent>Chunks</FlowBox>
+        <FlowBox accent>Chunking</FlowBox>
         <Arrow />
-        <FlowBox>Embeddings</FlowBox>
+        <FlowBox>Embedding</FlowBox>
         <Arrow />
-        <FlowBox>Vector search</FlowBox>
+        <FlowBox>Store in Vector DB</FlowBox>
+        <Arrow />
+        <FlowBox>Retreive</FlowBox>
       </div>
     </DiagramShell>
   );
@@ -419,9 +437,9 @@ function SemanticDiagram() {
       <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
         <FlowBox>Docs</FlowBox>
         <Arrow />
-        <FlowBox>LLM / embeddings</FlowBox>
+        <FlowBox>LLM creates embeddings</FlowBox>
         <Arrow />
-        <FlowBox accent>Similarity search groups related chunks</FlowBox>
+        <FlowBox accent>Group related data in 1 chunk using vector similarity</FlowBox>
       </div>
     </DiagramShell>
   );
@@ -431,9 +449,9 @@ function StructureAwareDiagram() {
   return (
     <DiagramShell>
       <div className="grid gap-5 md:grid-cols-3">
-        <FlowBox>Resume → summary, skills, experience per company, education</FlowBox>
-        <FlowBox>API doc → endpoint, parameters, request example, response example, errors</FlowBox>
-        <FlowBox>Codebase → file, module, class, function</FlowBox>
+        <FlowBox centered={false}>Resume: Chunk By <br/>- Summary<br/> - Skills<br/> - Experience per company<br/> - Education</FlowBox>
+        <FlowBox centered={false}>API doc: Chunk By <br/> - Endpoint<br/> - Parameters<br/> - Request example <br/> - Response example <br/> - Errors</FlowBox>
+        <FlowBox centered={false}>Codebase: Chunk By <br/> - File <br/> - Module <br/> - Class <br/> - Function</FlowBox>
       </div>
     </DiagramShell>
   );
@@ -450,7 +468,7 @@ function EmbeddingDiagram() {
         <FlowBox>Vector [0.12, -0.44, 0.90, ...]</FlowBox>
       </div>
       <div className="mt-5 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-        <Database className="h-5 w-5 text-accent" /> Similar meaning → nearby vectors → cosine
+        <Database className="h-5 w-5 text-accent" /> Similar meaning tokens → nearby vectors → high cosine
         similarity
       </div>
     </DiagramShell>
@@ -468,9 +486,20 @@ function ParserDiagram() {
           <Arrow />
           <FlowBox>Create chunks by class / module / function / component</FlowBox>
         </div>
-        <div className="rounded-2xl border border-border bg-background p-4 font-mono text-xs text-muted-foreground">
-          FunctionDeclaration → name: sum → params: a, b → body: ReturnStatement → BinaryExpression
-        </div>
+        <CodeBlock>
+{`Function Declaration
+    |-- name: sum
+    |-- params:
+    |     |-- a
+    |     |-- b
+    |-- body
+    |     |-- Return Statement
+    |     |       |-- Binary Expression
+    |     |       |       | -- left: a
+    |     |       |       | -- operator: +
+    |     |       |       | -- right: a
+            `}
+          </CodeBlock>
       </div>
     </DiagramShell>
   );
