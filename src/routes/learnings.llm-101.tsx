@@ -177,7 +177,7 @@ function Llm101Blog() {
       </Section>
 
       <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">My practical takeaway</h2>
+        <h2 className="text-xl font-semibold text-primary-foreground">Takeaway</h2>
         <p className="mt-3 text-primary-foreground/85">
           Key to AI engineering is giving the right context to the LLM at the right time in the right amount.<br/>
           And that starts with a disciplined context design: choosing the right instructions, passing

@@ -268,17 +268,17 @@ chunk 2 = para 4`}</CodeBlock>
         <ParserDiagram />
       </Section>
 
-      <Section title="Takeaways">
+      <section className="mt-12 rounded-3xl bg-accent p-8 text-primary-foreground">
+        <h2 className="text-xl font-semibold text-primary-foreground">Takeaways</h2>
         <ul>
-          <li>Chunk quality controls retrieval quality.</li>
-          <li>Overlap can protect context, but it duplicates text and raises storage cost.</li>
+          <li>- Chunk quality controls retrieval quality.</li>
           <li>
-            Section, recursive, semantic, and custom chunking usually beat naive fixed-size chunks.
+            - Section, recursive, semantic and custom chunking usually beat naive fixed-size chunks.
           </li>
-          <li>Metadata makes RAG answers easier to cite, filter, debug, and trace.</li>
-          <li>Use the same embedding model for documents and user queries.</li>
+          <li>- Metadata makes RAG answers easier to cite, filter, debug and trace.</li>
+          <li>- Use the same model to embed chunks and user queries.</li>
         </ul>
-      </Section>
+      </section>
     </article>
   );
 }
