@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ArrowLeft, ArrowRight, Clock, Database, Sparkles } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  Clock,
+  Database,
+  FileText,
+  Sparkles,
+} from "lucide-react";
 
 export const Route = createFileRoute("/learnings/rag-architecture")({
   component: RagArchitectureBlog,
@@ -59,20 +67,20 @@ function RagArchitectureBlog() {
       <Section title="Why RAG exists">
         <p>LLMs have two common failures:</p>
         <p className="mt-3">
-            1. <strong>Knowledge cutoff:</strong><br/>
-            - Once the LLM has completed its training, it will not
-            learn anything new.<br/>
-            - For example, if an LLM was trained on web development knowledge up
-            to June 2025, it will not know features from a new React version released after June
-            2025.<br/>
-            - It also will not know your private component library and CSS styles because that
-            data was not part of training.
+          1. <strong>Knowledge cutoff:</strong>
+          <br />
+          - Once the LLM has completed its training, it will not learn anything new.
+          <br />
+          - For example, if an LLM was trained on web development knowledge up to June 2025, it will
+          not know features from a new React version released after June 2025.
+          <br />- It also will not know your private component library and CSS styles because that
+          data was not part of training.
         </p>
         <p className="mt-3">
-            2. <strong>Hallucination:</strong> if you ask an LLM something it does not know, it may
-            guess. It still produces an answer, but the answer may be wrong, unrelated, or
-            irrelevant. Since the model has to answer something, it can hallucinate instead of
-            saying, “I do not know this.”
+          2. <strong>Hallucination:</strong> if you ask an LLM something it does not know, it may
+          guess. It still produces an answer, but the answer may be wrong, unrelated, or irrelevant.
+          Since the model has to answer something, it can hallucinate instead of saying, “I do not
+          know this.”
         </p>
       </Section>
 
@@ -89,13 +97,16 @@ function RagArchitectureBlog() {
       </Section>
 
       <Section title="Example: leave policy question">
-        <p>User asks: <span className="text-ring">“What is the leave policy?”</span></p>
+        <p>
+          User asks: <span className="text-ring">“What is the leave policy?”</span>
+        </p>
         <div className="grid gap-5 lg:grid-cols-2 mt-3">
           <Callout title="Without RAG">
-            The LLM may guess:<br/>
-            “Typically 10 paid leaves” OR <br/>
-            It may hallucinate: “Leave policy describes the company&apos;s rules on how an employee can
-            take time off.”
+            The LLM may guess:
+            <br />
+            “Typically 10 paid leaves” OR <br />
+            It may hallucinate: “Leave policy describes the company&apos;s rules on how an employee
+            can take time off.”
           </Callout>
           <Callout title="With RAG">
             <ol>
@@ -114,7 +125,7 @@ function RagArchitectureBlog() {
         </p>
       </Section>
 
-      <Section title="Basic RAG architecture">
+      <Section title="Basic RAG architecture" wide>
         <ArchitectureDiagram />
         <p>
           The high-level path is: ingest data, split it into useful pieces, embed it, index it in a
@@ -125,45 +136,46 @@ function RagArchitectureBlog() {
 
       <Section title="1. Ingest">
         <p>
-          - Provide the RAG app the company documents.<br/>
-          - These could be PDFs, Word documents, web pages,
-          code, GitHub links, support tickets, support logs, images, videos, or other internal
-          sources.<br/>
-          - Examples include a leave policy document, GitHub repository, or support logs.
+          - Provide the RAG app the company documents.
+          <br />
+          - These could be PDFs, Word documents, web pages, code, GitHub links, support tickets,
+          support logs, images, videos, or other internal sources.
+          <br />- Examples include a leave policy document, GitHub repository, or support logs.
         </p>
       </Section>
 
       <Section title="2. Chunking">
         <p>
-          - Split documents into smaller chunks<br/>
-          - If company data is large, not all of it will fit in
-          the LLM context window. So when answering, the LLM may use only part of the company data or
-          use summarized data, which can cause hallucination.<br/>
-          - <span className="text-primary">Chunking helps limit the LLM context window.</span>
+          - Split documents into smaller chunks
+          <br />
+          - If company data is large, not all of it will fit in the LLM context window. So when
+          answering, the LLM may use only part of the company data or use summarized data, which can
+          cause hallucination.
+          <br />- <span className="text-primary">Chunking helps limit the LLM context window.</span>
         </p>
         <p className="mt-3">
           - For example, an HR policies document may become separate chunks for leave policy, travel
-          policy, holiday calendar, and work-from-home policy.<br/>
-          - If the user asks “What is the leave
-          policy?”, your RAG can retrieve only the relevant leave policy chunk, not the whole
-          document.
+          policy, holiday calendar, and work-from-home policy.
+          <br />- If the user asks “What is the leave policy?”, your RAG can retrieve only the
+          relevant leave policy chunk, not the whole document.
         </p>
       </Section>
 
       <Section title="3. Embedding">
         <p>
-          - Convert chunks to vectors.<br/>
-          - LLMs do not understand text directly; they understand vectors.
-          - The user query is also converted to an embedding. Use the same embedding model for chunks
-          and the user query so similar meaning lands close together in the same vector space.
+          - Convert chunks to vectors.
+          <br />- LLMs do not understand text directly; they understand vectors. - The user query is
+          also converted to an embedding. Use the same embedding model for chunks and the user query
+          so similar meaning lands close together in the same vector space.
         </p>
       </Section>
 
       <Section title="4. Vector database">
         <p className="mb-3">
           - Store embeddings in a vector database, such as Chroma DB, Pinecone, or Postgres with
-          pgvector.<br/>
-          - We cannot use a regular SQL database since we are not doing text comparison or keyword search. We do vector comparison, hence we need vector DB.
+          pgvector.
+          <br />- We cannot use a regular SQL database since we are not doing text comparison or
+          keyword search. We do vector comparison, hence we need vector DB.
         </p>
         <CodeBlock>{`{
   "id": "employee-policy-leave-001",
@@ -180,11 +192,12 @@ function RagArchitectureBlog() {
 
       <Section title="5. Retrieval">
         <p>
-          - Retrieval performs similarity search to compare the user query embedding vector with chunk
-          vectors.<br/>
-          - It retrieves the top K chunks. These are the most relevant chunks likely to have
-          the right data to feed the LLM.<br/>
-          - K is decided by you when designing the RAG system.
+          - Retrieval performs similarity search to compare the user query embedding vector with
+          chunk vectors.
+          <br />
+          - It retrieves the top K chunks. These are the most relevant chunks likely to have the
+          right data to feed the LLM.
+          <br />- K is decided by you when designing the RAG system.
         </p>
       </Section>
 
@@ -199,9 +212,17 @@ function RagArchitectureBlog() {
   );
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({
+  title,
+  children,
+  wide = false,
+}: {
+  title: string;
+  children: ReactNode;
+  wide?: boolean;
+}) {
   return (
-    <section className="mt-12 max-w-4xl">
+    <section className={wide ? "mt-12 w-full max-w-none" : "mt-12 max-w-4xl"}>
       <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
       <div className="prose prose-neutral mt-4 max-w-none text-muted-foreground prose-li:my-1 prose-strong:text-foreground">
         {children}
@@ -238,33 +259,256 @@ function Arrow() {
 }
 
 function ArchitectureDiagram() {
+  const documentCards = ["Company docs", "Latest papers", "Support tickets"];
+  const chunks = ["Leave policy", "Holiday calendar", "WFH rules", "Travel policy"];
+  const embeddingBars = ["w-8", "w-12", "w-10"];
+
   return (
-    <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
-      <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr_auto_1fr] md:items-center">
-        <FlowBox>Ingest</FlowBox>
-        <Arrow />
-        <FlowBox>Chunk</FlowBox>
-        <Arrow />
-        <FlowBox>Embed</FlowBox>
-        <Arrow />
-        <FlowBox>Index in DB</FlowBox>
-        <Arrow />
-        <FlowBox accent>Retrieve</FlowBox>
+    <div className="not-prose overflow-hidden rounded-3xl border border-border bg-secondary/40 p-5 sm:p-6">
+      <div className="mb-6 text-center">
+        <p className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
+          Offline Indexing + Online Retrieval
+        </p>
+        <h3 className="mt-2 text-xl font-semibold text-foreground">Basic RAG Architecture</h3>
       </div>
-      <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr] lg:items-center">
-        <div className="space-y-3">
-          <FlowBox>Company docs, latest papers, support tickets</FlowBox>
-          <FlowBox>Embeddings stored in vector DB</FlowBox>
+
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:items-start">
+        <DiagramBoundary
+          title="Offline"
+          caption="Prepare knowledge before the user asks a question"
+        >
+          <DiagramStep number={1} title="Ingest" caption="e.g. company docs, latest papers">
+            <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
+              {documentCards.map((document) => (
+                <div
+                  key={document}
+                  className="rounded-xl border border-border bg-background p-3 text-center text-sm font-semibold text-foreground"
+                >
+                  <FileText className="mx-auto mb-2 h-5 w-5 text-accent" />
+                  {document}
+                </div>
+              ))}
+            </div>
+          </DiagramStep>
+
+          <DiagramArrowLabel label="Break docs into chunks to fit the LLM context window and reduce hallucination." />
+
+          <DiagramStep
+            number={2}
+            title="Chunking"
+            caption="Split source material into useful pieces"
+          >
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
+              {chunks.map((chunk) => (
+                <div key={chunk} className="rounded-lg border border-primary/30 bg-primary/10 p-3">
+                  <div className="mx-auto mb-2 h-10 w-8 rounded border border-primary/40 bg-background" />
+                  <p className="text-center text-xs font-medium text-primary">{chunk}</p>
+                </div>
+              ))}
+            </div>
+          </DiagramStep>
+
+          <DiagramArrowLabel label="Convert each text chunk into vectors. LLM systems compare vectors, not raw text." />
+
+          <DiagramStep number={3} title="Embedding" caption="Represent every chunk in vector space">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
+              {chunks.map((chunk) => (
+                <VectorCard key={chunk} bars={embeddingBars} label={chunk} />
+              ))}
+            </div>
+          </DiagramStep>
+
+          <DiagramArrowLabel label="Store chunk embeddings in the vector database." />
+
+          <VectorDatabase number={4} title="Vector DB" caption="Indexed chunk embeddings" />
+        </DiagramBoundary>
+
+        <div className="hidden h-full items-center justify-center xl:flex">
+          <ArrowRight className="h-12 w-12 text-accent" strokeWidth={2.5} />
         </div>
-        <div className="space-y-3">
-          <FlowBox>User query embedded by the same embedding model</FlowBox>
-          <FlowBox accent>
-            Compare query vector with chunk vectors and retrieve top K chunks
-          </FlowBox>
-          <FlowBox>Send user query + relevant chunks to LLM</FlowBox>
-        </div>
+
+        <DiagramBoundary title="Online" caption="Run when the user asks a question" accent>
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
+            <DiagramStep number={5} title="User Query" caption="Embed query with the same model">
+              <div className="rounded-xl border border-border bg-background p-4 text-center font-semibold text-foreground">
+                “What is the leave policy?”
+              </div>
+              <div className="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
+                <ArrowDown className="h-4 w-4 text-accent" /> Query vector
+              </div>
+              <VectorCard bars={["w-10", "w-14", "w-8"]} label="Embedded query" />
+            </DiagramStep>
+
+            <div className="flex items-center justify-center">
+              <ArrowRight
+                className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
+                strokeWidth={2.5}
+              />
+            </div>
+
+            <VectorDatabase
+              number={6}
+              title="Search within DB"
+              caption="Compare query vector with chunk vectors"
+            />
+          </div>
+
+          <DiagramArrowLabel label="Similarity search returns the most relevant chunks." />
+
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
+            <DiagramStep
+              number={7}
+              title="Top K Relevant Chunks"
+              caption="K = 5 most similar chunks"
+              accent
+            >
+              <div className="grid grid-cols-2 gap-2">
+                <VectorCard bars={["w-9", "w-12", "w-7"]} label="Leave policy" />
+                <VectorCard bars={["w-8", "w-10", "w-12"]} label="Benefits FAQ" />
+              </div>
+            </DiagramStep>
+
+            <div className="flex flex-col items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
+              <ArrowRight
+                className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
+                strokeWidth={2.5}
+              />
+              <span className="text-center">User query + chunks</span>
+            </div>
+
+            <DiagramStep number={8} title="LLM" caption="Receives both inputs individually" accent>
+              <div className="space-y-2">
+                <div className="rounded-xl border border-border bg-background p-3 text-center text-sm font-semibold text-foreground">
+                  User Query → LLM
+                </div>
+                <div className="rounded-xl border border-primary/30 bg-primary/10 p-3 text-center text-sm font-semibold text-primary">
+                  Top K Relevant Chunks → LLM
+                </div>
+                <p className="text-center text-sm text-muted-foreground">
+                  Generate grounded answer
+                </p>
+              </div>
+            </DiagramStep>
+          </div>
+        </DiagramBoundary>
       </div>
     </div>
+  );
+}
+
+function DiagramBoundary({
+  title,
+  caption,
+  children,
+  accent = false,
+}: {
+  title: string;
+  caption: string;
+  children: ReactNode;
+  accent?: boolean;
+}) {
+  return (
+    <section
+      className={
+        accent
+          ? "space-y-4 rounded-3xl border-2 border-primary/30 bg-primary/5 p-4 sm:p-5"
+          : "space-y-4 rounded-3xl border-2 border-border bg-background/60 p-4 sm:p-5"
+      }
+    >
+      <div>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">{title}</p>
+        <h4 className="mt-1 text-lg font-semibold text-foreground">{caption}</h4>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function DiagramStep({
+  number,
+  title,
+  caption,
+  children,
+  accent = false,
+}: {
+  number: number;
+  title: string;
+  caption: string;
+  children: ReactNode;
+  accent?: boolean;
+}) {
+  return (
+    <div
+      className={
+        accent
+          ? "rounded-2xl border border-primary/30 bg-card p-4 shadow-sm"
+          : "rounded-2xl border border-border bg-card p-4 shadow-sm"
+      }
+    >
+      <div className="mb-3 flex min-w-0 items-start gap-3">
+        <StepNumber number={number} />
+        <div className="min-w-0">
+          <h4 className="break-words text-lg font-semibold text-foreground">{title}</h4>
+          <p className="break-words text-sm text-muted-foreground">{caption}</p>
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function DiagramArrowLabel({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-background/80 px-4 py-3 text-sm text-muted-foreground">
+      <ArrowDown className="h-9 w-9 shrink-0 text-accent" strokeWidth={2.5} />
+      <span className="min-w-0 break-words">{label}</span>
+    </div>
+  );
+}
+
+function VectorCard({ bars, label }: { bars: string[]; label: string }) {
+  return (
+    <div className="rounded-lg border border-border bg-background p-3">
+      <div className="space-y-1.5">
+        {bars.map((bar, index) => (
+          <div key={`${label}-${index}`} className={`h-1.5 rounded-full bg-accent/70 ${bar}`} />
+        ))}
+      </div>
+      <p className="mt-2 text-center text-xs font-medium text-muted-foreground">{label}</p>
+    </div>
+  );
+}
+
+function VectorDatabase({
+  number,
+  title,
+  caption,
+}: {
+  number: number;
+  title: string;
+  caption: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-card p-4 text-center shadow-sm">
+      <StepNumber number={number} className="mx-auto mb-3" />
+      <Database className="mx-auto h-12 w-12 text-accent" />
+      <h4 className="mt-3 text-lg font-semibold text-foreground">{title}</h4>
+      <p className="mt-1 text-sm text-muted-foreground">{caption}</p>
+      <div className="mt-4 rounded-xl border border-border bg-background p-3 text-sm font-medium text-foreground">
+        Vector similarity
+      </div>
+    </div>
+  );
+}
+
+function StepNumber({ number, className = "" }: { number: number; className?: string }) {
+  return (
+    <span
+      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary font-mono text-sm font-bold text-primary-foreground shadow-sm ${className}`}
+      aria-label={`Step ${number}`}
+    >
+      {number}
+    </span>
   );
 }
 
@@ -285,7 +529,9 @@ function GenerationDiagram() {
 function CodeBlock({ children }: { children: ReactNode }) {
   return (
     <pre className="overflow-x-auto rounded-2xl bg-primary p-5 text-sm text-primary-foreground">
-      Example of a chunk stored in DB:<br/><br/>
+      Example of a chunk stored in DB:
+      <br />
+      <br />
       <code>{children}</code>
     </pre>
   );
