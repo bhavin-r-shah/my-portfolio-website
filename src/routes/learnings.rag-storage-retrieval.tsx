@@ -638,9 +638,9 @@ function HnswSimilarityGraph() {
 
         <g className="fill-none stroke-primary/45" strokeWidth="3" strokeLinecap="round">
           <path d="M185 55 L615 55" />
-          <path d="M120 170 L230 170 L340 170" />
+          <path d="M120 170 L230 170 M120 170 Q230 120 340 170" />
           <path d="M560 170 L670 170" />
-          <path d="M85 285 L180 285 L275 285 L370 285" />
+          <path d="M85 285 L180 285 L275 285 M85 285 Q180 235 275 285" />
           <path d="M500 285 L595 285 L690 285" />
           <path d="M185 55 L230 170 M185 55 L340 170" />
           <path d="M615 55 L670 170" />
