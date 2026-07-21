@@ -229,40 +229,40 @@ G - Hiring process                 Layer 1`}</CodeBlock>
       </Section>
 
       <Section title="IVF: Inverted File Index">
-        <p>
-          Inverted File Index (IVF) groups similar vectors into buckets, or clusters, and then
-          searches only the clusters that are closest to the user query vector.
-        </p>
-        <p>IVF commonly uses the K-Means clustering algorithm.</p>
+        <ul className="list-disc pl-5 my-3">
+          <li>Inverted File Index (IVF) groups similar vectors into buckets, or clusters, and then
+          searches only within the clusters that are closest to the user query vector.</li>
+          <li>It uses the K-Means clustering algorithm</li>
+          <li>Suppose you have these document chunks:<br/>
+          (A) paid leave, (B) sick leave, (C) hardware request, (D) laptop
+          reimbursement and (E) travel reimbursement.</li>
+          <li>
+            If you ask to group them into K = 3 clusters:
+            <ol className="list-disc pl-5">
+              <li>Cluster 1: paid leave, sick leave</li>
+              <li>Cluster 2: laptop reimbursement, travel reimbursement</li>
+              <li>Cluster 3: hardware request</li>
+            </ol>
+          </li>
+          <li>
+            Each cluster has a centroid. A centroid is the numerical average of the group of vectors.<br/>
+            For example, if A = [1, 2] and B = [2, 2], then <br/>
+            Centroid C1 = [(1 + 2) / 2, (2 + 2) / 2] = [1.5, 2].
+          </li>
+        </ul>
         <IvfClusterDiagram />
-        <p>
-          Suppose you have these document chunks: paid leave, sick leave, hardware request, laptop
-          reimbursement, and travel reimbursement.
-        </p>
-        <p>If you ask to group them into K = 3 clusters:</p>
-        <ol>
-          <li>Cluster 1: paid leave, sick leave</li>
-          <li>Cluster 2: laptop reimbursement, travel reimbursement</li>
-          <li>Cluster 3: hardware request</li>
-        </ol>
-        <p>
-          Each cluster has a centroid. A centroid is the average of a group of vectors. For example,
-          if A = [1, 2] and B = [2, 2], then centroid = [(1 + 2) / 2, (2 + 2) / 2] = [1.5, 2].
-        </p>
-        <Callout title="nlist">The nlist parameter determines how many clusters to create.</Callout>
-      </Section>
 
-      <Section title="How IVF clusters are created">
-        <ol>
-          <li>Randomly select K vectors as centroids.</li>
+        <h2 className="text-xl mt-7 mb-3">How are clusters created?</h2>
+        <ol className="list-decimal pl-5">
+          <li>Say we decided to build K clusters. Then for each cluster, randomly select a vector as its centroid.</li>
           <li>
             Assign each remaining vector to the cluster whose centroid is closest to this vector.
           </li>
-          <li>Recalculate each centroid as the average of vectors in the cluster.</li>
-          <li>Reassign vectors to the nearest centroids.</li>
+          <li>Recalculate each centroid as the average of vectors within its cluster.</li>
+          <li>Reassign all vectors to the nearest centroids.</li>
           <li>Repeat until clusters stabilize.</li>
         </ol>
-        <p>
+        <p className="my-3">
           A centroid is an average number. It does not necessarily represent an actual chunk vector.
         </p>
         <CodeBlock>{`Example
@@ -275,111 +275,119 @@ G - Hiring process                 Layer 1`}</CodeBlock>
    C2 = [(8 + 6 + 7) / 3, (8 + 9 + 8) / 3] = [7, 8.33]
 4) Re-check if any chunks need to move to another cluster.
 5) If no chunks move, clusters are stabilized.`}</CodeBlock>
-      </Section>
 
-      <Section title="How vectors are stored inside IVF">
-        <p>Vectors are stored under the centroid, or cluster, they belong to.</p>
+        <h2 className="text-xl mt-7 mb-3">How vectors are stored inside IVF?</h2>
+        <p className="my-3">Vectors are stored in Inverted File Pattern</p>
         <IvfStorageDiagram />
-        <p>
-          During search, take the user query vector, find the nearest centroid, and then search
-          vectors within the cluster of the nearest centroid.
-        </p>
-        <CodeBlock>{`Step 1: user query vector vs C1 = 0.91 similarity
-        user query vector vs C2 = 0.35
-        user query vector vs C3 = 0.62
 
-Step 2: search closest clusters C1 and C3
-Inside Cluster 1:
-  user query vector vs chunk 1 = 0.94
-  user query vector vs chunk 2 = 0.72
-Inside Cluster 3:
-  user query vector vs chunk 3 = 0.88
+        <h2 className="text-xl mt-7 mb-3">Search</h2>
+        <ol className="list-decimal pl-5 mb-3">
+          <li>Take the user query vector (UQ)</li>
+          <li>Find the nearest centroid</li>
+          <li>Search vectors within the cluster of the nearest centroid.</li>
+        </ol>
+        <CodeBlock>{`Step 1:
+  UQ vector vs C1 = 0.91 similarity
+  UQ vector vs C2 = 0.35
+  UQ vector vs C3 = 0.62
 
-Response K = Top 2 = chunk 1 and chunk 3`}</CodeBlock>
-        <Callout title="nprobe">
-          nprobe determines how many closest clusters IVF will search in. Higher nprobe means higher
-          accuracy, but slower search.
-        </Callout>
-      </Section>
+Step 2:
+  Search within cluster of nearest centriods C1 and C3
 
-      <Section title="IVF risk: the right answer may be in another cluster">
-        <p>
+Step 3:
+  Inside Cluster 1:
+    UQ vector vs chunk 1 = 0.94
+    UQ vector vs chunk 2 = 0.72
+  Inside Cluster 3:
+    UQ vector vs chunk 3 = 0.88
+
+Response Top 2 closest: chunk 1 and chunk 3`}</CodeBlock>
+
+        <h2 className="text-xl mt-7 mb-3">IVF Parameters</h2>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Callout title="nlist">The nlist parameter determines how many clusters to create.</Callout>
+          <Callout title="nprobe">
+            nprobe determines how many closest clusters IVF will search in. Higher nprobe means higher
+            accuracy, but slower search.
+          </Callout>
+        </div>
+
+        <h2 className="text-xl mt-7 mb-3">Risk</h2>
+        <p className="mb-3">
           If a user query is not properly formed, or if the query vector is closer to C1 but the
           answer is in cluster C2, searching only C1 can miss the right chunk.
         </p>
-        <p>
-          Example user query: &quot;Engg dept needs 15 Apple MacBook Air with 15 GB RAM, 10 Apple
-          keyboards, 10 Apple mice. Will it fit budget of Q4?&quot;
+        <p className="mb-3">
+          e.g. user query: <span className="text-ring">Engineering deparment needs 30 Apple MacBook Air each with 10 GB RAM, 10 Apple
+          keyboards and 10 Apple mice. Will it fit budget of Q4?</span>
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           <Callout title="Cluster 1">
-            Chunk A: MacBook Air specs
+            <span className="text-ring">Centroid: C1</span>
+            <br/>
+            Chunk A: Apple MacBook Air specs
             <br />
             Chunk B: Apple laptop config
             <br />
             Chunk C: Apple accessories
-            <br />
-            Centroid: C1
           </Callout>
           <Callout title="Cluster 2">
-            Chunk E: Engg quarterly budget
+            <span className="text-ring">Centroid: C2</span>
+            <br/>
+            Chunk E: Engineering deparment budget
             <br />
             Chunk F: Procurement process
             <br />
             Chunk G: Financial approval process
-            <br />
-            Centroid: C2
           </Callout>
         </div>
-        <p>
-          Since the user query has a lot of Apple text, the query vector is closer to C1 than C2. If
-          you search only cluster 1 with nprobe = 1, you will not find the right answer chunk E of
+        <p className="mt-3">
+          - Closest Chunk: <span className="text-primary">Chunk E of Cluster 2</span><br/>
+          - But since the user query has a lot text relating to Apple, the query vector is closer to C1 than C2. If
+          you <span className="text-destructive">search only cluster 1</span> (with nprobe = 1), you will not find the right answer chunk E which is in
           cluster 2.
         </p>
+
       </Section>
 
       <Section title="Product Quantization">
-        <p>Product Quantization (PQ) is a vector compression technique.</p>
-        <p>
-          PQ compresses large vectors into smaller codes, so vector search becomes cheaper and
-          faster.
-        </p>
-        <p>
-          A common production stack is IVF + PQ. IVF narrows where you search, and PQ shrinks the
-          vectors.
-        </p>
+        <ul className="list-disc pl-5 my-3">
+          <li>Product Quantization (PQ) is a vector compression technique.</li>
+          <li>PQ compresses large vectors into smaller codes, so vector search becomes cheaper and faster.</li>
+          <li>A common production stack is IVF + PQ. IVF narrows where you search, and PQ shrinks the vectors.</li>
+        </ul>
+        
         <PqDiagram />
-        <p>
-          Floating point quantization converts floating point values into smaller integer values.
-        </p>
+        
+        <h2 className="text-xl mt-7 mb-3">Floating point quantization</h2>
+        <p className="mb-3">Converts floating point values into smaller integer values.</p>
         <CodeBlock>{`Vector = [0.12, -0.44, 2.37, 10.8, ..., 1.8, 0.19]
 Compressed vector = [0, 0, 2, 10, ..., 1, 0]`}</CodeBlock>
-        <p>Code quantization splits a vector into parts and replaces each part with a code.</p>
+        
+        <h2 className="text-xl mt-7 mb-3">Code quantization</h2>
+        <p className="mb-3">Splits a vector into parts and replaces each part with a code.</p>
         <CodeBlock>{`Vector = [0.12, -0.44, 0.87, 0.10, 0.55, -0.20]
+
 Split:
-  Part 1 = [0.12, -0.44] -> code 7
-  Part 2 = [0.87, 0.10]  -> code 2
-  Part 3 = [0.55, -0.20] -> code 13
+    Part 1 = [0.12, -0.44] -> code 7
+    Part 2 = [0.87, 0.10]  -> code 2
+    Part 3 = [0.55, -0.20] -> code 13
 Compressed representation = [7, 2, 13]
 
 Codebook:
   Id 7  = [0.12, -0.44]
   Id 2  = [0.87, 0.10]
   Id 13 = [0.55, -0.20]`}</CodeBlock>
-        <p>
-          Why use it? To save memory. For example, an original vector with 1536 dimensions has 1536
-          floating point numbers. If each float is 4 bytes, that is 1536 × 4 = 6144 bytes. With PQ,
-          m = 96 sub-vectors can reduce it to about 96 bytes.
-        </p>
+        <br/>
         <Callout title="Trade-off">
-          Memory goes down and search is faster, but accuracy can go down. PQ can be used with IVF
-          and HNSW.
+          - PQ saves memory by replacing vector parts with compact codebook IDs.<br/>
+          - Memory usage goes down and search is faster, but accuracy can go down.
         </Callout>
       </Section>
 
       <Section title="Which vector DB to use?">
-        <p>It depends on the use case.</p>
-        <ul>
+        <p className="mb-3">It depends on the use case. In general,</p>
+        <ul className="list-disc pl-5">
           <li>
             pgvector: when you already run Postgres and want SQL metadata filters plus vector
             search.
@@ -388,25 +396,45 @@ Codebook:
           <li>Weaviate: built-in vectorization and GraphRAG-style retrieval.</li>
           <li>Milvus: disaggregated compute/storage and scalability.</li>
         </ul>
-        <p>Things to consider when selecting a vector DB:</p>
-        <ol>
+
+        <h2 className="text-xl mt-7 mb-3">Things to consider when selecting a vector DB:</h2>
+        <ol className="list-decimal pl-5">
           <li>
-            Filtering support: filter by metadata to increase accuracy of retrieval of chunks. Each
-            chunk should store metadata, for example doc name, page number, and section header. When
-            the LLM gives a response, this helps us figure out which chunks were picked and helps us
+            Filtering support:<br/>
+            - Filter by metadata to increase accuracy of chunk retreival.<br/>
+            - Each chunk should store metadata, e.g. doc name, page number, section header.<br/>
+            - When the LLM gives a response, this helps us figure out which chunks were picked and helps us
             check accuracy.
           </li>
           <li>Hybrid search support.</li>
           <li>Support your existing stack, such as Postgres or SQL apps using pgvector.</li>
-          <li>Benchmark on your own data: how do you evaluate your RAG system?</li>
+          <li>Benchmark on your own data: Evaluate your RAG system and tweak it to get best results</li>
         </ol>
       </Section>
 
-      <Section title="Metadata filtering + search">
-        <p>Example user query: &quot;Can employee 001 take 10 days paid leave?&quot;</p>
-        <p>Employee data is in SQL DB. HR leave policy is in documents we ingest inside RAG.</p>
+      <Section title="Metadata filtering + Search">
+        <p>e.g. user query: <span className="text-ring">Can employee 007 take 10 days leave?</span></p>
+        <p className="my-3">Employee data is in SQL DB. HR leave policy is in documents we ingest inside RAG.</p>
         <MetadataSearchDiagram />
-        <p>Online step: run a SQL query to get employee data.</p>
+
+        <p className="my-5">
+          <h2 className="text-xl mt-7 mb-3">Offline step</h2>
+          Store employee metadata along with each chunk in the vector DB.</p>
+        <CodeBlock>{`{
+  "id": "chunk-01",
+  "text": "Contract employees in India get 20 paid leaves per year",
+  "embedding": [0.12, -0.44, 0.91, 0.75, 0.53],
+  "metadata": {
+    "doc_type": "policy",
+    "policy_type": "leave",
+    "country": "India",
+    "emp_type": "contract"
+  }
+}`}</CodeBlock>
+
+        <p className="my-5">
+        <h2 className="text-xl mt-7 mb-3">Online step</h2>
+        Run a SQL query to get employee data.</p>
         <CodeBlock>{`select employee_id, country, employment_type, status, available_leave_balance
 from emp_leave_table
 where emp_id = '001';
@@ -419,31 +447,27 @@ Result JSON:
   "status": "active",
   "avail_leave_bal": "10 days"
 }`}</CodeBlock>
-        <p>Offline step: store employee metadata along with each chunk in the vector DB.</p>
-        <CodeBlock>{`{
-  "id": "chunk-01",
-  "text": "Contract employees in India get 20 paid leaves per year",
-  "embedding": [0.12, -0.44, 0.91, 0.75, 0.53],
-  "metadata": {
-    "doc_type": "policy",
-    "policy_type": "leave",
-    "country": "India",
-    "emp_type": "contract"
-  }
-}`}</CodeBlock>
-        <p>
-          Search process: use employee data as filters on chunk metadata, tell the vector DB to
-          search only chunks where metadata matches the employee data, then send the SQL data,
-          retrieved chunks, and user query to the LLM.
+
+        <p className="my-5">
+          <h2 className="text-xl mt-7 mb-3">Search process</h2>
+          <p className="mb-3">e.g. user query: <span className="text-ring">Can employee 007 take 10 days leave?</span></p>
+          <ol className="list-decimal pl-5">
+            <li>Hit SQL DB to get employee details: id, country, emp_type, avail_leave_bal</li>
+            <li>
+              Use this data as filter on chunk metadata. Tell vector DB to search only chunks where metadata value = emp data
+            </li>
+            <li>Send data from steps 1 & 2 along with user query vector to LLM</li>
+          </ol>
         </p>
         <CodeBlock>{`Search only chunks where:
+emp_id = "007"
 policy_type = "leave"
 country = "India"
 emp_type = "contract"
 
 Faster search because fewer chunks are searched.`}</CodeBlock>
       </Section>
-
+{/* 
       <Section title="Takeaways">
         <ul>
           <li>A vector DB stores embeddings, original chunks, and metadata.</li>
@@ -452,7 +476,7 @@ Faster search because fewer chunks are searched.`}</CodeBlock>
           <li>Vector indexes trade a little accuracy for much lower latency and compute.</li>
           <li>HNSW is popular because it balances speed and accuracy using layered graphs.</li>
         </ul>
-      </Section>
+      </Section> */}
     </article>
   );
 }
@@ -682,51 +706,48 @@ function HnswSimilarityGraph() {
 
 function IvfClusterDiagram() {
   return (
-    <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
+    <div>
       <div className="grid gap-4 md:grid-cols-3">
         <Callout title="Cluster 1">
           Paid leave
           <br />
           Sick leave
           <br />
-          Centroid C1
+          <span className="text-ring">Centroid C1</span>
         </Callout>
         <Callout title="Cluster 2">
           Laptop reimbursement
           <br />
           Travel reimbursement
           <br />
-          Centroid C2
+          <span className="text-ring">Centroid C2</span>
         </Callout>
         <Callout title="Cluster 3">
           Hardware request
           <br />
-          Centroid C3
+          <span className="text-ring">Centroid C3</span>
         </Callout>
       </div>
-      <p className="mt-5 text-sm text-muted-foreground">
-        IVF first chooses the nearest centroid, then searches inside nearby clusters.
-      </p>
     </div>
   );
 }
 
 function IvfStorageDiagram() {
   return (
-    <div className="not-prose rounded-3xl border border-border bg-card p-6">
+    <div>
       <div className="grid gap-4 md:grid-cols-3">
         <FlowBox accent>
-          Centroid 1<br />
+          <div className="text-ring">Centroid 1:</div>
           Vector A<br />
           Vector B
         </FlowBox>
         <FlowBox accent>
-          Centroid 2<br />
+          <div className="text-ring">Centroid 2:</div>
           Vector C<br />
           Vector D
         </FlowBox>
         <FlowBox accent>
-          Centroid 3<br />
+          <div className="text-ring">Centroid 3:</div>
           Vector E
         </FlowBox>
       </div>
@@ -736,7 +757,7 @@ function IvfStorageDiagram() {
 
 function PqDiagram() {
   return (
-    <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
+    <div>
       <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
         <FlowBox>Large vector</FlowBox>
         <Arrow />
@@ -744,9 +765,6 @@ function PqDiagram() {
         <Arrow />
         <FlowBox accent>Store small codes</FlowBox>
       </div>
-      <p className="mt-5 text-sm text-muted-foreground">
-        PQ saves memory by replacing vector parts with compact codebook IDs.
-      </p>
     </div>
   );
 }
@@ -761,11 +779,11 @@ function MetadataSearchDiagram() {
         <Arrow />
         <FlowBox accent>Search fewer policy chunks</FlowBox>
       </div>
-      <div className="mt-6 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
+      {/* <div className="mt-6 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
         <FlowBox>Retrieved chunks + SQL facts + user query</FlowBox>
         <Arrow />
         <FlowBox accent>LLM answer</FlowBox>
-      </div>
+      </div> */}
     </div>
   );
 }
