@@ -229,40 +229,40 @@ G - Hiring process                 Layer 1`}</CodeBlock>
       </Section>
 
       <Section title="IVF: Inverted File Index">
-        <p>
-          Inverted File Index (IVF) groups similar vectors into buckets, or clusters, and then
-          searches only the clusters that are closest to the user query vector.
-        </p>
-        <p>IVF commonly uses the K-Means clustering algorithm.</p>
+        <ul className="list-disc pl-5 my-3">
+          <li>Inverted File Index (IVF) groups similar vectors into buckets, or clusters, and then
+          searches only within the clusters that are closest to the user query vector.</li>
+          <li>It uses the K-Means clustering algorithm</li>
+          <li>Suppose you have these document chunks:<br/>
+          (A) paid leave, (B) sick leave, (C) hardware request, (D) laptop
+          reimbursement and (E) travel reimbursement.</li>
+          <li>
+            If you ask to group them into K = 3 clusters:
+            <ol className="list-disc pl-5">
+              <li>Cluster 1: paid leave, sick leave</li>
+              <li>Cluster 2: laptop reimbursement, travel reimbursement</li>
+              <li>Cluster 3: hardware request</li>
+            </ol>
+          </li>
+          <li>
+            Each cluster has a centroid. A centroid is the numerical average of the group of vectors.<br/>
+            For example, if A = [1, 2] and B = [2, 2], then <br/>
+            Centroid C1 = [(1 + 2) / 2, (2 + 2) / 2] = [1.5, 2].
+          </li>
+        </ul>
         <IvfClusterDiagram />
-        <p>
-          Suppose you have these document chunks: paid leave, sick leave, hardware request, laptop
-          reimbursement, and travel reimbursement.
-        </p>
-        <p>If you ask to group them into K = 3 clusters:</p>
-        <ol>
-          <li>Cluster 1: paid leave, sick leave</li>
-          <li>Cluster 2: laptop reimbursement, travel reimbursement</li>
-          <li>Cluster 3: hardware request</li>
-        </ol>
-        <p>
-          Each cluster has a centroid. A centroid is the average of a group of vectors. For example,
-          if A = [1, 2] and B = [2, 2], then centroid = [(1 + 2) / 2, (2 + 2) / 2] = [1.5, 2].
-        </p>
-        <Callout title="nlist">The nlist parameter determines how many clusters to create.</Callout>
-      </Section>
 
-      <Section title="How IVF clusters are created">
-        <ol>
-          <li>Randomly select K vectors as centroids.</li>
+        <h2 className="text-xl mt-7 mb-3">How are clusters created?</h2>
+        <ol className="list-decimal pl-5">
+          <li>Say we decided to build K clusters. Then for each cluster, randomly select a vector as its centroid.</li>
           <li>
             Assign each remaining vector to the cluster whose centroid is closest to this vector.
           </li>
-          <li>Recalculate each centroid as the average of vectors in the cluster.</li>
-          <li>Reassign vectors to the nearest centroids.</li>
+          <li>Recalculate each centroid as the average of vectors within its cluster.</li>
+          <li>Reassign all vectors to the nearest centroids.</li>
           <li>Repeat until clusters stabilize.</li>
         </ol>
-        <p>
+        <p className="my-3">
           A centroid is an average number. It does not necessarily represent an actual chunk vector.
         </p>
         <CodeBlock>{`Example
@@ -275,67 +275,81 @@ G - Hiring process                 Layer 1`}</CodeBlock>
    C2 = [(8 + 6 + 7) / 3, (8 + 9 + 8) / 3] = [7, 8.33]
 4) Re-check if any chunks need to move to another cluster.
 5) If no chunks move, clusters are stabilized.`}</CodeBlock>
-      </Section>
 
-      <Section title="How vectors are stored inside IVF">
-        <p>Vectors are stored under the centroid, or cluster, they belong to.</p>
+        <h2 className="text-xl mt-7 mb-3">How vectors are stored inside IVF?</h2>
+        <p className="my-3">Vectors are stored in Inverted File Pattern</p>
         <IvfStorageDiagram />
-        <p>
-          During search, take the user query vector, find the nearest centroid, and then search
-          vectors within the cluster of the nearest centroid.
-        </p>
-        <CodeBlock>{`Step 1: user query vector vs C1 = 0.91 similarity
-        user query vector vs C2 = 0.35
-        user query vector vs C3 = 0.62
 
-Step 2: search closest clusters C1 and C3
-Inside Cluster 1:
-  user query vector vs chunk 1 = 0.94
-  user query vector vs chunk 2 = 0.72
-Inside Cluster 3:
-  user query vector vs chunk 3 = 0.88
+        <h2 className="text-xl mt-7 mb-3">Search</h2>
+        <ol className="list-decimal pl-5 mb-3">
+          <li>Take the user query vector (UQ)</li>
+          <li>Find the nearest centroid</li>
+          <li>Search vectors within the cluster of the nearest centroid.</li>
+        </ol>
+        <CodeBlock>{`Step 1:
+  UQ vector vs C1 = 0.91 similarity
+  UQ vector vs C2 = 0.35
+  UQ vector vs C3 = 0.62
 
-Response K = Top 2 = chunk 1 and chunk 3`}</CodeBlock>
-        <Callout title="nprobe">
-          nprobe determines how many closest clusters IVF will search in. Higher nprobe means higher
-          accuracy, but slower search.
-        </Callout>
-      </Section>
+Step 2:
+  Search within cluster of nearest centriods C1 and C3
 
-      <Section title="IVF risk: the right answer may be in another cluster">
-        <p>
+Step 3:
+  Inside Cluster 1:
+    UQ vector vs chunk 1 = 0.94
+    UQ vector vs chunk 2 = 0.72
+  Inside Cluster 3:
+    UQ vector vs chunk 3 = 0.88
+
+Response Top 2 closest: chunk 1 and chunk 3`}</CodeBlock>
+
+        <h2 className="text-xl mt-7 mb-3">IVF Parameters</h2>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Callout title="nlist">The nlist parameter determines how many clusters to create.</Callout>
+          <Callout title="nprobe">
+            nprobe determines how many closest clusters IVF will search in. Higher nprobe means higher
+            accuracy, but slower search.
+          </Callout>
+        </div>
+
+        <h2 className="text-xl mt-7 mb-3">Risk</h2>
+        <p className="mb-3">
           If a user query is not properly formed, or if the query vector is closer to C1 but the
           answer is in cluster C2, searching only C1 can miss the right chunk.
         </p>
-        <p>
-          Example user query: &quot;Engg dept needs 15 Apple MacBook Air with 15 GB RAM, 10 Apple
-          keyboards, 10 Apple mice. Will it fit budget of Q4?&quot;
+        <p className="mb-3">
+          e.g. user query: <span className="text-ring">Engineering deparment needs 30 Apple MacBook Air each with 10 GB RAM, 10 Apple
+          keyboards and 10 Apple mice. Will it fit budget of Q4?</span>
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           <Callout title="Cluster 1">
-            Chunk A: MacBook Air specs
+            <span className="text-ring">Centroid: C1</span>
+            <br/>
+            Chunk A: Apple MacBook Air specs
             <br />
             Chunk B: Apple laptop config
             <br />
             Chunk C: Apple accessories
-            <br />
-            Centroid: C1
           </Callout>
           <Callout title="Cluster 2">
-            Chunk E: Engg quarterly budget
+            <span className="text-ring">Centroid: C2</span>
+            <br/>
+            Chunk E: Engineering deparment budget
             <br />
             Chunk F: Procurement process
             <br />
             Chunk G: Financial approval process
-            <br />
-            Centroid: C2
           </Callout>
         </div>
-        <p>
-          Since the user query has a lot of Apple text, the query vector is closer to C1 than C2. If
-          you search only cluster 1 with nprobe = 1, you will not find the right answer chunk E of
+        <p className="mt-3">
+          - Closest Chunk: <span className="text-primary">Chunk E of Cluster 2</span><br/>
+          - But since the user query has a lot text relating to Apple, the query vector is closer to C1 than C2. If
+          you <span className="text-destructive">search only cluster 1</span> (with nprobe = 1), you will not find the right answer chunk E which is in
           cluster 2.
         </p>
+
+                
+
       </Section>
 
       <Section title="Product Quantization">
@@ -682,51 +696,48 @@ function HnswSimilarityGraph() {
 
 function IvfClusterDiagram() {
   return (
-    <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
+    <div>
       <div className="grid gap-4 md:grid-cols-3">
         <Callout title="Cluster 1">
           Paid leave
           <br />
           Sick leave
           <br />
-          Centroid C1
+          <span className="text-ring">Centroid C1</span>
         </Callout>
         <Callout title="Cluster 2">
           Laptop reimbursement
           <br />
           Travel reimbursement
           <br />
-          Centroid C2
+          <span className="text-ring">Centroid C2</span>
         </Callout>
         <Callout title="Cluster 3">
           Hardware request
           <br />
-          Centroid C3
+          <span className="text-ring">Centroid C3</span>
         </Callout>
       </div>
-      <p className="mt-5 text-sm text-muted-foreground">
-        IVF first chooses the nearest centroid, then searches inside nearby clusters.
-      </p>
     </div>
   );
 }
 
 function IvfStorageDiagram() {
   return (
-    <div className="not-prose rounded-3xl border border-border bg-card p-6">
+    <div>
       <div className="grid gap-4 md:grid-cols-3">
         <FlowBox accent>
-          Centroid 1<br />
+          <div className="text-ring">Centroid 1:</div>
           Vector A<br />
           Vector B
         </FlowBox>
         <FlowBox accent>
-          Centroid 2<br />
+          <div className="text-ring">Centroid 2:</div>
           Vector C<br />
           Vector D
         </FlowBox>
         <FlowBox accent>
-          Centroid 3<br />
+          <div className="text-ring">Centroid 3:</div>
           Vector E
         </FlowBox>
       </div>
