@@ -348,46 +348,40 @@ Response Top 2 closest: chunk 1 and chunk 3`}</CodeBlock>
           cluster 2.
         </p>
 
-                
-
       </Section>
 
       <Section title="Product Quantization">
-        <p>Product Quantization (PQ) is a vector compression technique.</p>
-        <p>
-          PQ compresses large vectors into smaller codes, so vector search becomes cheaper and
-          faster.
-        </p>
-        <p>
-          A common production stack is IVF + PQ. IVF narrows where you search, and PQ shrinks the
-          vectors.
-        </p>
+        <ul className="list-disc pl-5 my-3">
+          <li>Product Quantization (PQ) is a vector compression technique.</li>
+          <li>PQ compresses large vectors into smaller codes, so vector search becomes cheaper and faster.</li>
+          <li>A common production stack is IVF + PQ. IVF narrows where you search, and PQ shrinks the vectors.</li>
+        </ul>
+        
         <PqDiagram />
-        <p>
-          Floating point quantization converts floating point values into smaller integer values.
-        </p>
+        
+        <h2 className="text-xl mt-7 mb-3">Floating point quantization</h2>
+        <p className="mb-3">Converts floating point values into smaller integer values.</p>
         <CodeBlock>{`Vector = [0.12, -0.44, 2.37, 10.8, ..., 1.8, 0.19]
 Compressed vector = [0, 0, 2, 10, ..., 1, 0]`}</CodeBlock>
-        <p>Code quantization splits a vector into parts and replaces each part with a code.</p>
+        
+        <h2 className="text-xl mt-7 mb-3">Code quantization</h2>
+        <p className="mb-3">Splits a vector into parts and replaces each part with a code.</p>
         <CodeBlock>{`Vector = [0.12, -0.44, 0.87, 0.10, 0.55, -0.20]
+
 Split:
-  Part 1 = [0.12, -0.44] -> code 7
-  Part 2 = [0.87, 0.10]  -> code 2
-  Part 3 = [0.55, -0.20] -> code 13
+    Part 1 = [0.12, -0.44] -> code 7
+    Part 2 = [0.87, 0.10]  -> code 2
+    Part 3 = [0.55, -0.20] -> code 13
 Compressed representation = [7, 2, 13]
 
 Codebook:
   Id 7  = [0.12, -0.44]
   Id 2  = [0.87, 0.10]
   Id 13 = [0.55, -0.20]`}</CodeBlock>
-        <p>
-          Why use it? To save memory. For example, an original vector with 1536 dimensions has 1536
-          floating point numbers. If each float is 4 bytes, that is 1536 × 4 = 6144 bytes. With PQ,
-          m = 96 sub-vectors can reduce it to about 96 bytes.
-        </p>
+        <br/>
         <Callout title="Trade-off">
-          Memory goes down and search is faster, but accuracy can go down. PQ can be used with IVF
-          and HNSW.
+          - PQ saves memory by replacing vector parts with compact codebook IDs.<br/>
+          - Memory usage goes down and search is faster, but accuracy can go down.
         </Callout>
       </Section>
 
@@ -747,7 +741,7 @@ function IvfStorageDiagram() {
 
 function PqDiagram() {
   return (
-    <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
+    <div>
       <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
         <FlowBox>Large vector</FlowBox>
         <Arrow />
@@ -755,9 +749,6 @@ function PqDiagram() {
         <Arrow />
         <FlowBox accent>Store small codes</FlowBox>
       </div>
-      <p className="mt-5 text-sm text-muted-foreground">
-        PQ saves memory by replacing vector parts with compact codebook IDs.
-      </p>
     </div>
   );
 }
