@@ -69,7 +69,8 @@
 
   --border: oklch(0.9 0.01 85);
   --input: oklch(0.9 0.01 85);
-  --ring: oklch(44.456% 0.19466 266.298);
+  /* --ring: oklch(44.456% 0.19466 266.298); */
+  --ring: oklch(51.794% 0.22909 316.436);
 }
 
 .dark {
@@ -100,7 +101,8 @@
 
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.72 0.12 165);
+  /* --ring: oklch(0.72 0.12 165); */
+  --ring: oklch(61.172% 0.12585 314.11);
 }
 
 @layer base {

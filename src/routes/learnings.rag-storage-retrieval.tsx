@@ -50,7 +50,7 @@ function RagStorageRetrievalBlog() {
             Updated Jul 2026
           </span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="h-4 w-4" /> 18 min read
+            <Clock className="h-4 w-4" /> 15 min read
           </span>
           <span className="inline-flex items-center gap-1">
             <Sparkles className="h-4 w-4" /> Built from handwritten notes
@@ -59,7 +59,7 @@ function RagStorageRetrievalBlog() {
       </header>
 
       <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">Beginner mental model</h2>
+        <h2 className="text-2xl font-semibold text-primary-foreground">Mental Model</h2>
         <p className="mt-3 text-primary-foreground/85">
           A vector database in RAG is both storage for embeddings and a search engine for meaning.
           It stores document chunks as vectors, then finds the chunks whose vectors are closest to

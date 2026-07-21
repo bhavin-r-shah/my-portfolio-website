@@ -30,7 +30,7 @@ export const learnings: Learning[] = [
     summary:
       "A beginner-friendly guide to RAG vector databases, storage, similarity search, indexing, HNSW, and retrieval trade-offs.",
     category: "AI Engineering",
-    readingTime: "12 min",
+    readingTime: "15 min",
     updated: "Jul 2026",
     href: "/learnings/rag-storage-retrieval",
   },
@@ -40,7 +40,7 @@ export const learnings: Learning[] = [
     summary:
       "A beginner-friendly guide to RAG chunking strategies, metadata, embedding model trade-offs, parsers, and retrieval quality.",
     category: "AI Engineering",
-    readingTime: "13 min",
+    readingTime: "10 min",
     updated: "Jul 2026",
     href: "/learnings/rag-chunking-embedding",
   },
@@ -50,7 +50,7 @@ export const learnings: Learning[] = [
     summary:
       "RAG 101 & its architecture.",
     category: "AI Engineering",
-    readingTime: "10 min",
+    readingTime: "12 min",
     updated: "Jul 2026",
     href: "/learnings/rag-architecture",
   },
@@ -60,7 +60,7 @@ export const learnings: Learning[] = [
     summary:
       "Attention mechanism helps LLM understand the context of the text and help predict the next token.",
     category: "AI Engineering",
-    readingTime: "9 min",
+    readingTime: "5 min",
     updated: "Jul 2026",
     href: "/learnings/attention",
   },
@@ -70,7 +70,7 @@ export const learnings: Learning[] = [
     summary:
       "How is an LLM trained? How does it relate 2 concepts?",
     category: "AI Engineering",
-    readingTime: "11 min",
+    readingTime: "8 min",
     updated: "Jul 2026",
     href: "/learnings/embedding-training",
   },
@@ -80,7 +80,7 @@ export const learnings: Learning[] = [
     summary:
       "A beginner-friendly mental model for how LLMs generate responses, how tokens drive cost, and how to write effective prompts.",
     category: "AI Engineering",
-    readingTime: "7 min",
+    readingTime: "5 min",
     updated: "Jul 2026",
     href: "/learnings/llm-101",
   },
