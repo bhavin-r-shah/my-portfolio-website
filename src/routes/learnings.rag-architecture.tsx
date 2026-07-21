@@ -47,7 +47,7 @@ function RagArchitectureBlog() {
             Updated Jul 2026
           </span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="h-4 w-4" /> 10 min read
+            <Clock className="h-4 w-4" /> 12 min read
           </span>
           <span className="inline-flex items-center gap-1">
             <Sparkles className="h-4 w-4" /> Built from handwritten notes
@@ -269,10 +269,10 @@ function ArchitectureDiagram() {
   return (
     <div className="not-prose overflow-hidden rounded-3xl border border-border bg-secondary/40 p-5 sm:p-6">
       <div className="mb-6 text-center">
-        <p className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
+        <p className="font-mono text-sm uppercase tracking-[0.3em] text-ring">
           Offline Indexing + Online Retrieval
         </p>
-        <h3 className="mt-2 text-xl font-semibold text-foreground">Basic RAG Architecture</h3>
+        {/* <h3 className="mt-2 text-xl font-semibold text-foreground">Basic RAG Architecture</h3> */}
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:items-start">
@@ -327,24 +327,24 @@ function ArchitectureDiagram() {
         </DiagramBoundary>
 
         <div className="hidden h-full items-center justify-center xl:flex">
-          <ArrowRight className="h-12 w-12 text-accent" strokeWidth={2.5} />
+          <ArrowRight className="h-12 w-12 text-ring" strokeWidth={2.5} />
         </div>
 
-        <DiagramBoundary title="Online" caption="Run when the user asks a question" accent>
+        <DiagramBoundary title="Online" caption="Runs when the user asks a question" accent>
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center">
             <DiagramStep number={5} title="User Query" caption="Embed query with the same model">
               <div className="rounded-xl border border-border bg-background p-4 text-center font-semibold text-foreground">
                 “What is the leave policy?”
               </div>
               <div className="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
-                <ArrowDown className="h-8 w-8 text-accent mb-3" /> Query vector
+                <ArrowDown className="h-8 w-8 text-ring mb-3" /> Query vector
               </div>
               <VectorCard bars={["w-10", "w-14", "w-8"]} label="Embedded query" />
             </DiagramStep>
 
             <div className="flex items-center justify-center">
               <ArrowRight
-                className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
+                className="h-10 w-10 rotate-90 text-ring lg:rotate-0"
                 strokeWidth={2.5}
               />
             </div>
@@ -373,7 +373,7 @@ function ArchitectureDiagram() {
 
             <div className="flex flex-col items-center justify-center gap-2 text-sm font-medium text-muted-foreground">
               <ArrowRight
-                className="h-10 w-10 rotate-90 text-accent lg:rotate-0"
+                className="h-10 w-10 rotate-90 text-ring lg:rotate-0"
                 strokeWidth={2.5}
               />
               {/* <span className="text-center">User query</span>
@@ -423,7 +423,7 @@ function DiagramBoundary({
       }
     >
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">{title}</p>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-ring">{title}</p>
         <h4 className="mt-1 text-lg font-semibold text-foreground">{caption}</h4>
       </div>
       {children}
@@ -467,7 +467,7 @@ function DiagramStep({
 function DiagramArrowLabel({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-background/80 px-4 py-3 text-sm text-muted-foreground">
-      <ArrowDown className="h-9 w-9 shrink-0 text-accent" strokeWidth={2.5} />
+      <ArrowDown className="h-9 w-9 shrink-0 text-ring" strokeWidth={2.5} />
       <span className="min-w-0 break-words">{label}</span>
     </div>
   );

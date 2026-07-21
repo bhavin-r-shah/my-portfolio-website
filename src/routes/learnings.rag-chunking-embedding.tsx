@@ -41,7 +41,7 @@ function RagChunkingEmbeddingBlog() {
             Updated Jul 2026
           </span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="h-4 w-4" /> 13 min read
+            <Clock className="h-4 w-4" /> 10 min read
           </span>
           <span className="inline-flex items-center gap-1">
             <Sparkles className="h-4 w-4" /> Built from handwritten notes

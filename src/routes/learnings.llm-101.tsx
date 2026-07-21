@@ -64,7 +64,7 @@ function Llm101Blog() {
         </p> */}
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
           <span className="rounded-full bg-primary/10 px-3 py-1 font-mono text-primary">Updated Jul 2026</span>
-          <span className="inline-flex items-center gap-1"><Clock className="h-4 w-4" /> 7 min read</span>
+          <span className="inline-flex items-center gap-1"><Clock className="h-4 w-4" /> 5 min read</span>
           <span className="inline-flex items-center gap-1"><Sparkles className="h-4 w-4" /> Built from handwritten notes</span>
         </div>
       </header>

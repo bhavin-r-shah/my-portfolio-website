@@ -50,7 +50,7 @@ function RagStorageRetrievalBlog() {
             Updated Jul 2026
           </span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="h-4 w-4" /> 18 min read
+            <Clock className="h-4 w-4" /> 15 min read
           </span>
           <span className="inline-flex items-center gap-1">
             <Sparkles className="h-4 w-4" /> Built from handwritten notes
@@ -58,27 +58,18 @@ function RagStorageRetrievalBlog() {
         </div>
       </header>
 
-      <section className="mt-12 rounded-3xl bg-primary p-8 text-primary-foreground">
-        <h2 className="text-2xl font-semibold text-primary-foreground">Beginner mental model</h2>
+      <section className="mt-7 rounded-3xl bg-primary p-5 text-primary-foreground">
+        <h2 className="text-2xl font-semibold text-primary-foreground">Mental Model</h2>
         <p className="mt-3 text-primary-foreground/85">
-          A vector database in RAG is both storage for embeddings and a search engine for meaning.
+          A vector database in RAG is both: a storage for embeddings & a search engine.
           It stores document chunks as vectors, then finds the chunks whose vectors are closest to
           the user query vector.
         </p>
       </section>
 
-      <Section title="Vector DB">
-        <p>Examples of vector databases include Pinecone, pgvector, and Chroma DB.</p>
-        <p>
-          Vector DB in RAG = store embeddings + search engine. The vector DB stores chunks as
-          embeddings and then finds chunks whose vectors are closest to the user query&apos;s
-          vector.
-        </p>
-      </Section>
-
       <Section title="RAG has 2 flows">
         <div className="grid gap-5 lg:grid-cols-2">
-          <Callout title="Offline: ingest">
+          <Callout title="Offline: Build knowledge base">
             Document → chunks → embeddings → store embedding vector + chunk + metadata in vector DB.
           </Callout>
           <Callout title="Online: when user asks query">
@@ -87,11 +78,23 @@ function RagStorageRetrievalBlog() {
             closest chunk vectors to LLM → LLM answers.
           </Callout>
         </div>
-        <StorageFlowDiagram />
+        {/* <StorageFlowDiagram /> */}
       </Section>
 
-      <Section title="What a vector DB stores">
-        <p>Vector DB stores: 1) vector, 2) original text chunk, and 3) metadata.</p>
+      <Section title="Vector DB">
+        <ul className="list-disc pl-5 mb-3">
+          <li>Vector DB in RAG = Store Embeddings + Search Engine</li>
+          <li>Examples of vector databases include Pinecone, pgvector, Chroma DB.</li>
+          <li>Real models can have 384, 768, 1536, or 3072 dimensions. So each chunk embedding can become a large number of vectors.</li>
+          <li>Vector DB stores:
+            <ul className="list-disc pl-5"> 
+              <li>Vector</li>
+              <li>Original text chunk</li>
+              <li>Metadata (Your app decides the metadata. For example, if you store HR data, you may add metadata as
+            policy-name: &quot;Leave&quot; and policy-type: &quot;HR&quot;.)</li>
+            </ul>
+          </li>
+        </ul>
         <CodeBlock>{`{
   "id": "employee-handbook-001",
   "embedding": [0.12, -0.44, 0.93, ..., 0.7, 0.19],
@@ -103,98 +106,87 @@ function RagStorageRetrievalBlog() {
     "chunk-index": 1
   }
 }`}</CodeBlock>
-        <p>
-          Real models can have 384, 768, 1536, or 3072 dimensions. That means each chunk becomes a
-          long list of numbers, and there can be a large number of possible vectors.
-        </p>
-        <p>
-          Your app decides the metadata. For example, if you store HR data, you may add metadata as
-          policy-name: &quot;Leave&quot; and policy-type: &quot;HR&quot;.
-        </p>
       </Section>
 
-      <Section title="How does vector DB search / compare user query vector?">
-        <p>
-          Search closest vectors. The vector DB compares the user query vector with chunk vectors
-          using similarity search, commonly cosine similarity.
+      <Section title="Search closest vectors">
+        <p className="my-3">
+          The vector DB compares the user query vector with chunk vectors
+          using cosine similarity.
         </p>
         <SimilarityDiagram />
       </Section>
 
       <Section title="Brute-force search">
-        <p>
-          For every user query, brute force compares the user query vector with each chunk vector.
-          Brute-force search works well if there are few chunks, say 100 or 1,000. But in production
-          you mostly will have a lot more: 10,000, 1 lakh, or millions of chunks.
-        </p>
-        <Callout title="Trade-off">Brute force is accurate but slow.</Callout>
+        <ul className="list-disc pl-5">
+          <li>For every user query, compare the user query vector with each chunk vector.</li>
+          <li>Brute-force search works well if there are few chunks, say 100 or 1,000. But in production
+          you mostly will have a lot more: 10,000, 1 lakh, or millions of chunks.</li>
+          <li><span className="text-accent">Trade-Off:</span> Brute force is accurate but slow.</li>
+        </ul>
       </Section>
 
       <Section title="Indexing">
-        <p>
-          Vector indexing, like a SQL index, helps avoid scanning every record or chunk in the DB. A
-          vector index does nearest-neighbor search.
-        </p>
-        <p>Types of vector indexes:</p>
-        <ol>
-          <li>HNSW (Hierarchical Navigable Small World)</li>
-          <li>IVF (Inverted File)</li>
-          <li>Product Quantization (PQ)</li>
-          <li>IVF-PQ</li>
-        </ol>
-        <p>
-          Results after using these indexing methods may not be as accurate as brute force, but we
-          accept approximate results so that we save latency and compute. This is approximate
-          nearest neighbor search.
-        </p>
+        <ul className="list-disc pl-5">
+          <li>Vector indexing, like a SQL index, helps avoid scanning every record or chunk in the DB.</li>
+          <li>A vector index does approximate nearest-neighbor search. Results after using these indexing methods may not be as accurate as brute force, but we
+          accept approximate results so that we save latency and compute.</li>
+          <li>
+            Types of vector indexes:
+            <ol className="list-decimal pl-5">
+              <li>HNSW (Hierarchical Navigable Small World)</li>
+              <li>IVF (Inverted File)</li>
+              <li>Product Quantization (PQ)</li>
+              <li>IVF-PQ</li>
+            </ol>
+          </li>
+        </ul>
       </Section>
 
       <Section title="HNSW: Hierarchical Navigable Small World">
-        <p>HNSW is used in production where speed and accuracy are important.</p>
-        <p>
-          It is an indexing technique that finds nearest vectors quickly without comparing the user
-          query vector with every stored chunk vector.
-        </p>
-        <p>
-          HNSW creates a multi-layer graph where each vector is a node and each node is connected to
-          nearby vectors, meaning semantically close vectors, using cosine similarity.
-        </p>
+        <ul className="list-disc pl-5 my-3">
+          <li>It is an indexing technique that finds nearest vectors quickly without comparing the user
+          query vector with every stored chunk vector.</li>
+          <li>HNSW is used in production where speed and accuracy are important.</li>
+        </ul>
+
+        <h2 className="text-xl mt-5">Hierarchical Graph Creation</h2>
+        <ul className="list-disc pl-5 my-3">
+          <li>HNSW creates a multi-layer graph where each vector is a node and each node is connected to
+          nearby vectors (semantically close vectors) using cosine similarity.</li>
+          <li>Search begins at a random node, then moves to the neighbor of that node that is closest to the
+          user query vector, then to neighbors of that neighbor, and so on.</li>
+        </ul>
         <HnswLayerDiagram />
-      </Section>
 
-      <Section title="How HNSW search moves through layers">
-        <p>
-          Search begins at a node, then moves to the neighbor of that node that is closest to the
-          user query vector, then to neighbors of that neighbor, and so on.
-        </p>
-        <p>
-          HNSW creates multiple graph layers. For example: layer 2 has few nodes, layer 1 has some
-          more nodes, and layer 0 has all nodes. Search starts at the top layer and moves down to
-          layer 0, coming closer and closer to nearby, similar vectors.
-        </p>
+        <h2 className="text-xl mt-5">How HNSW search moves through layers?</h2>
+        <ul className="list-disc pl-5 my-3">
+          <li>Search starts at a random node in the top layer (Layer 2 above). Find top layer node which is nearest to the user query vector.</li>
+          <li>Then find its nearest neigbour (node) in the layer below (Layer 1 above)</li>
+          <li>And so on ... moving down to layer 0, thus coming closer and closer to nearby, similar vectors.</li>
+        </ul>
         <HnswSearchDiagram />
+
+        <h2 className="text-xl mt-5">Who goes in the top layer?</h2>
+        <ul className="list-disc pl-5 my-3">
+          <li>Ideally the vector that is semantically the root should be on top.</li>
+          <li>But with millions of
+          nodes, this would be costly because each time we store a new vector, the root and its
+          subtree may change. Also, it is not necessary that there is a clear winner i.e. a vector that
+          is semantically root of all other vectors.</li>
+          <li>So, HNSW randomly assigns a level to each node. Every node is always in level 0. Only some
+          nodes randomly get level &gt; 0.</li>
+        </ul>
+                <CodeBlock>{`Sample Nodes:
+
+A - paid leave policy              Layer 0
+B - sick leave policy              Layer 1
+C - laptop reimbursement policy    Layer 1
+D - travel reimbursement policy    Layer 0
+E - Accounting policy              Layer 2
+F - HR policy                      Layer 2
+G - Hiring process                 Layer 1`}</CodeBlock>
       </Section>
 
-      <Section title="Who goes in the top layer?">
-        <p>
-          Ideally the vector that is semantically the root should be on top. But with millions of
-          nodes, this would be costly because each time we store a new vector, the root and its
-          subtree may change. Also, it is not necessary that there is a clear winner, a vector that
-          is semantically root of all other vectors.
-        </p>
-        <p>
-          So, HNSW randomly assigns a level to each node. Every node is always in level 0. Only some
-          nodes randomly get level &gt; 0.
-        </p>
-        <CodeBlock>{`Nodes:
-A - paid leave policy              L0
-B - sick leave policy              L1
-C - laptop reimbursement policy    L1
-D - travel reimbursement policy    L0
-E - Accounting policy              L2
-F - HR policy                      L2
-G - Hiring process                 L1`}</CodeBlock>
-      </Section>
 
       <Section title="Why edges connect similar nodes">
         <p>
@@ -559,14 +551,14 @@ function HnswLayerDiagram() {
   return (
     <div className="not-prose rounded-3xl border border-border bg-secondary/40 p-6">
       <div className="space-y-4">
-        <GraphLayer label="L2" nodes={["F", "E"]} accent />
-        <GraphLayer label="L1" nodes={["F", "B", "G", "E", "C"]} />
-        <GraphLayer label="L0" nodes={["F", "A", "B", "G", "E", "C", "D"]} />
+        <GraphLayer label="Layer 2: Few nodes" nodes={["F", "E"]} accent />
+        <GraphLayer label="Layer 1: Some nodes" nodes={["F", "B", "G", "E", "C"]} />
+        <GraphLayer label="Layer 0: All nodes" nodes={["F", "A", "B", "G", "E", "C", "D"]} />
       </div>
-      <p className="mt-5 text-sm text-muted-foreground">
+      {/* <p className="mt-5 text-sm text-muted-foreground">
         Top layers have fewer entry points. Lower layers contain more nodes, with L0 containing all
         nodes.
-      </p>
+      </p> */}
     </div>
   );
 }
@@ -694,9 +686,9 @@ function GraphLayer({
   accent?: boolean;
 }) {
   return (
-    <div className="grid grid-cols-[3rem_1fr] items-center gap-3">
+    <div className="grid grid-cols-[10rem_1fr] items-center gap-3">
       <span className="font-mono text-sm font-semibold text-primary">{label}</span>
-      <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-border bg-background p-3">
+      <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-background p-3">
         {nodes.map((node, index) => (
           <span key={`${label}-${node}-${index}`} className="inline-flex items-center gap-2">
             <span
@@ -708,7 +700,7 @@ function GraphLayer({
             >
               {node}
             </span>
-            {index < nodes.length - 1 ? <span className="text-muted-foreground">—</span> : null}
+            {/* {index < nodes.length - 1 ? <span className="text-muted-foreground">—</span> : null} */}
           </span>
         ))}
       </div>

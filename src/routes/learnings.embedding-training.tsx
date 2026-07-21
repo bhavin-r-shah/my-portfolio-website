@@ -70,7 +70,7 @@ function EmbeddingTrainingBlog() {
             Updated Jul 2026
           </span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="h-4 w-4" /> 11 min read
+            <Clock className="h-4 w-4" /> 8 min read
           </span>
           <span className="inline-flex items-center gap-1">
             <Sparkles className="h-4 w-4" /> Built from handwritten notes
@@ -166,7 +166,7 @@ function EmbeddingTrainingBlog() {
             <li>I love chocolate shake</li>
           </ol>
           <p className="mt-3">
-            If we only compare English words <span className="text-destructive">without meaning</span>, sentences “The car won't start” and “My automobile
+            If we only compare English words <span className="text-ring">without meaning</span>, sentences “The car won't start” and “My automobile
             broke down” do not repeat any words, so plain word comparison will say they are not
             similar. This is why embedding is needed: <span className="text-primary">embedding tells the LLM that both sentences are
             similar meaning and should have close vectors and high cosine similarity.</span>
@@ -343,28 +343,28 @@ function EmbeddingSpaceDiagram() {
       >
         <defs>
           <marker id="axisArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L9,3 z" className="fill-primary" />
+            <path d="M0,0 L0,6 L9,3 z" className="fill-foreground" />
           </marker>
         </defs>
         <path
           d="M80 260 L470 260"
-          className="fill-none stroke-primary stroke-2"
+          className="fill-none stroke-foreground stroke-2"
           markerEnd="url(#axisArrow)"
         />
         <path
           d="M80 260 L80 45"
-          className="fill-none stroke-primary stroke-2"
+          className="fill-none stroke-foreground stroke-2"
           markerEnd="url(#axisArrow)"
         />
-        <text x="350" y="292" className="fill-muted-foreground text-[14px]">
+        <text x="350" y="292" className="fill-ring text-[14px]">
           vehicle-like →
         </text>
-        <text x="0" y="80" className="fill-muted-foreground text-[14px]">
+        <text x="0" y="80" className="fill-accent text-[14px]">
           fruit-like ↑
         </text>
         {[
-          { x: 450, y: 235, label: "Car", color: "fill-primary" },
-          { x: 325, y: 232, label: "Automobile", color: "fill-primary" },
+          { x: 450, y: 235, label: "Car", color: "fill-ring" },
+          { x: 325, y: 232, label: "Automobile", color: "fill-ring" },
           { x: 120, y: 65, label: "Banana", color: "fill-accent" },
           { x: 300, y: 150, label: "Yellow vehicle", color: "fill-accent" },
         ].map((point) => (
