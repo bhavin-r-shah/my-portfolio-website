@@ -176,68 +176,54 @@ function RagStorageRetrievalBlog() {
           <li>So, HNSW randomly assigns a level to each node. Every node is always in level 0. Only some
           nodes randomly get level &gt; 0.</li>
         </ul>
-                <CodeBlock>{`Sample Nodes:
+
+        <h2 className="text-xl my-5">Example Graph</h2>
+        <CodeBlock>{`Sample Nodes:
 
 A - paid leave policy              Layer 0
 B - sick leave policy              Layer 1
 C - laptop reimbursement policy    Layer 1
 D - travel reimbursement policy    Layer 0
-E - Accounting policy              Layer 2
-F - HR policy                      Layer 2
+E - Accounting department          Layer 2
+F - HR department                  Layer 2
 G - Hiring process                 Layer 1`}</CodeBlock>
-      </Section>
 
+      <HnswSimilarityGraph />
 
-      <Section title="Why edges connect similar nodes">
-        <p>
-          At layer 2, F and E may represent HR and Accounting. They are more semantically related
-          departments, so an edge can connect F and E. At layer 1, F and B are semantically closer,
-          so connect F and B. E and C connect, but B and E are not semantically close, so no edge.
-        </p>
-        <p>
-          Sometimes F and E are not semantically that close, but HNSW bridges them to connect two
-          distinct subgraphs, like a highway between states.
-        </p>
-        <HnswSimilarityGraph />
-      </Section>
-
-      <Section title="Example search">
-        <p>User query: &quot;How many leaves can I take?&quot;</p>
-        <ol>
-          <li>Start search at L2. The user query vector is closer to F.</li>
-          <li>Go down the tree of F node to its neighbors. Compare with B and G.</li>
-          <li>At L1, the user query vector is closer to B.</li>
-          <li>Go down the tree of B to its neighbors.</li>
-          <li>At L0, compare with A. The user query vector is closest to A.</li>
+        <h2 className="text-xl mt-5 mb-3">Example Search</h2>
+        <p>User query: <span className="text-ring">How many paid leaves can I take?</span></p>
+        <ol className="my-3 list-decimal pl-5">
+          <li>Layer 2: Start search. Compare user query vector with E & F.  The user query vector is semantically <span className="text-ring">closer to node F</span>.</li>
+          <li>Layer 1: Go to the sub-tree of node F to reach its neighbors. Compare with neighbours B and G. The user query vector is semantically <span className="text-ring">closer to node B</span>.</li>
+          <li>Layer 0: Go to the sub-tree of node B to reach its neighbors. Compare with neighbour <span className="text-ring">node A which is semantically closest</span> to the user query vector.</li>
+          <li>Return Top K = 3 <span className="text-ring">closest nodes: A, B & F</span>.</li>
         </ol>
-        <p>Top K = 3 returns nodes A, B, F.</p>
-      </Section>
 
-      <Section title="HNSW implementation notes">
-        <p>To implement HNSW, data structures like skip lists or Delaunay graphs are used.</p>
+        <h2 className="text-xl mt-5 mb-3">Implementation</h2>
+        <p className="mb-3">To implement HNSW, data structures like skip lists or Delaunay graphs are used.</p>
         <div className="grid gap-4 md:grid-cols-2">
           <Callout title="Pros">Good speed and accuracy. Faster than IVF.</Callout>
           <Callout title="Cons">Memory heavy. The entire tree is in RAM.</Callout>
         </div>
-      </Section>
 
-      <Section title="Important HNSW parameters">
+        <h2 className="text-xl mt-5 mb-3">HSNW Parameters</h2>
         <div className="grid gap-4 lg:grid-cols-3">
           <Callout title="M">
-            Max number of neighbor connections per node. Example: M = 16 means 16 edges between
-            nodes. Higher M means better accuracy because there are more connections, but indexing
+            - Max number of neighbor connections per node. e.g. M = 16 means a node can have an edge to max 16 other nodes.<br/>
+            - Higher M means better accuracy because there are more connections, but indexing
             is slower and memory usage is higher.
           </Callout>
           <Callout title="efConstruction">
-            When inserting a new vector while making the graph, HNSW searches the graph and finds
-            candidate neighbors to connect this node to. efConstruction controls how many candidates
-            it searches for. Higher efConstruction means better graph quality, deeper connections,
-            better accuracy, slower indexing, and higher CPU usage.
+            - When inserting a new vector during graph construction, HNSW searches the graph and finds
+            candidate neighbors to connect this node to.<br/>
+            - efConstruction controls how many candidates it searches for.<br/>
+            - Higher efConstruction means better graph quality, deeper connections,
+            better accuracy but slower indexing & higher CPU usage.
           </Callout>
           <Callout title="efSearch">
-            At query time, HNSW walks the graph and keeps a candidate list of similar vector chunks.
-            efSearch controls how many candidate nodes it explores before returning results. Higher
-            efSearch means deeper search, better accuracy, slower response, and higher CPU usage.
+            - At query time, HNSW walks the graph and keeps a candidate list of similar vector chunks.<br/>
+            - efSearch controls how many candidate nodes it explores before returning results.<br/>
+            - Higher efSearch means deeper search, better accuracy but slower response & higher CPU usage.
           </Callout>
         </div>
       </Section>
@@ -580,9 +566,9 @@ function HnswSearchDiagram() {
           <Database className="mx-auto mb-2 h-5 w-5" /> Return top K chunks
         </FlowBox>
       </div>
-      <div className="mt-6 rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-4 text-sm text-muted-foreground">
+      {/* <div className="mt-6 rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-4 text-sm text-muted-foreground">
         Example path: L2 chooses F → L1 chooses B → L0 reaches A → top K returns A, B, F.
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -674,9 +660,21 @@ function HnswSimilarityGraph() {
           </g>
         ))}
       </svg>
-      <figcaption className="mt-3 text-center text-sm text-muted-foreground">
-        Nearby nodes connect within each layer; the dashed F–E link keeps the two semantic
-        neighborhoods navigable.
+      <figcaption className="mt-3 text-sm text-muted-foreground">
+        <p className="mb-3">Layer 2:</p>
+        <ul className="list-disc pl-5">
+          <li> Nodes F (HR) & E (Accounting) are both departments but semantically not close. HSNW bridges them to connect two
+          distinct subgraphs.</li>
+        </ul>
+        <p className="mt-5 mb-3">Layer 1:</p>
+        <ul className="list-disc pl-5">
+          <li>Node F (HR) is connected to sematically similar nodes: B (sick leave policy) & G (Hiring Process). But B & G are not connected since they are not semantically close.</li>
+          <li>Node E (Accounting) is connected to semantically similar node C (laptop reimbursement policy).</li>
+        </ul>
+        <p className="mt-5 mb-3">Layer 0:</p>
+        <ul className="list-disc pl-5">
+          <li>Has all nodes. Semantically similar nodes are connected.</li>
+        </ul>
       </figcaption>
     </figure>
   );
