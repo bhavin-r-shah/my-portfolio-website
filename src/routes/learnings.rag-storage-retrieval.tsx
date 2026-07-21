@@ -386,8 +386,8 @@ Codebook:
       </Section>
 
       <Section title="Which vector DB to use?">
-        <p>It depends on the use case.</p>
-        <ul>
+        <p className="mb-3">It depends on the use case. In general,</p>
+        <ul className="list-disc pl-5">
           <li>
             pgvector: when you already run Postgres and want SQL metadata filters plus vector
             search.
@@ -396,25 +396,45 @@ Codebook:
           <li>Weaviate: built-in vectorization and GraphRAG-style retrieval.</li>
           <li>Milvus: disaggregated compute/storage and scalability.</li>
         </ul>
-        <p>Things to consider when selecting a vector DB:</p>
-        <ol>
+
+        <h2 className="text-xl mt-7 mb-3">Things to consider when selecting a vector DB:</h2>
+        <ol className="list-decimal pl-5">
           <li>
-            Filtering support: filter by metadata to increase accuracy of retrieval of chunks. Each
-            chunk should store metadata, for example doc name, page number, and section header. When
-            the LLM gives a response, this helps us figure out which chunks were picked and helps us
+            Filtering support:<br/>
+            - Filter by metadata to increase accuracy of chunk retreival.<br/>
+            - Each chunk should store metadata, e.g. doc name, page number, section header.<br/>
+            - When the LLM gives a response, this helps us figure out which chunks were picked and helps us
             check accuracy.
           </li>
           <li>Hybrid search support.</li>
           <li>Support your existing stack, such as Postgres or SQL apps using pgvector.</li>
-          <li>Benchmark on your own data: how do you evaluate your RAG system?</li>
+          <li>Benchmark on your own data: Evaluate your RAG system and tweak it to get best results</li>
         </ol>
       </Section>
 
-      <Section title="Metadata filtering + search">
-        <p>Example user query: &quot;Can employee 001 take 10 days paid leave?&quot;</p>
-        <p>Employee data is in SQL DB. HR leave policy is in documents we ingest inside RAG.</p>
+      <Section title="Metadata filtering + Search">
+        <p>e.g. user query: <span className="text-ring">Can employee 007 take 10 days leave?</span></p>
+        <p className="my-3">Employee data is in SQL DB. HR leave policy is in documents we ingest inside RAG.</p>
         <MetadataSearchDiagram />
-        <p>Online step: run a SQL query to get employee data.</p>
+
+        <p className="my-5">
+          <h2 className="text-xl mt-7 mb-3">Offline step</h2>
+          Store employee metadata along with each chunk in the vector DB.</p>
+        <CodeBlock>{`{
+  "id": "chunk-01",
+  "text": "Contract employees in India get 20 paid leaves per year",
+  "embedding": [0.12, -0.44, 0.91, 0.75, 0.53],
+  "metadata": {
+    "doc_type": "policy",
+    "policy_type": "leave",
+    "country": "India",
+    "emp_type": "contract"
+  }
+}`}</CodeBlock>
+
+        <p className="my-5">
+        <h2 className="text-xl mt-7 mb-3">Online step</h2>
+        Run a SQL query to get employee data.</p>
         <CodeBlock>{`select employee_id, country, employment_type, status, available_leave_balance
 from emp_leave_table
 where emp_id = '001';
@@ -427,31 +447,27 @@ Result JSON:
   "status": "active",
   "avail_leave_bal": "10 days"
 }`}</CodeBlock>
-        <p>Offline step: store employee metadata along with each chunk in the vector DB.</p>
-        <CodeBlock>{`{
-  "id": "chunk-01",
-  "text": "Contract employees in India get 20 paid leaves per year",
-  "embedding": [0.12, -0.44, 0.91, 0.75, 0.53],
-  "metadata": {
-    "doc_type": "policy",
-    "policy_type": "leave",
-    "country": "India",
-    "emp_type": "contract"
-  }
-}`}</CodeBlock>
-        <p>
-          Search process: use employee data as filters on chunk metadata, tell the vector DB to
-          search only chunks where metadata matches the employee data, then send the SQL data,
-          retrieved chunks, and user query to the LLM.
+
+        <p className="my-5">
+          <h2 className="text-xl mt-7 mb-3">Search process</h2>
+          <p className="mb-3">e.g. user query: <span className="text-ring">Can employee 007 take 10 days leave?</span></p>
+          <ol className="list-decimal pl-5">
+            <li>Hit SQL DB to get employee details: id, country, emp_type, avail_leave_bal</li>
+            <li>
+              Use this data as filter on chunk metadata. Tell vector DB to search only chunks where metadata value = emp data
+            </li>
+            <li>Send data from steps 1 & 2 along with user query vector to LLM</li>
+          </ol>
         </p>
         <CodeBlock>{`Search only chunks where:
+emp_id = "007"
 policy_type = "leave"
 country = "India"
 emp_type = "contract"
 
 Faster search because fewer chunks are searched.`}</CodeBlock>
       </Section>
-
+{/* 
       <Section title="Takeaways">
         <ul>
           <li>A vector DB stores embeddings, original chunks, and metadata.</li>
@@ -460,7 +476,7 @@ Faster search because fewer chunks are searched.`}</CodeBlock>
           <li>Vector indexes trade a little accuracy for much lower latency and compute.</li>
           <li>HNSW is popular because it balances speed and accuracy using layered graphs.</li>
         </ul>
-      </Section>
+      </Section> */}
     </article>
   );
 }
@@ -763,11 +779,11 @@ function MetadataSearchDiagram() {
         <Arrow />
         <FlowBox accent>Search fewer policy chunks</FlowBox>
       </div>
-      <div className="mt-6 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
+      {/* <div className="mt-6 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
         <FlowBox>Retrieved chunks + SQL facts + user query</FlowBox>
         <Arrow />
         <FlowBox accent>LLM answer</FlowBox>
-      </div>
+      </div> */}
     </div>
   );
 }
