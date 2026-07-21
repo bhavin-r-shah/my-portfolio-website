@@ -198,6 +198,7 @@ G - Hiring process                 Layer 1`}</CodeBlock>
           Sometimes F and E are not semantically that close, but HNSW bridges them to connect two
           distinct subgraphs, like a highway between states.
         </p>
+        <HnswSimilarityGraph />
       </Section>
 
       <Section title="Example search">
@@ -583,6 +584,101 @@ function HnswSearchDiagram() {
         Example path: L2 chooses F → L1 chooses B → L0 reaches A → top K returns A, B, F.
       </div>
     </div>
+  );
+}
+
+function HnswSimilarityGraph() {
+  const nodes = [
+    { id: "l2-f", label: "F", x: 185, y: 55 },
+    { id: "l2-e", label: "E", x: 615, y: 55 },
+    { id: "l1-f", label: "F", x: 120, y: 170 },
+    { id: "l1-b", label: "B", x: 230, y: 170 },
+    { id: "l1-g", label: "G", x: 340, y: 170 },
+    { id: "l1-e", label: "E", x: 560, y: 170 },
+    { id: "l1-c", label: "C", x: 670, y: 170 },
+    { id: "l0-f", label: "F", x: 85, y: 285 },
+    { id: "l0-a", label: "A", x: 180, y: 285 },
+    { id: "l0-b", label: "B", x: 275, y: 285 },
+    { id: "l0-g", label: "G", x: 370, y: 285 },
+    { id: "l0-e", label: "E", x: 500, y: 285 },
+    { id: "l0-c", label: "C", x: 595, y: 285 },
+    { id: "l0-d", label: "D", x: 690, y: 285 },
+  ];
+
+  return (
+    <figure className="not-prose mt-6 overflow-hidden rounded-3xl border border-border bg-card p-4 sm:p-6">
+      <svg
+        viewBox="0 0 760 350"
+        role="img"
+        aria-labelledby="hnsw-similarity-title hnsw-similarity-description"
+        className="h-auto w-full"
+      >
+        <title id="hnsw-similarity-title">HNSW edges across three graph layers</title>
+        <desc id="hnsw-similarity-description">
+          Similar HR nodes form a connected group on the left, while similar Accounting nodes form
+          another group on the right. An edge between F and E at layer two bridges the groups.
+        </desc>
+
+        <g className="fill-muted-foreground font-mono text-[13px] font-semibold">
+          <text x="8" y="60">
+            L2
+          </text>
+          <text x="8" y="175">
+            L1
+          </text>
+          <text x="8" y="290">
+            L0
+          </text>
+        </g>
+
+        <g className="stroke-border" strokeWidth="2">
+          <line x1="45" y1="105" x2="735" y2="105" />
+          <line x1="45" y1="220" x2="735" y2="220" />
+        </g>
+
+        <g className="fill-none stroke-primary/45" strokeWidth="3" strokeLinecap="round">
+          <path d="M185 55 L615 55" />
+          <path d="M120 170 L230 170 L340 170" />
+          <path d="M560 170 L670 170" />
+          <path d="M85 285 L180 285 L275 285 L370 285" />
+          <path d="M500 285 L595 285 L690 285" />
+          <path d="M185 55 L120 170 M185 55 L230 170 M185 55 L340 170" />
+          <path d="M615 55 L560 170 M615 55 L670 170" />
+          <path d="M120 170 L85 285 M230 170 L180 285 M230 170 L275 285" />
+          <path d="M340 170 L370 285 M560 170 L500 285 M670 170 L595 285 M670 170 L690 285" />
+          <path d="M85 285 Q225 345 370 285 M500 285 Q595 345 690 285" />
+        </g>
+
+        <path
+          d="M210 46 Q400 4 590 46"
+          className="fill-none stroke-accent"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeDasharray="9 8"
+        />
+        <text x="400" y="22" textAnchor="middle" className="fill-accent text-[12px] font-semibold">
+          bridge between subgraphs
+        </text>
+
+        {nodes.map((node) => (
+          <g key={node.id} transform={`translate(${node.x} ${node.y})`}>
+            <circle r="23" className="fill-background stroke-primary" strokeWidth="3" />
+            <text
+              y="1"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="fill-primary text-[16px] font-bold"
+            >
+              {node.label}
+            </text>
+          </g>
+        ))}
+      </svg>
+      <figcaption className="mt-3 text-center text-sm text-muted-foreground">
+        Nearby nodes connect within each layer; the dashed F–E link keeps the two semantic
+        neighborhoods navigable.
+      </figcaption>
+    </figure>
   );
 }
 
