@@ -45,7 +45,7 @@ const timeline = [
 function ExperiencePage() {
   return (
     <div className="container-page my-10">
-      <h1 className="display-serif max-w-3xl text-5xl sm:text-6xl">Experience</h1>
+      <h1 className="display-serif max-w-3xl text-[2rem] sm:text-[2.5rem]">Experience</h1>
       <p className="mt-5 text-muted-foreground">
         Projects I've led or contributed to across HPE, Nimble Storage, Intuit, IBM and Accenture.
       </p>
@@ -105,7 +105,7 @@ function ExperiencePage() {
                       "linear-gradient(135deg, color-mix(in oklab, var(--primary) 20%, var(--card)), color-mix(in oklab, var(--accent) 15%, var(--card)))",
                   }}
                 >
-                  <span className="display-serif text-7xl italic text-foreground/70">
+                  <span className="display-serif text-[3.9375rem] italic text-foreground/70">
                     {p.title
                       .split(" ")
                       .map((w) => w[0])

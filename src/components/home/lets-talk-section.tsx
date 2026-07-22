@@ -16,7 +16,7 @@ export function LetsTalkSection() {
           }}
         >
           <p className="eyebrow">Let's talk</p>
-          <h2 className="display-serif mt-3 max-w-3xl text-4xl sm:text-5xl">
+          <h2 className="display-serif mt-3 max-w-3xl text-[1.5rem] sm:text-[2rem]">
             Interested in working together?
           </h2>
           <p className="mt-4 max-w-xl text-muted-foreground">

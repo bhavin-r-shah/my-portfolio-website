@@ -16,7 +16,7 @@ export function TestimonialsSection() {
     <>
       {/* TESTIMONIALS */}
       <section className="container-page my-10">
-        <h2 className="display-serif mt-2 text-4xl sm:text-5xl">Testimonials</h2>
+        <h2 className="display-serif mt-2 text-[1.5rem] sm:text-[2rem]">Testimonials</h2>
         <Carousel
           opts={{ align: "start" }}
           className="mt-10"
@@ -29,7 +29,7 @@ export function TestimonialsSection() {
                   <div className="flex flex-1 flex-col border-b border-border">
                     <blockquote
                       id={`recommendation-${index}`}
-                      className={`display-serif whitespace-pre-line text-xl leading-snug text-foreground ${
+                      className={`display-serif whitespace-pre-line text-[1.09375rem] leading-snug text-foreground ${
                         expandedTestimonials[t.name] ? "" : "line-clamp-5"
                       }`}
                     >

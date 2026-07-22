@@ -11,7 +11,7 @@ export function FeaturedWorkSection() {
       <section className="container-page my-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="display-serif mt-2 text-4xl sm:text-5xl">Professional Projects</h2>
+            <h2 className="display-serif mt-2 text-[1.5rem] sm:text-[2rem]">Professional Projects</h2>
           </div>
           <Link
             to="/experience"
@@ -37,7 +37,7 @@ export function FeaturedWorkSection() {
                 }}
               >
                 <div className="grid h-full place-items-center">
-                  <span className="display-serif text-6xl italic text-foreground/70">
+                  <span className="display-serif text-[3.28125rem] italic text-foreground/70">
                     {p.title
                       .split(" ")
                       .map((w) => w[0])

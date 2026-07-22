@@ -23,7 +23,7 @@ function ContactPage() {
     <div className="container-page my-20">
       <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start">
         <div>
-          <h1 className="display-serif text-5xl sm:text-6xl">
+          <h1 className="display-serif text-[2rem] sm:text-[2.5rem]">
             Interested in working together?
           </h1>
 
