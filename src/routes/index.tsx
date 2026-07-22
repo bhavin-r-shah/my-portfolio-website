@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/home/hero-section";
 import { LetsTalkSection } from "@/components/home/lets-talk-section";
 import { SkillsSection } from "@/components/home/skills-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
+import { BlogSection } from "@/components/home/blog-section";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -29,6 +30,7 @@ function Home() {
       <CoreStrengths />
       <SkillsSection />
       <FeaturedWorkSection />
+      <BlogSection />
       <TestimonialsSection />
       {/* About Me section intentionally commented out. */}
       <LetsTalkSection />

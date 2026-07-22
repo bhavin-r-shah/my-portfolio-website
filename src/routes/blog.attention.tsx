@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Clock, ExternalLink, Sparkles } from "lucide-react";
 
-export const Route = createFileRoute("/learnings/attention")({
+export const Route = createFileRoute("/blog/attention")({
   component: AttentionBlog,
   head: () => ({
     meta: [
@@ -18,9 +18,9 @@ export const Route = createFileRoute("/learnings/attention")({
         content:
           "A practical learning blog from handwritten notes explaining how attention helps LLMs decide which tokens matter.",
       },
-      { property: "og:url", content: "/learnings/attention" },
+      { property: "og:url", content: "/blog/attention" },
     ],
-    links: [{ rel: "canonical", href: "/learnings/attention" }],
+    links: [{ rel: "canonical", href: "/blog/attention" }],
   }),
 });
 
@@ -41,8 +41,8 @@ const attentionRows = [
 function AttentionBlog() {
   return (
     <article className="container-page my-10 sm:my-14">
-      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
-        <ArrowLeft className="h-4 w-4" /> Back to learnings
+      <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-accent">
+        <ArrowLeft className="h-4 w-4" /> Back to blog
       </Link>
 
       <header className="mt-8 max-w-4xl">

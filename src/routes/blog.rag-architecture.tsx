@@ -10,7 +10,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const Route = createFileRoute("/learnings/rag-architecture")({
+export const Route = createFileRoute("/blog/rag-architecture")({
   component: RagArchitectureBlog,
   head: () => ({
     meta: [
@@ -26,17 +26,17 @@ export const Route = createFileRoute("/learnings/rag-architecture")({
         content:
           "Handwritten RAG notes converted into a clear beginner blog with architecture diagrams.",
       },
-      { property: "og:url", content: "/learnings/rag-architecture" },
+      { property: "og:url", content: "/blog/rag-architecture" },
     ],
-    links: [{ rel: "canonical", href: "/learnings/rag-architecture" }],
+    links: [{ rel: "canonical", href: "/blog/rag-architecture" }],
   }),
 });
 
 function RagArchitectureBlog() {
   return (
     <article className="container-page my-10 sm:my-14">
-      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
-        <ArrowLeft className="h-4 w-4" /> Back to learnings
+      <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-accent">
+        <ArrowLeft className="h-4 w-4" /> Back to blog
       </Link>
 
       <header className="mt-8 max-w-4xl">

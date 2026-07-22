@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowDown, ArrowLeft, ArrowRight, Clock, Database, Sparkles } from "lucide-react";
 
-export const Route = createFileRoute("/learnings/rag-chunking-embedding")({
+export const Route = createFileRoute("/blog/rag-chunking-embedding")({
   component: RagChunkingEmbeddingBlog,
   head: () => ({
     meta: [
@@ -18,17 +18,17 @@ export const Route = createFileRoute("/learnings/rag-chunking-embedding")({
         content:
           "Handwritten RAG chunking and embedding notes converted into a clear beginner blog with diagrams.",
       },
-      { property: "og:url", content: "/learnings/rag-chunking-embedding" },
+      { property: "og:url", content: "/blog/rag-chunking-embedding" },
     ],
-    links: [{ rel: "canonical", href: "/learnings/rag-chunking-embedding" }],
+    links: [{ rel: "canonical", href: "/blog/rag-chunking-embedding" }],
   }),
 });
 
 function RagChunkingEmbeddingBlog() {
   return (
     <article className="container-page my-10 sm:my-14">
-      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
-        <ArrowLeft className="h-4 w-4" /> Back to learnings
+      <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-accent">
+        <ArrowLeft className="h-4 w-4" /> Back to blog
       </Link>
 
       <header className="mt-8 max-w-4xl">
