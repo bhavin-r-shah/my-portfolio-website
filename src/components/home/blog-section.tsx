@@ -9,16 +9,16 @@ export function BlogSection() {
     <section className="container-page my-10" aria-labelledby="blog-heading">
       <div className="flex items-end justify-between gap-6">
         <div>
-          <p className="eyebrow">Notes &amp; ideas</p>
+          {/* <p className="eyebrow">Notes &amp; ideas</p> */}
           <h2 id="blog-heading" className="display-serif mt-2 text-[1.4rem] sm:text-[1.8rem]">
-            From the blog
+            My Learnings
           </h2>
         </div>
         <Link
           to="/blog"
           className="hidden items-center gap-1 text-lg text-muted-foreground hover:text-foreground sm:inline-flex"
         >
-          All posts <ArrowRight className="h-4 w-4" />
+          All blog posts <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
 

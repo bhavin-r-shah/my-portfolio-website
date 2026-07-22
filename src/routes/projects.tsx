@@ -32,7 +32,7 @@ function ProjectsPage() {
   ];
 
   return (
-    <div className="container-page py-20">
+    <div className="container-page my-10">
       <p className="eyebrow inline-flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Coming soon
       </p>
