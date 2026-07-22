@@ -66,7 +66,7 @@ function AboutPage() {
 
         <div>
           <p className="eyebrow">About</p>
-          <h1 className="display-serif mt-3 text-5xl sm:text-6xl">
+          <h1 className="display-serif mt-3 text-[2.625rem] sm:text-[3.28125rem]">
             Fifteen years of turning ambiguity into shipped software.
           </h1>
           <div className="mt-6 space-y-5 text-base leading-relaxed text-foreground/90">

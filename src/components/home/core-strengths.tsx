@@ -42,7 +42,7 @@ export function CoreStrengths() {
       <section className="container-page mt-5 mb-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="display-serif text-4xl sm:text-5xl">Core Strengths</h2>
+            <h2 className="display-serif text-[1.96875rem] sm:text-[2.625rem]">Core Strengths</h2>
           </div>
         </div>
         <div className="grid grid-cols-1 mt-5 overflow-hidden rounded-2xl border border-border bg-border/60 shadow-sm lg:grid-cols-10 lg:gap-px">
@@ -65,7 +65,7 @@ export function CoreStrengths() {
               </div>
               <div>
                 <p
-                  className={`display-serif leading-snug text-foreground items-start ${italic ? "text-lg italic" : sub ? "text-2xl italic" : "text-xl"}`}
+                  className={`display-serif leading-snug text-foreground items-start ${italic ? "text-[0.984375rem] italic" : sub ? "text-[1.3125rem] italic" : "text-[1.09375rem]"}`}
                 >
                   {value}
                   {emphasis && (

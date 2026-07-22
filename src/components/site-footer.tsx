@@ -13,7 +13,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-surface/60">
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="display-serif text-3xl">Bhavin Shah</p>
+          <p className="display-serif text-[1.640625rem]">Bhavin Shah</p>
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
             Technical Product Leader & Staff Software Engineer. Bridging product and engineering
             across cloud-native, full-stack systems.

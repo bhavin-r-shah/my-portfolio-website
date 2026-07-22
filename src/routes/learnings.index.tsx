@@ -33,7 +33,7 @@ function LearningsIndexPage() {
     <div className="container-page my-10">
       <div className="mt-3 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
-          <h2 className="display-serif text-4xl sm:text-5xl">My Learnings</h2>
+          <h2 className="display-serif text-[1.96875rem] sm:text-[2.625rem]">My Learnings</h2>
           <p className="mt-5 max-w-2xl text-muted-foreground">
             Documenting the concepts I am learning and translating my hand written notes into crisp
             mental models illutrated with diagrams and implementation handy nuances.
