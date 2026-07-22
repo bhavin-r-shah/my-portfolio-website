@@ -1,21 +1,21 @@
-export type LearningCategory =
+export type BlogCategory =
   | "AI Engineering"
   | "React / Frontend"
   | "DSA Patterns"
   | "Sustainable Web"
   | "System Design Basics";
 
-export interface Learning {
+export interface BlogPost {
   slug: string;
   title: string;
   summary: string;
-  category: LearningCategory;
+  category: BlogCategory;
   readingTime: string;
   updated: string;
   href: string;
 }
 
-export const categories: LearningCategory[] = [
+export const categories: BlogCategory[] = [
   "AI Engineering",
   // "React / Frontend",
   // "DSA Patterns",
@@ -23,7 +23,7 @@ export const categories: LearningCategory[] = [
   // "System Design Basics",
 ];
 
-export const learnings: Learning[] = [
+export const blogPosts: BlogPost[] = [
   {
     slug: "rag-storage-retrieval",
     title: "RAG: Storage & Retrieval",
@@ -32,7 +32,7 @@ export const learnings: Learning[] = [
     category: "AI Engineering",
     readingTime: "15 min",
     updated: "Jul 2026",
-    href: "/learnings/rag-storage-retrieval",
+    href: "/blog/rag-storage-retrieval",
   },
   {
     slug: "rag-chunking-embedding",
@@ -42,17 +42,16 @@ export const learnings: Learning[] = [
     category: "AI Engineering",
     readingTime: "10 min",
     updated: "Jul 2026",
-    href: "/learnings/rag-chunking-embedding",
+    href: "/blog/rag-chunking-embedding",
   },
   {
     slug: "rag-architecture",
     title: "RAG: Architecture",
-    summary:
-      "RAG 101 & its architecture.",
+    summary: "RAG 101 & its architecture.",
     category: "AI Engineering",
     readingTime: "12 min",
     updated: "Jul 2026",
-    href: "/learnings/rag-architecture",
+    href: "/blog/rag-architecture",
   },
   {
     slug: "attention",
@@ -62,17 +61,16 @@ export const learnings: Learning[] = [
     category: "AI Engineering",
     readingTime: "5 min",
     updated: "Jul 2026",
-    href: "/learnings/attention",
+    href: "/blog/attention",
   },
   {
     slug: "embedding-training",
     title: "Embedding & Training",
-    summary:
-      "How is an LLM trained? How does it relate 2 concepts?",
+    summary: "How is an LLM trained? How does it relate 2 concepts?",
     category: "AI Engineering",
     readingTime: "8 min",
     updated: "Jul 2026",
-    href: "/learnings/embedding-training",
+    href: "/blog/embedding-training",
   },
   {
     slug: "llm-101",
@@ -82,7 +80,7 @@ export const learnings: Learning[] = [
     category: "AI Engineering",
     readingTime: "5 min",
     updated: "Jul 2026",
-    href: "/learnings/llm-101",
+    href: "/blog/llm-101",
   },
   // {
   //   slug: "shipping-with-copilot",
@@ -92,7 +90,7 @@ export const learnings: Learning[] = [
   //   category: "AI Engineering",
   //   readingTime: "6 min",
   //   updated: "May 2026",
-  //   href: "/learnings/shipping-with-copilot",
+  //   href: "/blog/shipping-with-copilot",
   // },
   // {
   //   slug: "prompting-for-code-review",
@@ -102,7 +100,7 @@ export const learnings: Learning[] = [
   //   category: "AI Engineering",
   //   readingTime: "7 min",
   //   updated: "Apr 2026",
-  //   href: "/learnings/prompting-for-code-review",
+  //   href: "/blog/prompting-for-code-review",
   // },
   // {
   //   slug: "react-suspense-loaders",
@@ -112,7 +110,7 @@ export const learnings: Learning[] = [
   //   category: "React / Frontend",
   //   readingTime: "8 min",
   //   updated: "Mar 2026",
-  //   href: "/learnings/react-suspense-loaders",
+  //   href: "/blog/react-suspense-loaders",
   // },
   // {
   //   slug: "design-tokens-tailwind-v4",
@@ -122,7 +120,7 @@ export const learnings: Learning[] = [
   //   category: "React / Frontend",
   //   readingTime: "5 min",
   //   updated: "Feb 2026",
-  //   href: "/learnings/design-tokens-tailwind-v4",
+  //   href: "/blog/design-tokens-tailwind-v4",
   // },
   // {
   //   slug: "sliding-window-cheatsheet",
@@ -132,7 +130,7 @@ export const learnings: Learning[] = [
   //   category: "DSA Patterns",
   //   readingTime: "9 min",
   //   updated: "Jan 2026",
-  //   href: "/learnings/sliding-window-cheatsheet",
+  //   href: "/blog/sliding-window-cheatsheet",
   // },
   // {
   //   slug: "graph-bfs-templates",
@@ -142,7 +140,7 @@ export const learnings: Learning[] = [
   //   category: "DSA Patterns",
   //   readingTime: "6 min",
   //   updated: "Dec 2025",
-  //   href: "/learnings/graph-bfs-templates",
+  //   href: "/blog/graph-bfs-templates",
   // },
   // {
   //   slug: "green-frontend-checklist",
@@ -152,7 +150,7 @@ export const learnings: Learning[] = [
   //   category: "Sustainable Web",
   //   readingTime: "10 min",
   //   updated: "Nov 2025",
-  //   href: "/learnings/green-frontend-checklist",
+  //   href: "/blog/green-frontend-checklist",
   // },
   // {
   //   slug: "system-design-primer-101",
@@ -162,7 +160,7 @@ export const learnings: Learning[] = [
   //   category: "System Design Basics",
   //   readingTime: "12 min",
   //   updated: "Oct 2025",
-  //   href: "/learnings/system-design-primer-101",
+  //   href: "/blog/system-design-primer-101",
   // },
   // {
   //   slug: "caching-layers",
@@ -172,6 +170,6 @@ export const learnings: Learning[] = [
   //   category: "System Design Basics",
   //   readingTime: "8 min",
   //   updated: "Sep 2025",
-  //   href: "/learnings/caching-layers",
+  //   href: "/blog/caching-layers",
   // },
 ];

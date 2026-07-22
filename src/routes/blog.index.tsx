@@ -1,42 +1,42 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Clock, ArrowRight } from "lucide-react";
-import { learnings, categories, type LearningCategory } from "@/lib/learnings-data";
+import { blogPosts, categories, type BlogCategory } from "@/lib/blog-data";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/learnings/")({
-  component: LearningsIndexPage,
+export const Route = createFileRoute("/blog/")({
+  component: BlogIndexPage,
   head: () => ({
     meta: [
-      { title: "AI Learnings & Engineering Notes — Bhavin Shah" },
+      { title: "AI Engineering Blog — Bhavin Shah" },
       {
         name: "description",
         content:
-          "Practical AI engineering learnings, including LLM fundamentals, prompts, tokens, context windows, and production patterns.",
+          "Practical AI engineering articles about LLM fundamentals, RAG, embeddings, and production patterns.",
       },
-      { property: "og:title", content: "AI Learnings & Engineering Notes — Bhavin Shah" },
+      { property: "og:title", content: "AI Engineering Blog — Bhavin Shah" },
       {
         property: "og:description",
         content: "A public learning journal on AI engineering and software craftsmanship.",
       },
-      { property: "og:url", content: "/learnings" },
+      { property: "og:url", content: "/blog" },
     ],
-    links: [{ rel: "canonical", href: "/learnings" }],
+    links: [{ rel: "canonical", href: "/blog" }],
   }),
 });
 
-function LearningsIndexPage() {
-  const [active, setActive] = useState<LearningCategory | "All">("All");
-  const filtered = active === "All" ? learnings : learnings.filter((n) => n.category === active);
+function BlogIndexPage() {
+  const [active, setActive] = useState<BlogCategory | "All">("All");
+  const filtered = active === "All" ? blogPosts : blogPosts.filter((n) => n.category === active);
 
   return (
     <div className="container-page my-10">
       <div className="mt-3 grid gap-6 lg:grid-cols-[2fr_1fr] lg:items-end">
         <div>
-          <h2 className="display-serif text-[1.4rem] sm:text-[1.8rem]">My Learnings</h2>
+          <h1 className="display-serif text-[1.4rem] sm:text-[1.8rem]">Blog</h1>
           <p className="mt-5 text-muted-foreground">
-            Documenting the concepts I am learning and translating my hand written notes into crisp
-            mental models illutrated with diagrams and implementation handy nuances.
+            Practical notes on AI engineering, translated into crisp mental models with diagrams and
+            implementation details.
           </p>
         </div>
         {/* <div className="card-surface bg-primary/5 p-5">
@@ -46,7 +46,7 @@ function LearningsIndexPage() {
             A beginner-friendly walkthrough from my handwritten AI engineering notes.
           </p>
           <Link
-            to="/learnings/llm-101"
+            to="/blog/llm-101"
             className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             Read the blog <ArrowRight className="h-4 w-4" />

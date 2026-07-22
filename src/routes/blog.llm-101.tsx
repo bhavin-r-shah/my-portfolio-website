@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Clock, Sparkles } from "lucide-react";
 
-export const Route = createFileRoute("/learnings/llm-101")({
+export const Route = createFileRoute("/blog/llm-101")({
   component: Llm101Blog,
   head: () => ({
     meta: [
@@ -18,9 +18,9 @@ export const Route = createFileRoute("/learnings/llm-101")({
         content:
           "Beginner-friendly AI engineering notes with diagrams for LLM response generation and context windows.",
       },
-      { property: "og:url", content: "/learnings/llm-101" },
+      { property: "og:url", content: "/blog/llm-101" },
     ],
-    links: [{ rel: "canonical", href: "/learnings/llm-101" }],
+    links: [{ rel: "canonical", href: "/blog/llm-101" }],
   }),
 });
 
@@ -46,8 +46,8 @@ function Llm101Blog() {
   return (
     <article className="container-page my-10 sm:my-14">
       {/* Back Link */}
-      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
-        <ArrowLeft className="h-4 w-4" /> Back to learnings
+      <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-accent">
+        <ArrowLeft className="h-4 w-4" /> Back to blog
       </Link>
 
       {/* Header */}

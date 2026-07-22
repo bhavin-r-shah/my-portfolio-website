@@ -11,7 +11,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const Route = createFileRoute("/learnings/rag-storage-retrieval")({
+export const Route = createFileRoute("/blog/rag-storage-retrieval")({
   component: RagStorageRetrievalBlog,
   head: () => ({
     meta: [
@@ -27,17 +27,17 @@ export const Route = createFileRoute("/learnings/rag-storage-retrieval")({
         content:
           "Handwritten RAG storage and retrieval notes converted into a clear beginner blog with diagrams.",
       },
-      { property: "og:url", content: "/learnings/rag-storage-retrieval" },
+      { property: "og:url", content: "/blog/rag-storage-retrieval" },
     ],
-    links: [{ rel: "canonical", href: "/learnings/rag-storage-retrieval" }],
+    links: [{ rel: "canonical", href: "/blog/rag-storage-retrieval" }],
   }),
 });
 
 function RagStorageRetrievalBlog() {
   return (
     <article className="container-page my-10 sm:my-14">
-      <Link to="/learnings" className="inline-flex items-center gap-2 text-sm text-accent">
-        <ArrowLeft className="h-4 w-4" /> Back to learnings
+      <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-accent">
+        <ArrowLeft className="h-4 w-4" /> Back to blog
       </Link>
 
       <header className="mt-8 max-w-4xl">
