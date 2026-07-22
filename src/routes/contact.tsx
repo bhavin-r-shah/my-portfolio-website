@@ -23,7 +23,7 @@ function ContactPage() {
     <div className="container-page my-20">
       <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:items-start">
         <div>
-          <h1 className="display-serif text-[2rem] sm:text-[2.5rem]">
+          <h1 className="display-serif text-[1.4rem] sm:text-[1.8rem]">
             Interested in working together?
           </h1>
 
@@ -80,7 +80,7 @@ function ContactPage() {
               <MapPin className="mt-0.5 h-4 w-4 text-primary" />
               <div>
                 <p className="font-medium">Mumbai, India</p>
-                <p className="text-muted-foreground">Open to remote, hybrid, or relocation.</p>
+                <p className="text-accent">Open to remote, hybrid, or relocation.</p>
               </div>
             </li>
             <li className="flex items-start gap-3">

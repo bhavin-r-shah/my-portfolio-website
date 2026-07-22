@@ -33,7 +33,8 @@ export function HeroSection() {
         <span className="italic text-primary">product strategy</span> and{" "}
         <span className="italic text-accent">resilient engineering.</span>
       </h1> */}
-            <h1 className="display-serif mt-6 whitespace-nowrap text-[clamp(0.875rem,2.25vw,1.75rem)]">
+
+            <h1 className="display-serif mt-6 text-[1.4rem] sm:text-[1.8rem]">
               <span className="italic text-primary">Product-Minded.</span>{" "}
               <span className="italic text-accent">Engineering-Native</span>
             </h1>
