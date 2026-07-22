@@ -53,8 +53,8 @@ function Llm101Blog() {
       {/* Header */}
       <header className="mt-8 max-w-4xl">
         <p className="eyebrow">AI Engineering / LLM 101</p>
-        <h1 className="display-serif mt-3 text-[1.8rem] sm:text-[2.4rem] text-primary">
-          {/* <h2 className="display-serif text-[1.8rem] sm:text-[2.4rem]"></h2> */}
+        <h1 className="display-serif mt-3 text-[1.5rem] sm:text-[2rem] text-primary">
+          {/* <h2 className="display-serif text-[1.5rem] sm:text-[2rem]"></h2> */}
           LLM 101: prompts, tokens and context windows
         </h1>
         {/* <p className="mt-6 max-w-3xl text-lg text-muted-foreground">

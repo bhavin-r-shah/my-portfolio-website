@@ -11,7 +11,7 @@ export function FeaturedWorkSection() {
       <section className="container-page my-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="display-serif mt-2 text-[1.8rem] sm:text-[2.4rem]">Professional Projects</h2>
+            <h2 className="display-serif mt-2 text-[1.5rem] sm:text-[2rem]">Professional Projects</h2>
           </div>
           <Link
             to="/experience"

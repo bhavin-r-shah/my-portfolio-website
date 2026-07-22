@@ -42,7 +42,7 @@ export function CoreStrengths() {
       <section className="container-page mt-5 mb-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="display-serif text-[1.8rem] sm:text-[2.4rem]">Core Strengths</h2>
+            <h2 className="display-serif text-[1.5rem] sm:text-[2rem]">Core Strengths</h2>
           </div>
         </div>
         <div className="grid grid-cols-1 mt-5 overflow-hidden rounded-2xl border border-border bg-border/60 shadow-sm lg:grid-cols-10 lg:gap-px">
