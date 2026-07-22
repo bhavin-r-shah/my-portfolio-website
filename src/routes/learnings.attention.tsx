@@ -47,7 +47,7 @@ function AttentionBlog() {
 
       <header className="mt-8 max-w-4xl">
         <p className="eyebrow">AI Engineering / Attention</p>
-        <h1 className="display-serif mt-3 text-[1.5rem] text-primary sm:text-[2rem]">Attention</h1>
+        <h1 className="display-serif mt-3 text-[1.4rem] sm:text-[1.8rem] text-primary">Attention</h1>
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
           <span className="rounded-full bg-primary/10 px-3 py-1 font-mono text-primary">
             Updated Jul 2026

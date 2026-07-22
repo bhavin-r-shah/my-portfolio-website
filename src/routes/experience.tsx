@@ -45,7 +45,7 @@ const timeline = [
 function ExperiencePage() {
   return (
     <div className="container-page my-10">
-      <h1 className="display-serif max-w-3xl text-[2rem] sm:text-[2.5rem]">Experience</h1>
+      <h1 className="display-serif max-w-3xl text-[1.4rem] sm:text-[1.8rem]">Experience</h1>
       <p className="mt-5 text-muted-foreground">
         Projects I've led or contributed to across HPE, Nimble Storage, Intuit, IBM and Accenture.
       </p>

@@ -9,14 +9,14 @@ export function LetsTalkSection() {
       {/* FINAL CTA */}
       <section className="container-page my-20">
         <div
-          className="card-surface relative overflow-hidden p-8 sm:p-14"
+          className="card-surface relative overflow-hidden p-6 sm:p-10"
           style={{
             background:
               "linear-gradient(135deg, color-mix(in oklab, var(--primary) 10%, var(--card)), var(--card))",
           }}
         >
           <p className="eyebrow">Let's talk</p>
-          <h2 className="display-serif mt-3 max-w-3xl text-[1.5rem] sm:text-[2rem]">
+          <h2 className="display-serif mt-3 max-w-3xl text-[1.4rem] sm:text-[1.8rem]">
             Interested in working together?
           </h2>
           <p className="mt-4 max-w-xl text-muted-foreground">

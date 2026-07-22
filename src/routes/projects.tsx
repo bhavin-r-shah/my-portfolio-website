@@ -36,10 +36,10 @@ function ProjectsPage() {
       <p className="eyebrow inline-flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Coming soon
       </p>
-      <h1 className="display-serif mt-3 max-w-3xl text-[2rem] sm:text-[2.5rem]">
+      <h1 className="display-serif mt-3 text-[1.4rem] sm:text-[1.8rem]">
         Side projects, experiments &amp; open source.
       </h1>
-      <p className="mt-5 max-w-2xl text-muted-foreground">
+      <p className="mt-5 text-muted-foreground">
         This space is reserved for things I'm building on the side — small
         tools, weekend experiments, AI-assisted projects, and open-source
         contributions. New entries land here as I ship them. For professional
@@ -51,7 +51,7 @@ function ProjectsPage() {
       </p>
 
       <div
-        className="mt-12 card-surface relative overflow-hidden p-8 sm:p-12"
+        className="mt-12 card-surface relative overflow-hidden p-4 sm:p-6"
         style={{
           background:
             "linear-gradient(135deg, color-mix(in oklab, var(--primary) 12%, var(--card)), var(--card))",
@@ -66,7 +66,7 @@ function ProjectsPage() {
             <p className="text-lg font-semibold">Building in public — check back soon.</p>
           </div>
         </div>
-        <p className="mt-5 max-w-2xl text-sm text-muted-foreground">
+        <p className="mt-5 text-sm text-muted-foreground">
           Follow along on GitHub or via Learnings for early write-ups,
           code snippets, and lessons from what I'm exploring right now.
         </p>
