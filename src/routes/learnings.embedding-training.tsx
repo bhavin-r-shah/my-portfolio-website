@@ -62,7 +62,7 @@ function EmbeddingTrainingBlog() {
 
       <header className="mt-8 max-w-4xl">
         <p className="eyebrow">AI Engineering / Embedding & Training</p>
-        <h1 className="display-serif mt-3 text-[1.96875rem] text-primary sm:text-[2.625rem]">
+        <h1 className="display-serif mt-3 text-[1.8rem] text-primary sm:text-[2.4rem]">
           Embedding & Training
         </h1>
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">

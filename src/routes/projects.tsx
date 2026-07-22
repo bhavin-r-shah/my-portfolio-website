@@ -36,7 +36,7 @@ function ProjectsPage() {
       <p className="eyebrow inline-flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Coming soon
       </p>
-      <h1 className="display-serif mt-3 max-w-3xl text-[2.625rem] sm:text-[3.28125rem]">
+      <h1 className="display-serif mt-3 max-w-3xl text-[2.4rem] sm:text-[3rem]">
         Side projects, experiments &amp; open source.
       </h1>
       <p className="mt-5 max-w-2xl text-muted-foreground">
@@ -82,7 +82,7 @@ function ProjectsPage() {
 
       <div className="mt-16">
         <p className="eyebrow">On the workbench</p>
-        <h2 className="display-serif mt-2 text-[1.640625rem] sm:text-[1.96875rem]">Ideas in progress.</h2>
+        <h2 className="display-serif mt-2 text-[1.5rem] sm:text-[1.8rem]">Ideas in progress.</h2>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {upcoming.map((u) => (
             <article key={u.title} className="card-surface flex flex-col p-6">

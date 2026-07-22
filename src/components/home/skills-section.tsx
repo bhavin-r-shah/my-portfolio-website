@@ -7,7 +7,7 @@ export function SkillsSection() {
       <section className="container-page my-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="display-serif text-[1.96875rem] sm:text-[2.625rem]">Skills</h2>
+            <h2 className="display-serif text-[1.8rem] sm:text-[2.4rem]">Skills</h2>
           </div>
         </div>
 

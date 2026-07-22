@@ -13,7 +13,7 @@ export function AboutMeSection() {
           </div>
           <div>
             <p className="eyebrow">About</p>
-            <h2 className="display-serif mt-2 text-[1.96875rem] sm:text-[2.625rem]">
+            <h2 className="display-serif mt-2 text-[1.8rem] sm:text-[2.4rem]">
               Product-minded. Engineering-native.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">

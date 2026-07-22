@@ -21,7 +21,7 @@ function NotFoundComponent() {
       <main className="container-page flex flex-1 items-center py-24">
         <div className="max-w-md">
           <p className="eyebrow">404</p>
-          <h1 className="display-serif mt-3 text-[2.625rem]">This page slipped through.</h1>
+          <h1 className="display-serif mt-3 text-[2.4rem]">This page slipped through.</h1>
           <p className="mt-4 text-sm text-muted-foreground">
             The URL you followed doesn't map to anything on the site.
           </p>
@@ -49,7 +49,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-dvh items-center justify-center px-4">
       <div className="max-w-md text-center">
         <p className="eyebrow">Something broke</p>
-        <h1 className="display-serif mt-3 text-[1.640625rem]">This page didn't load.</h1>
+        <h1 className="display-serif mt-3 text-[1.5rem]">This page didn't load.</h1>
         <p className="mt-3 text-sm text-muted-foreground">
           Try again, or head back home while I take a look.
         </p>

@@ -16,7 +16,7 @@ export function TestimonialsSection() {
     <>
       {/* TESTIMONIALS */}
       <section className="container-page my-10">
-        <h2 className="display-serif mt-2 text-[1.96875rem] sm:text-[2.625rem]">Testimonials</h2>
+        <h2 className="display-serif mt-2 text-[1.8rem] sm:text-[2.4rem]">Testimonials</h2>
         <Carousel
           opts={{ align: "start" }}
           className="mt-10"
