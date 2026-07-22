@@ -37,7 +37,7 @@ function RagStorageRetrievalBlog() {
   return (
     <article className="container-page my-10 sm:my-14">
       <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-accent">
-        <ArrowLeft className="h-4 w-4" /> Back to blog
+        <ArrowLeft className="h-4 w-4" /> Back to blog posts
       </Link>
 
       <header className="mt-8 max-w-4xl">
