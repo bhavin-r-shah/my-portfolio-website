@@ -79,7 +79,7 @@ function ContactPage() {
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 text-primary" />
               <div>
-                <p className="font-medium">Mumbai, India</p>
+                <p className="font-medium">Pune, India</p>
                 <p className="font-medium text-accent">Open to relocation / remote, hybrid, on-site roles.</p>
               </div>
             </li>
